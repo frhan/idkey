@@ -4,5 +4,15 @@
     <string name="app_name">Idkey</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="e_mail">Email:</string>
+    <string name="password">Password:</string>
+    <string name="repeat_password">Repeat Password:</string>
+    <string name="create">Create</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="sign_in">Log In</string>
+    <string name="forget_password">Forgot Password</string>
 
+     <string name="close">Close</string>
+    
 </resources>
