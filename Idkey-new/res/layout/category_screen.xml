@@ -28,8 +28,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
             android:text="Category"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_big" />
 
         <Button
             android:id="@+id/btn_cate_done"
