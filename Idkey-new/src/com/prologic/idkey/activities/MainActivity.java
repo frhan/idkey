@@ -1,6 +1,8 @@
-package com.prologic.idkey;
+package com.prologic.idkey.activities;
 
 
+
+import com.prologic.idkey.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

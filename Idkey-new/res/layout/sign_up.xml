@@ -43,6 +43,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/et_register_email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_rect_white"
@@ -62,6 +63,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/et_register_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_rect_white"
@@ -81,6 +83,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/et_register_password_conf"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_rect_white"
@@ -89,6 +92,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <Button
+            android:id="@+id/btn_reg_sign_up"
             android:layout_width="fill_parent"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
@@ -120,6 +124,7 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/btn_register_log_in"
             android:layout_width="fill_parent"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
