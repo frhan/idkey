@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="60dp"
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
@@ -15,26 +15,29 @@
         android:background="@drawable/cross_button" />
 
     <TextView
+        android:id="@+id/txt_cat_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
         android:background="@drawable/rount_rect_category_count"
-        android:padding="7sp"
+        android:padding="10sp"
         android:text="10"
         android:textColor="#000000"
         android:textSize="@dimen/text_size_medium"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/txt_cat_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="2dp"
         android:layout_toRightOf="@+id/btn_cat_row_cross_button"
         android:text="This is text"
-        android:layout_marginLeft="2dp"
         android:textColor="#000000"
+        android:textStyle="bold"
         android:textSize="@dimen/text_size_medium" />
 
 </RelativeLayout>

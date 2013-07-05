@@ -32,6 +32,7 @@
         android:orientation="vertical" >
 
         <Button
+            android:id="@+id/btn_home_tutorial"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -46,6 +47,7 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/btn_home_my_acc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -53,6 +55,7 @@
                 android:background="@drawable/btn_my_account" />
 
             <Button
+                android:id="@+id/btn_home_settings"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -67,6 +70,7 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/btn_home_add_new_key"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -75,6 +79,7 @@
                 android:background="@drawable/btn_add_new_key" />
 
             <Button
+                android:id="@+id/btn_home_id_a_key"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -89,6 +94,7 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/btn_home_key_listing"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -97,11 +103,13 @@
                 android:background="@drawable/btn_key_listing" />
 
             <Button
+                android:id="@+id/btn_home_categories"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:onClick="onClickCategories"
                 android:background="@drawable/btn_categories" />
         </LinearLayout>
     </LinearLayout>

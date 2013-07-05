@@ -13,6 +13,13 @@ public class Category
 		this.count = 0;
 	
 	}
+	public Category(final int id,String name,int count) 
+	{
+		this.id = id;
+		this.name = name;
+		this.count = count;
+	
+	}
 	public String getName() {
 		return name;
 	}
