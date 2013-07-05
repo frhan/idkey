@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignUpActivity extends MainActivity implements OnClickListener 
 {
@@ -127,7 +128,15 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 
 			if(signUpCommand != null)
 			{
-				showOkAlertDailog(signUpCommand.getMessage(), "Sign Up", signUpCommand.isSignUpSuccessfull());
+				if(!signUpCommand.isSignUpSuccessfull())
+				{
+					showOkAlertDailog(signUpCommand.getMessage(), "Sign Up", signUpCommand.isSignUpSuccessfull());
+				}else {
+					Toast.makeText(context, "Sign up successfully", Toast.LENGTH_SHORT).show();
+					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
+					finish();
+
+				}
 
 
 			}

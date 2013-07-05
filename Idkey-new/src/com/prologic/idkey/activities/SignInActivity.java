@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignInActivity extends MainActivity implements OnClickListener
 {
@@ -98,7 +99,7 @@ public class SignInActivity extends MainActivity implements OnClickListener
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			
+
 			progressDialog.show();
 
 		}
@@ -121,8 +122,15 @@ public class SignInActivity extends MainActivity implements OnClickListener
 
 			if(signInCommand != null)
 			{
-				showOkAlertDailog(signInCommand.getMessage(), "Log In", signInCommand.isSignInSuccessfull());
+				if(!signInCommand.isSignInSuccessfull()){
+					showOkAlertDailog(signInCommand.getMessage(), "Log In", signInCommand.isSignInSuccessfull());
+				}else 
+				{
+					Toast.makeText(context, "Log in successfully", Toast.LENGTH_SHORT).show();
+					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
+					finish();
 
+				}
 			}
 			signInCommand = null;	
 
