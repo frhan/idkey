@@ -137,13 +137,9 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 					finish();
 
 				}
-
-
 			}
 			signUpCommand = null;	
-
-
-
+			
 		}
 	}
 }
