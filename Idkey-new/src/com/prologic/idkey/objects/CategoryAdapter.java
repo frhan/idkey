@@ -17,12 +17,15 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements OnClickLi
 {
 	private List<Category> listCategories;
 	private LayoutInflater layoutInflater;
-
+	private boolean showDeleteButton;
+	//private Button btnDelCatButton;
+	private OnCategoryItemDeleteListener categoryItemDeleteListener;
 	public CategoryAdapter(Context context, int textViewResourceId,
 			List<Category> objects) {
 		super(context, textViewResourceId, objects);
 		this.listCategories = objects;
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		showDeleteButton = false;
 	}
 
 	@Override
@@ -31,30 +34,86 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements OnClickLi
 	}
 
 	@Override
+	public Category getItem(int position) {
+		return listCategories.get(position);
+	}
+
+	public void setShowDelete(boolean showDeleteButton)
+	{
+		this.showDeleteButton = showDeleteButton;
+	}
+
+	public void setOnCategoryItemDeleteListener(OnCategoryItemDeleteListener categoryItemDeleteListener)
+	{
+		this.categoryItemDeleteListener = categoryItemDeleteListener;
+	}
+
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		Category category = listCategories.get(position);
+		final ViewHolder viewHolder;
 		if(convertView == null)
 		{
-			convertView = (View) layoutInflater.inflate(R.layout.category_row_view, null);			
+			convertView = (View) layoutInflater.inflate(R.layout.category_row_view, null);				
+			viewHolder = new ViewHolder();
+			viewHolder.txtCategoryName = (TextView) convertView.findViewById(R.id.txt_cat_name);
+			viewHolder.txtCount = (TextView) convertView.findViewById(R.id.txt_cat_count);	
+			viewHolder.btnActualDelete = (Button) convertView.findViewById(R.id.btn_cat_delete);
+			viewHolder.btnCrossDelete =  (Button) convertView.findViewById(R.id.btn_cat_row_cross_button);
+			convertView.setTag(viewHolder);
+		}else {
+			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		Button btnDeleteCategory = (Button) convertView.findViewById(R.id.btn_cat_row_cross_button);
-		TextView txtCatName = (TextView) convertView.findViewById(R.id.txt_cat_name);
-		TextView txtCatCount = (TextView) convertView.findViewById(R.id.txt_cat_count);
+		viewHolder.btnCrossDelete.setVisibility((showDeleteButton && category.getCount() == 0 && !category.getName().equalsIgnoreCase("Unassigned"))? View.VISIBLE: View.GONE);		
+		viewHolder.btnActualDelete.setVisibility(View.GONE);
+		viewHolder.btnActualDelete.setTag(position);
+		viewHolder.btnActualDelete.setOnClickListener(this);
+		viewHolder.txtCategoryName.setText(category.getName());		
+		viewHolder.txtCount.setText(String.valueOf(category.getCount()));
 
-		txtCatName.setText(category.getName());
-		txtCatCount.setText(String.valueOf(category.getCount()));
+		viewHolder.btnCrossDelete.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) 
+			{
+				viewHolder.btnActualDelete.setVisibility(View.VISIBLE);
+
+			}
+		});
 		return convertView;
 	}
 
 	@Override
 	public void onClick(View v) 
 	{
-	
-		
+
+		switch (v.getId()) {
+		case R.id.btn_cat_delete:
+			if(categoryItemDeleteListener != null)
+			{
+				categoryItemDeleteListener.onItemDelete((Integer)v.getTag());
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
+	private class ViewHolder
+	{
+		Button btnCrossDelete;
+		Button btnActualDelete;
+		TextView txtCategoryName;
+		TextView txtCount;
+
+	}
+	public interface OnCategoryItemDeleteListener
+	{
+		void onItemDelete(int position);
+	}
 
 
 }

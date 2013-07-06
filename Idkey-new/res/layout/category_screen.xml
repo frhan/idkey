@@ -17,6 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="10sp"
             android:background="@drawable/round_rect_blue"
+            android:onClick="onClickClose"
             android:text="Close"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
@@ -28,9 +29,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
             android:text="Category"
-            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_size_big" />
+            android:textSize="@dimen/text_size_big"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_cate_done"
@@ -39,34 +40,35 @@
             android:layout_alignParentRight="true"
             android:layout_margin="10sp"
             android:background="@drawable/round_rect_blue"
-            android:text="Done"
+            android:onClick="onClickEditDone"
+            android:text="Edit"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
     </RelativeLayout>
 
     <Button
-        android:id="@+id/add_new_category"
+        android:id="@+id/btn_category_add_new"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@null"
         android:drawableLeft="@drawable/ic_launcher"
         android:gravity="left|center"
+        android:onClick="onClickAddCategory"
         android:text="Add New Category"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:visibility="gone" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="20sp"
         android:background="#999999" />
 
     <ListView
         android:id="@+id/lv_categories"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="20sp"
         android:cacheColorHint="@android:color/transparent"
-        android:dividerHeight="1dp"
+        android:dividerHeight="2dp"
         android:fadingEdge="none"
         android:focusable="false" >
     </ListView>

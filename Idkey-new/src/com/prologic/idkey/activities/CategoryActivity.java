@@ -9,6 +9,7 @@ import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.command.GetAllCategoriesCommand;
 import com.prologic.idkey.objects.Category;
 import com.prologic.idkey.objects.CategoryAdapter;
+import com.prologic.idkey.objects.CategoryAdapter.OnCategoryItemDeleteListener;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,14 +17,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class CategoryActivity extends MainActivity implements OnItemClickListener {
+public class CategoryActivity extends MainActivity implements OnItemClickListener,OnCategoryItemDeleteListener {
 
 	private ListView lvCategories;
 	private CategoryAdapter adapter;
 	private List<Category> listCategories;
+	private boolean isEditing;
+	private Button btnEditDone;
+	private Button btnAddNewCategory;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -31,13 +36,16 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.category_screen);
+		btnEditDone = (Button) findViewById(R.id.btn_cate_done);
+		btnAddNewCategory = (Button) findViewById(R.id.btn_category_add_new);
 		listCategories = new ArrayList<Category>();	
 
 		lvCategories = (ListView) findViewById(R.id.lv_categories);
 
 		adapter = new CategoryAdapter(context, R.layout.category_row_view, listCategories);
+		adapter.setOnCategoryItemDeleteListener(this);
 		lvCategories.setAdapter(adapter);
-
+		isEditing = false;
 		loadCategoryList();
 	}
 
@@ -55,12 +63,40 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 		adapter.notifyDataSetChanged();
 
 	}
+	
+	public void onClickAddCategory(View v) 
+	{
+		
+	}
+	
+	public void onClickClose(View v)
+	{
+		
+	}
+	
+	public void onClickEditDone(View v)
+	{	
+		btnEditDone.setText(!isEditing?"Done":"Edit");
+		btnAddNewCategory.setVisibility(!isEditing?View.VISIBLE:View.GONE);
+		adapter.setShowDelete(!isEditing);
+		adapter.notifyDataSetChanged();	
+		isEditing = !isEditing;
+	}	
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int pos, long id)
 	{
 
 
+	}
+
+
+	@Override
+	public void onItemDelete(int position) 
+	{
+		listCategories.remove(position);
+		adapter.notifyDataSetChanged();
+		
 	}
 
 	private class CategoryListTask extends AsyncTask<Void, Void, Void>

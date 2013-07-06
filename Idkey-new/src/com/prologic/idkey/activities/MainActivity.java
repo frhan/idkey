@@ -47,9 +47,9 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) 
 	{
 		switch (v.getId()) {
-//		case R.id.btn_back:
-//			pressedBackButton();
-//			break;
+		//		case R.id.btn_back:
+		//			pressedBackButton();
+		//			break;
 
 		default:
 			break;
@@ -126,6 +126,36 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 
 		// show it
 		alertDialog.show();
+	}
+
+	private void showCustomAlertDailog(final String title,final IDailogOKClickListener clickListener,final View v)
+	{		
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		alertDialogBuilder.setTitle(title);
+
+
+		alertDialogBuilder.setCancelable(true)
+		.setView(v)
+		.setPositiveButton(getResources().getString(android.R.string.ok),new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) 
+			{
+				dialog.dismiss();	
+
+				clickListener.onOkClick();
+			}
+		});
+		alertDialogBuilder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// Canceled.
+			}
+		});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+
 	}
 
 
