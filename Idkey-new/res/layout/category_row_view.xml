@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:background="@drawable/cross_button"
+        android:background="@drawable/button_minus_red"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:visibility="gone" />
@@ -51,7 +51,7 @@
         <Button
             android:id="@+id/btn_cat_delete"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
             android:text="Delete"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </LinearLayout>
 
 </RelativeLayout>
