@@ -128,7 +128,8 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		alertDialog.show();
 	}
 
-	private void showCustomAlertDailog(final String title,final IDailogOKClickListener clickListener,final View v)
+	protected void showCustomAlertDailog(final String title,final String posButtonName,final String negButtonName,final View v,
+			final ICustomDailogClickListener clickListener)
 	{		
 
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -137,17 +138,18 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 
 		alertDialogBuilder.setCancelable(true)
 		.setView(v)
-		.setPositiveButton(getResources().getString(android.R.string.ok),new DialogInterface.OnClickListener() {
+		.setPositiveButton(posButtonName,new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) 
 			{
 				dialog.dismiss();	
 
-				clickListener.onOkClick();
+				clickListener.onOkClick(v);
 			}
 		});
-		alertDialogBuilder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+		alertDialogBuilder.setNegativeButton(negButtonName, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
+				dialog.dismiss();
 			}
 		});
 		// create alert dialog
@@ -163,6 +165,13 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	{
 		void onOkClick();
 		void onCancelClick();	
+
+	}
+
+	public interface ICustomDailogClickListener 
+	{
+		void onOkClick(final View customView);
+		//void onCancelClick(final View customView);	
 
 	}
 

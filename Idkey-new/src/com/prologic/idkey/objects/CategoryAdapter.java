@@ -18,7 +18,6 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements OnClickLi
 	private List<Category> listCategories;
 	private LayoutInflater layoutInflater;
 	private boolean showDeleteButton;
-	//private Button btnDelCatButton;
 	private OnCategoryItemDeleteListener categoryItemDeleteListener;
 	public CategoryAdapter(Context context, int textViewResourceId,
 			List<Category> objects) {
@@ -114,6 +113,4 @@ public class CategoryAdapter extends ArrayAdapter<Category> implements OnClickLi
 	{
 		void onItemDelete(int position);
 	}
-
-
 }
