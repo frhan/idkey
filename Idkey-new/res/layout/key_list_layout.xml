@@ -4,9 +4,64 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#889db8"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Keys"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_big"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/round_rect_blue"
+            android:padding="5dp"
+            android:text="Categories"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="#5191e0"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_rect_white_edittext"
+            android:drawableLeft="@drawable/serach_2"
+            android:imeOptions="actionSearch"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_margin="1dp"
         android:background="#000000"
         android:orientation="horizontal"
         android:weightSum="10" >
@@ -17,7 +72,12 @@
             android:layout_height="fill_parent"
             android:layout_weight="1.25"
             android:background="#e8e8e8"
-            android:text="NO" >
+            android:gravity="left|center"
+            android:paddingLeft="5dp"
+            android:text="NO"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" >
         </Button>
 
         <Button
@@ -27,7 +87,12 @@
             android:layout_marginLeft="1dp"
             android:layout_weight="2.5"
             android:background="#e8e8e8"
-            android:text="I.D" >
+            android:gravity="left|center"
+            android:paddingLeft="5dp"
+            android:text="I.D"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" >
         </Button>
 
         <Button
@@ -36,7 +101,12 @@
             android:layout_marginLeft="1dp"
             android:layout_weight="2.5"
             android:background="#e8e8e8"
-            android:text="Date" >
+            android:gravity="left|center"
+            android:paddingLeft="5dp"
+            android:text="Date"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" >
         </Button>
 
         <Button
@@ -46,26 +116,30 @@
             android:layout_marginLeft="1dp"
             android:layout_weight="2.5"
             android:background="#e8e8e8"
-            android:text="All Cat" >
+            android:gravity="left|center"
+            android:paddingLeft="5dp"
+            android:text="All Cat"
+            android:textColor="#000000"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" >
         </Button>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="1dp"
             android:layout_weight="1.25"
             android:background="#e8e8e8"
             android:drawableLeft="@drawable/keys_filter_arrow_up"
-            android:gravity="center"
-            android:paddingLeft="10dp" >
+            android:gravity="left|center"
+            android:paddingLeft="5dp" >
         </Button>
     </LinearLayout>
 
     <ListView
         android:id="@+id/lv_keys"
-        android:layout_marginTop="3dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="3dp"
         android:cacheColorHint="@android:color/transparent"
         android:dividerHeight="1dp"
         android:fadingEdge="none" >
