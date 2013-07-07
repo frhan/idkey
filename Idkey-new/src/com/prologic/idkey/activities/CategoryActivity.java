@@ -60,7 +60,6 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 	private void loadCategoryList() 
 	{	
 		new CategoryListTask(context).execute();
-
 	}
 
 	private void updateCategoryList(List<Category> categories) 
@@ -125,7 +124,6 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 	{
 		listCategories.remove(listItemPosition);
 		adapter.notifyDataSetChanged();
-
 	}
 
 	public void onClickAddCategory(View v) 

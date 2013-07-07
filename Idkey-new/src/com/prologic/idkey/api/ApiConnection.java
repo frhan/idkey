@@ -74,23 +74,13 @@ public class ApiConnection
 		return readStream(executeRequest(put));
 	}
 
-	public String delete(String url, JSONObject jsonObject) throws ApiException {
-		return delete(url, jsonObject, HttpURLConnection.HTTP_OK);
-	}
-	public String delete(String url,JSONObject jsonObject, int expectedHttpCode) throws ApiException {
-		HttpRequestBuilder delete = httpClient.delete(url).expect(expectedHttpCode);
-		
-		delete.content(jsonObject.toString().getBytes(), "application/json");
-		return readStream(executeRequest(delete));
-	}
-	
 	public String post(String url, String body) throws ApiException {
 		return post(url, body, HttpURLConnection.HTTP_OK);
 	}
 
 	public String post(String url,String body, int expectedHttpCode) throws ApiException {
 		HttpRequestBuilder post = httpClient.post(url).expect(expectedHttpCode);
-		
+
 		//post.jsonParam(jsonObject);
 		post.content(body.getBytes(), "application/json");
 		return readStream(executeRequest(post));

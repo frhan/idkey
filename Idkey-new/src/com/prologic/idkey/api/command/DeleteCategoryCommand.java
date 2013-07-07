@@ -41,7 +41,7 @@ public class DeleteCategoryCommand extends JsonCommand
 		{			
 			Log.e(TAG, e.getMessage());
 		}
-		return apiConnection.delete(url,jsonObj);
+		return null;
 
 	}
 

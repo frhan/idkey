@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#000000"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <Button
+            android:id="@+id/btn_key_sort_no"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.25"
+            android:background="#e8e8e8"
+            android:text="NO" >
+        </Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="2.5"
+            android:background="#e8e8e8"
+            android:text="I.D" >
+        </Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="2.5"
+            android:background="#e8e8e8"
+            android:text="Date" >
+        </Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="2.5"
+            android:background="#e8e8e8"
+            android:text="All Cat" >
+        </Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1.25"
+            android:background="#e8e8e8"
+            android:drawableLeft="@drawable/keys_filter_arrow_up"
+            android:gravity="center"
+            android:paddingLeft="10dp" >
+        </Button>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_keys"
+        android:layout_marginTop="3dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:dividerHeight="1dp"
+        android:fadingEdge="none" >
+    </ListView>
+
+</LinearLayout>
