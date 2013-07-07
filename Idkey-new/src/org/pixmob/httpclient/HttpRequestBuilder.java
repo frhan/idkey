@@ -86,7 +86,7 @@ public final class HttpRequestBuilder {
 	private boolean contentSet;
 	private String contentType;
 	private HttpResponseHandler handler;
-	private JSONObject jsonParam;
+	//private JSONObject jsonParam;
 
 	HttpRequestBuilder(final HttpClient hc, final String uri, final String method) {
 		this.hc = hc;
@@ -170,15 +170,15 @@ public final class HttpRequestBuilder {
 		return this;
 	}
 
-	public HttpRequestBuilder jsonParam(JSONObject jsonObject)
-	{
-		if (jsonObject == null) {
-			throw new IllegalArgumentException("Parameter name cannot be null");
-		}
-		this.jsonParam = jsonObject;
-		return this;
-
-	}
+//	public HttpRequestBuilder jsonParam(JSONObject jsonObject)
+//	{
+//		if (jsonObject == null) {
+//			throw new IllegalArgumentException("Parameter name cannot be null");
+//		}
+//		this.jsonParam = jsonObject;
+//		return this;
+//
+//	}
 
 
 	public HttpRequestBuilder cookie(String name, String value) {
@@ -311,18 +311,18 @@ public final class HttpRequestBuilder {
 				}
 			}
 
-
-			if(jsonParam != null && jsonParam.toString().length() >0)
-			{
-				conn.setRequestProperty("Content-Type", "application/json");
-				//conn.setDoOutput(true). 
-				conn.setDoOutput(true);
-				conn.setFixedLengthStreamingMode(
-						jsonParam.toString().getBytes().length);
-				PrintWriter out = new PrintWriter(conn.getOutputStream());
-				out.print(jsonParam);
-				out.close();
-			}
+//			//test code
+//			if(jsonParam != null && jsonParam.toString().length() >0 && !HTTP_DELETE.equals(method))
+//			{
+//				conn.setRequestProperty("Content-Type", "application/json");
+//				//conn.setDoOutput(true). 
+//				conn.setDoOutput(true);
+//				conn.setFixedLengthStreamingMode(
+//						jsonParam.toString().getBytes().length);
+//				PrintWriter out = new PrintWriter(conn.getOutputStream());
+//				out.print(jsonParam);
+//				out.close();
+//			}
 
 
 			for (final HttpRequestHandler connHandler : reqHandlers) {

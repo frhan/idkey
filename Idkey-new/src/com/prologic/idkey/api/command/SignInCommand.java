@@ -44,7 +44,7 @@ public class SignInCommand extends JsonCommand
 		{			
 			Log.e(TAG, e.getMessage());
 		}
-		return apiConnection.post(url, jsonObj);
+		return apiConnection.post(url, jsonObj.toString());
 	}
 
 	@Override

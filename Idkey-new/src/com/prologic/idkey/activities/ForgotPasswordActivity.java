@@ -74,9 +74,8 @@ public class ForgotPasswordActivity extends MainActivity implements OnClickListe
 			progressDialog = new ProgressDialog(context);
 			progressDialog.setTitle("Forgot password");
 			progressDialog.setMessage("Please wait...");
-
-
 		}
+		
 		@Override
 		protected Void doInBackground(Void... params) {
 			forgotPasswordCommand = new ForgotPasswordCommand(email);
