@@ -5,22 +5,22 @@ public class Key{
 	private final int no;
 	private String id;
 	private String date;
-	private String hotelName;
+	private String category;
 
 	public Key(final int no) 
 	{
 		this.no = no;
 		this.id = "";
 		this.date = null;
-		this.hotelName = "";
+		this.category = "";
 	}
 
-	public Key(final int no,String roomName,String date,String hotelName)
+	public Key(final int no,String roomName,String date,String category)
 	{
 		this.no = no ;
 		this.id = roomName;
 		this.date = date;
-		this.hotelName = hotelName;		
+		this.category = category;		
 	}
 	public String getId() {
 		return id;
@@ -34,11 +34,12 @@ public class Key{
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getHotelName() {
-		return hotelName;
+	public String getCategory()
+	{
+		return category;
 	}
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public int getNo() {
 		return no;

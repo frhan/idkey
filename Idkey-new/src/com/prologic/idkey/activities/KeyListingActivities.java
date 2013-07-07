@@ -22,6 +22,8 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 	private ListView lvKeys;
 	private KeyListAdapter adapter;
 	private Button btnNoKeySort;
+	private Button btnKeySortId;
+	private Button btnKeySortCat;
 	private KeysComparator keysComparator;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -30,22 +32,28 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		setContentView(R.layout.key_list_layout);
 		lvKeys = (ListView) findViewById(R.id.lv_keys);
 		btnNoKeySort = (Button) findViewById(R.id.btn_key_sort_no);
+		btnKeySortId = (Button) findViewById(R.id.btn_key_sort_id);
+		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
 
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
 		lvKeys.setAdapter(adapter);
+
 		btnNoKeySort.setOnClickListener(this);
+		btnKeySortId.setOnClickListener(this);
+		btnKeySortCat.setOnClickListener(this);
+
 		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_NO, KeysComparator.SORTING_ORDER_ASCENDING);
 		loadKeys();
 	}
 
 	private void loadKeys()
 	{
-		Key key = new Key(1, "room 15", "11/12/13", "Raddison");
+		Key key = new Key(1, "aoom 15", "11/12/13", "Raddison");
 		Key key1 = new Key(2, "room 19", "11/12/13", "Raddison blu");
-		Key key2 = new Key(3, "room 16","11/12/13", "sonargaon");
-		Key key3 = new Key(4, "room 17","11/12/13", "Hilton");
-		Key key4 = new Key(5, "room 18", "11/12/13", "hilton");
+		Key key2 = new Key(3, "zoom 16","11/12/13", "sonargaon");
+		Key key3 = new Key(4, "poom 17","11/12/13", "Hilton");
+		Key key4 = new Key(5, "boom 18", "11/12/13", "hilton");
 
 		listKeys.add(key);
 		listKeys.add(key2);
@@ -63,6 +71,18 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 
 		switch (v.getId()) {
 		case R.id.btn_key_sort_no:
+			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_NO);
+			Collections.sort(listKeys,keysComparator);
+			adapter.notifyDataSetChanged();
+			break;
+
+		case R.id.btn_key_sort_id:
+			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_ID);
+			Collections.sort(listKeys,keysComparator);
+			adapter.notifyDataSetChanged();
+			break;
+		case R.id.btn_key_sort_cat:
+			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_ALL_CAT);
 			Collections.sort(listKeys,keysComparator);
 			adapter.notifyDataSetChanged();
 			break;

@@ -53,7 +53,7 @@ public class KeyListAdapter extends ArrayAdapter<Key>
 		txtKeyNo.setText(String.valueOf(key.getNo()));
 		txtKeyId.setText(key.getId());
 		txtKeyDate.setText(key.getDate().toString());
-		txtKeyHotelName.setText(key.getHotelName());	
+		txtKeyHotelName.setText(key.getCategory());	
 
 
 		return convertView;

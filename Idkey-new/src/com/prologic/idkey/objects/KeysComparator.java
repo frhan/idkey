@@ -39,9 +39,21 @@ public class KeysComparator implements Comparator<Key>
 	{
 		//int compareNo = ((Key) rhs).getNo();
 
-		return lhs.getNo() -  rhs.getNo();
-
-
+		if(sortingType == SORTING_TYPE_ID)
+		{
+			/*if(lhs.getId().equalsIgnoreCase(rhs.getId()))
+	        {
+	            return lhs.getId().compareTo(rhs.getId());
+	        }*/
+			return lhs.getId().compareTo(rhs.getId());
+		}
+		else if(sortingType == SORTING_TYPE_ALL_CAT)
+		{
+			return lhs.getCategory().compareToIgnoreCase(rhs.getCategory());
+		}
+		else {
+			return lhs.getNo() - rhs.getNo() ;
+		}
 	}
 
 }
