@@ -106,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="3dp"
+                    android:onClick="onClickKeyList"
                     android:layout_weight="1"
                     android:background="@drawable/btn_key_listing" />
 

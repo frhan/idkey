@@ -55,10 +55,10 @@ public class KeyListAdapter extends ArrayAdapter<Key>
 		TextView txtKeyDate = (TextView) convertView.findViewById(R.id.txt_key_date);
 		TextView txtKeyHotelName = (TextView) convertView.findViewById(R.id.txt_hotel_name);
 
-		txtKeyNo.setText(String.valueOf(key.getNo()));
-		txtKeyId.setText(key.getId());
-		txtKeyDate.setText(key.getDate().toString());
-		txtKeyHotelName.setText(key.getCategory());	
+		txtKeyNo.setText(String.valueOf(key.getId()));
+		txtKeyId.setText(key.getName());
+		txtKeyDate.setText(key.getCreateDate());
+		txtKeyHotelName.setText(key.getCategoryName());	
 
 
 		return convertView;

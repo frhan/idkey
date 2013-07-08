@@ -69,8 +69,10 @@ public class ApiConnection
 	}
 	public String put(String url,String body, int expectedHttpCode) throws ApiException {
 		HttpRequestBuilder put = httpClient.put(url).expect(expectedHttpCode);		
-		//put.jsonParam(jsonObject);
-		put.content(body.getBytes(), "application/json");
+		
+		if(body != null && body.length() >0)
+			put.content(body.getBytes(), "application/json");
+		
 		return readStream(executeRequest(put));
 	}
 
@@ -81,8 +83,11 @@ public class ApiConnection
 	public String post(String url,String body, int expectedHttpCode) throws ApiException {
 		HttpRequestBuilder post = httpClient.post(url).expect(expectedHttpCode);
 
-		//post.jsonParam(jsonObject);
-		post.content(body.getBytes(), "application/json");
+		if(body != null && body.length() >0)
+		{
+			//post.jsonParam(jsonObject);
+			post.content(body.getBytes(), "application/json");
+		}
 		return readStream(executeRequest(post));
 	}
 	/**
@@ -175,6 +180,21 @@ public class ApiConnection
 	public String get(String url) throws ApiException {
 		return readStream(getRaw(url));
 	}
+	
+	public String get(String url,String body) throws ApiException 
+	{
+		return readStream(getRaw(url,body));
+	}
+	public InputStream getRaw(String url,String body) throws ApiException 
+	{
+		HttpRequestBuilder get = httpClient.get(url).expect(HttpURLConnection.HTTP_OK);
+		if(body != null && body.length() >0)
+		{
+			get.content(body.getBytes(), "application/json");
+		}
+		return executeRequest(get);
+	}
+	
 
 	/**
 	 * Execute a GET HTTP request for some url and a specific expected HTTP code

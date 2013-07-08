@@ -37,8 +37,8 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.key_list_layout);
 		lvKeys = (ListView) findViewById(R.id.lv_keys);
-		btnNoKeySort = (Button) findViewById(R.id.btn_key_sort_no);
-		btnKeySortId = (Button) findViewById(R.id.btn_key_sort_id);
+		btnNoKeySort = (Button) findViewById(R.id.btn_key_sort_id);
+		btnKeySortId = (Button) findViewById(R.id.btn_key_sort_name);
 		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
         etSearch = (EditText) findViewById(R.id.et_key_search);
 		listKeys = new ArrayList<Key>();
@@ -49,7 +49,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnKeySortId.setOnClickListener(this);
 		btnKeySortCat.setOnClickListener(this);
 
-		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_NO, KeysComparator.SORTING_ORDER_ASCENDING);
+		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_ID, KeysComparator.SORTING_ORDER_ASCENDING);
 
 
         etSearch.addTextChangedListener(new TextWatcher() {
@@ -101,14 +101,14 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		super.onClick(v);
 
 		switch (v.getId()) {
-		case R.id.btn_key_sort_no:
-			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_NO);
+		case R.id.btn_key_sort_id:
+			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_ID);
 			Collections.sort(listKeys,keysComparator);
 			adapter.notifyDataSetChanged();
 			break;
 
-		case R.id.btn_key_sort_id:
-			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_ID);
+		case R.id.btn_key_sort_name:
+			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_NAME);
 			Collections.sort(listKeys,keysComparator);
 			adapter.notifyDataSetChanged();
 			break;

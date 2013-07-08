@@ -68,7 +68,7 @@
         android:weightSum="10" >
 
         <Button
-            android:id="@+id/btn_key_sort_no"
+            android:id="@+id/btn_key_sort_id"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1.25"
@@ -82,7 +82,7 @@
         </Button>
 
         <Button
-            android:id="@+id/btn_key_sort_id"
+            android:id="@+id/btn_key_sort_name"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
@@ -97,6 +97,7 @@
         </Button>
 
         <Button
+             android:id="@+id/btn_key_sort_date"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
