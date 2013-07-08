@@ -8,6 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#889db8"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:orientation="horizontal" >
 
         <TextView
@@ -42,7 +44,7 @@
         android:orientation="horizontal" >
 
         <EditText
-                android:id="@+id/et_key_search"
+            android:id="@+id/et_key_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -97,7 +99,7 @@
         </Button>
 
         <Button
-             android:id="@+id/btn_key_sort_date"
+            android:id="@+id/btn_key_sort_date"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
