@@ -32,7 +32,12 @@ public class KeyListAdapter extends ArrayAdapter<Key>
 		return listKeys.size();
 	}
 
-	@Override
+    @Override
+    public Key getItem(int position) {
+        return  listKeys.get(position);
+    }
+
+    @Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
 		Key key = listKeys.get(position);

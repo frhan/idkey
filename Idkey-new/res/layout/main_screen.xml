@@ -67,6 +67,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
+                    android:onClick="onClickSettingsButton"
                     android:background="@drawable/btn_settings" />
             </LinearLayout>
 

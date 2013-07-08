@@ -11,10 +11,15 @@ import com.prologic.idkey.objects.KeyListAdapter;
 import com.prologic.idkey.objects.KeysComparator;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+
+import android.text.TextWatcher;
 
 public class KeyListingActivities extends MainActivity implements OnClickListener
 {
@@ -25,6 +30,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 	private Button btnKeySortId;
 	private Button btnKeySortCat;
 	private KeysComparator keysComparator;
+    private EditText etSearch;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -34,7 +40,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnNoKeySort = (Button) findViewById(R.id.btn_key_sort_no);
 		btnKeySortId = (Button) findViewById(R.id.btn_key_sort_id);
 		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
-
+        etSearch = (EditText) findViewById(R.id.et_key_search);
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
 		lvKeys.setAdapter(adapter);
@@ -44,7 +50,32 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnKeySortCat.setOnClickListener(this);
 
 		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_NO, KeysComparator.SORTING_ORDER_ASCENDING);
-		loadKeys();
+
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                adapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        loadKeys();
+
+
+
 	}
 
 	private void loadKeys()
