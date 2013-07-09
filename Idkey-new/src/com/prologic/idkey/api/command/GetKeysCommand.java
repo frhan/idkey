@@ -31,14 +31,15 @@ public class GetKeysCommand extends JsonCommand {
 	public List<Key> getListKeys() {
 		return listKeys;
 	}
-	
+
 
 	@Override
 	protected String makeRequest(ApiConnection apiConnection)
 			throws ApiException {
 		//http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC
-		String url = "http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC"; //ApiConnection.mainUrl+"get_keys.json"+"?auth_token="+Session.getInstance().getAuthToken();		
-		JSONObject jsonObj = null;
+		//String url = "http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC"; //ApiConnection.mainUrl+"get_keys.json"+"?auth_token="+Session.getInstance().getAuthToken();		
+		//String url = "http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC";
+		/*		JSONObject jsonObj = null;
 		if(userCategoryId >-1)
 		{			
 			try {
@@ -50,9 +51,21 @@ public class GetKeysCommand extends JsonCommand {
 				Log.e(TAG, e.getMessage());
 			}
 		}
-		String body = (jsonObj == null)? null : jsonObj.toString();
-		
-		return apiConnection.get(url,body);
+		String body = (jsonObj == null)? null : jsonObj.toString();*/
+
+		StringBuilder url = new StringBuilder(ApiConnection.mainUrl);
+		if(userCategoryId > -1)
+		{
+			url.append("get_keys.json");
+			url.append("?user_category_id=");
+			url.append(userCategoryId);
+			url.append("&auth_token=");
+			url.append(Session.getInstance().getAuthToken());
+		}else {
+			url.append("get_keys.json").append("?auth_token=").append(Session.getInstance().getAuthToken());
+		}
+
+		return apiConnection.get(url.toString());
 	}
 
 	@Override
@@ -115,7 +128,7 @@ public class GetKeysCommand extends JsonCommand {
 								key.setIqeToken(iqe_token);
 								key.setCategoryId(category_id);
 								key.setScanUrl(scan_url);
-								
+
 								listKeys.add(key);
 							}
 						}

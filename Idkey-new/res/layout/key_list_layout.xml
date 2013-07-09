@@ -13,6 +13,7 @@
         android:orientation="horizontal" >
 
         <TextView
+            android:id="@+id/txt_key_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -144,6 +145,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="3dp"
+        android:background="#FFFFFF"        
         android:cacheColorHint="@android:color/transparent"
         android:dividerHeight="1dp"
         android:fadingEdge="none" >

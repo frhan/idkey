@@ -1,10 +1,5 @@
 package com.prologic.idkey.activities;
 
-import com.prologic.idkey.R;
-import com.prologic.idkey.api.ApiConnection;
-import com.prologic.idkey.api.WebService;
-import com.prologic.idkey.api.command.SignUpCommand;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,6 +9,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.prologic.idkey.R;
+import com.prologic.idkey.api.ApiConnection;
+import com.prologic.idkey.api.command.SignUpCommand;
 
 public class SignUpActivity extends MainActivity implements OnClickListener 
 {

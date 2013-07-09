@@ -6,20 +6,23 @@ import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.ApiException;
 import com.prologic.idkey.api.JsonCommand;
 
-public class SignOutCommand extends JsonCommand {
+public class AgreeToToaCommand extends JsonCommand{
 
-	public SignOutCommand() {
+	public AgreeToToaCommand() 
+	{
+		
 	}
+
 	@Override
 	protected String makeRequest(ApiConnection apiConnection)
-			throws ApiException {
-		return null;
+			throws ApiException 
+			{
+			return null;
 	}
 
 	@Override
 	protected void parse(String data) throws JSONException {
-
+		// TODO Auto-generated method stub
+		
 	}
-
-
 }

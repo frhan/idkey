@@ -2,16 +2,7 @@ package com.prologic.idkey.activities;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-
-import com.prologic.idkey.CustomProgressDailog;
-import com.prologic.idkey.R;
-import com.prologic.idkey.api.ApiConnection;
-import com.prologic.idkey.api.command.GetKeysCommand;
-import com.prologic.idkey.objects.Key;
-import com.prologic.idkey.objects.KeyListAdapter;
-import com.prologic.idkey.objects.KeysComparator;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -23,8 +14,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import android.text.TextWatcher;
+import com.prologic.idkey.CustomProgressDailog;
+import com.prologic.idkey.R;
+import com.prologic.idkey.api.ApiConnection;
+import com.prologic.idkey.api.command.GetKeysCommand;
+import com.prologic.idkey.objects.Key;
+import com.prologic.idkey.objects.KeyListAdapter;
+import com.prologic.idkey.objects.KeysComparator;
 
 public class KeyListingActivities extends MainActivity implements OnClickListener
 {
@@ -36,7 +34,11 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 	private Button btnKeySortCat;
 	private KeysComparator keysComparator;
 	private EditText etSearch;
-	
+	private TextView tvKeyListTitle;
+	public static final String USER_CATEGORY_ID = "user_category_id";
+	public static final String USER_CATEGORY_NAME = "user_category_name";
+
+	int userCategoryId;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -47,6 +49,8 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnKeySortId = (Button) findViewById(R.id.btn_key_sort_name);
 		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
 		etSearch = (EditText) findViewById(R.id.et_key_search);
+		tvKeyListTitle = (TextView) findViewById(R.id.txt_key_list_title);
+		
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
 		lvKeys.setAdapter(adapter);
@@ -56,6 +60,16 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnKeySortCat.setOnClickListener(this);
 
 		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_ID, KeysComparator.SORTING_ORDER_ASCENDING);
+		userCategoryId = -1;
+		Bundle bundle = getIntent().getExtras();
+		if(bundle != null)
+		{
+			userCategoryId = bundle.getInt(USER_CATEGORY_ID, -1);
+			String userCategoryName = bundle.getString(USER_CATEGORY_NAME);
+			if(userCategoryName != null)
+				tvKeyListTitle.setText(userCategoryName);
+
+		}
 
 
 		etSearch.addTextChangedListener(new TextWatcher() {

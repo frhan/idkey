@@ -20,7 +20,6 @@ import com.prologic.idkey.R;
 import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.WebService;
 import com.prologic.idkey.api.command.CreateCategoryCommand;
-import com.prologic.idkey.api.command.DeleteCategoryCommand;
 import com.prologic.idkey.api.command.GetAllCategoriesCommand;
 import com.prologic.idkey.api.command.UpdateCategoryCommand;
 import com.prologic.idkey.objects.Category;
@@ -177,6 +176,13 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 
 				}
 			});
+		}else {
+			Bundle b = new Bundle();
+			
+			b.putInt(KeyListingActivities.USER_CATEGORY_ID, category.getId());
+			b.putString(KeyListingActivities.USER_CATEGORY_NAME, category.getName());
+
+			setCurrent(com.prologic.idkey.activities.KeyListingActivities.class, b);
 		}
 	}
 
@@ -326,7 +332,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 			{
 				progressDialog.dismiss();
 			}	
-			
+
 			if(isDeletedSuccessfully)
 			{
 				onDeleteCategoryListItem(listPos);
