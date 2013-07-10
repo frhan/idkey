@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/camera_frame_preview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -8,19 +8,24 @@
     <com.ff.camera.CameraView
         android:id="@+id/camera_view"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/rl_lt_footer_view" />
 
     <RelativeLayout
+        android:id="@+id/rl_lt_footer_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@android:color/transparent" >
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/darker_gray"
+        android:layout_gravity="bottom" >
 
         <Button
             android:id="@+id/btn_camera_snap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:onClick="onClickSnap"
             android:text="Snap" />
 
         <Button
@@ -28,7 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="Retake" />
+            android:layout_margin="5dp"
+            android:text="Retake"
+            android:onClick="onClickRetake"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_pic_use"
@@ -36,7 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="left"
-            android:text="Use" />
+            android:layout_margin="5dp"
+            android:background="#FFFFFF"
+            android:onClick="onClickUse"
+            android:text="Use"
+            android:visibility="gone" />
     </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>

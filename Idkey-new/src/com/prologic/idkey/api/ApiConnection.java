@@ -84,8 +84,7 @@ public class ApiConnection
 		HttpRequestBuilder post = httpClient.post(url).expect(expectedHttpCode);
 
 		if(body != null && body.length() >0)
-		{
-			//post.jsonParam(jsonObject);
+		{			
 			post.content(body.getBytes(), "application/json");
 		}
 		return readStream(executeRequest(post));
