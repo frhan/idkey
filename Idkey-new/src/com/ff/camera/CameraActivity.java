@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
@@ -25,52 +24,36 @@ import android.widget.Toast;
 import com.prologic.idkey.R;
 import com.prologic.idkey.activities.MainActivity;
 
-public class CameraActivity extends MainActivity implements IPictureCallback
+public abstract class CameraActivity extends MainActivity implements IPictureCallback
 {
-	private CameraView cameraView;
+	protected CameraView cameraView;
 	private byte []  tempData;
-	private Button btnClick;
+	/*private Button btnClick;
 	private Button btnRetake;
-	private Button btnUse;
+	private Button btnUse;*/
 	private AlbumStorageDirFactory albumStorageDirFactory = null;
 	private static final String JPEG_FILE_SUFFIX = ".jpg";
 	private static final String JPEG_FILE_PREFIX = "IMG_";
 	private String currentPhotoPath = null;
+	private String action = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);	
-		setContentView(R.layout.camera_view);
+
 		disableScreenTurnOff();
 
-		btnClick = (Button) findViewById(R.id.btn_camera_snap);
+		/*btnClick = (Button) findViewById(R.id.btn_camera_snap);
 		btnUse = (Button) findViewById(R.id.btn_pic_use);
-		btnRetake = (Button)findViewById(R.id.btn_pic_retake);
-
-		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		View toastView = (View) layoutInflater.inflate(R.layout.toast_view, null);
-
-		Toast toast = new Toast(getApplicationContext());
-		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-		toast.setDuration(Toast.LENGTH_LONG);
-		toast.setView(toastView);
-		toast.show();
-
-		cameraView = (CameraView) findViewById(R.id.camera_view);
-		cameraView.setPictureCallback(this);
-		//View v = new LinearLayout(this);
-		View overlayView = (View) layoutInflater.inflate(R.layout.overlay_view, null);
-		addContentView(overlayView, cameraView.getLayoutParams());
+		btnRetake = (Button)findViewById(R.id.btn_pic_retake);*/
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
 			albumStorageDirFactory = new FroyoAlbumDirFactory();
 		} else {
 			albumStorageDirFactory = new BaseAlbumDirFactory();
 		}
-
-		tempData = null;
+		tempData = null;	
 
 	}
 	@Override
@@ -131,9 +114,9 @@ public class CameraActivity extends MainActivity implements IPictureCallback
 		{
 			cameraView.takePicture();
 
-			btnClick.setVisibility(Button.GONE);
+			/*	btnClick.setVisibility(Button.GONE);
 			btnRetake.setVisibility(Button.VISIBLE);
-			btnUse.setVisibility(Button.VISIBLE);
+			btnUse.setVisibility(Button.VISIBLE);*/
 
 		}
 	}
@@ -143,10 +126,10 @@ public class CameraActivity extends MainActivity implements IPictureCallback
 		if(cameraView != null)
 		{
 			cameraView.resumePreview();
-
+			/*
 			btnClick.setVisibility(Button.VISIBLE);
 			btnRetake.setVisibility(Button.GONE);
-			btnUse.setVisibility(Button.GONE);
+			btnUse.setVisibility(Button.GONE);*/
 		}
 		tempData = null;
 
@@ -157,6 +140,9 @@ public class CameraActivity extends MainActivity implements IPictureCallback
 		try 
 		{
 			saveToMemory();
+			/*	Bundle b = new Bundle();
+			b.putString("", value)
+			setCurrent(com.prologic.idkey.activities.AddKeyActivity.class, bundle)*/
 
 		} catch (Exception e) {
 			Toast.makeText(context, e.getMessage(),
@@ -165,56 +151,7 @@ public class CameraActivity extends MainActivity implements IPictureCallback
 		} 
 
 	}
-	/*	@Override
-	public void onClick(View v) 
-	{
-		switch (v.getId()) {
-		case R.id.btn_camera_snap:
-			if(cameraView != null)
-			{
-				cameraView.takePicture();
 
-				btnClick.setVisibility(Button.GONE);
-				btnRetake.setVisibility(Button.VISIBLE);
-				btnUse.setVisibility(Button.VISIBLE);
-
-			}
-
-			break;
-		case R.id.btn_pic_retake:
-			if(cameraView != null)
-			{
-				cameraView.resumePreview();
-
-				btnClick.setVisibility(Button.VISIBLE);
-				btnRetake.setVisibility(Button.GONE);
-				btnUse.setVisibility(Button.GONE);
-			}
-			tempData = null;
-			break;
-		case R.id.btn_pic_use:
-
-			try 
-			{
-				saveToMemory();
-				if(currentPhotoPath != null)
-				{
-					//do your task
-				}
-
-			} catch (Exception e) {
-				Toast.makeText(context, e.getMessage(),
-						Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			} 
-
-			break;
-
-		default:
-			break;
-		}
-
-	}*/
 	private void saveToMemory()
 	{
 
@@ -281,7 +218,8 @@ public class CameraActivity extends MainActivity implements IPictureCallback
 		{
 			tempData = data;
 		}
-
-
+	}
+	public String getCurrentPhotoPath() {
+		return currentPhotoPath;
 	}
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_lt_footer_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_gravity="bottom"
+    android:background="@android:color/darker_gray" >
+
+    <Button
+        android:id="@+id/btn_camera_snap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:onClick="onClickSnap"
+        android:text="Snap" />
+
+    <Button
+        android:id="@+id/btn_pic_retake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"
+        android:onClick="onClickRetake"
+        android:text="Retake"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_pic_use"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="left"
+        android:layout_margin="5dp"
+        android:background="#FFFFFF"
+        android:onClick="onClickUse"
+        android:text="Use"
+        android:visibility="gone" />
+
+</RelativeLayout>
