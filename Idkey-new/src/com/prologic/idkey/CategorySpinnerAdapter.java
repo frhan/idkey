@@ -5,6 +5,7 @@ import java.util.List;
 import com.prologic.idkey.objects.Category;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,6 @@ public  class CategorySpinnerAdapter extends ArrayAdapter<Category>
 	{
 		View v =  getCustomView(position, convertView, parent);
 
-		//v.setBackgroundColor(Color.parseColor("#FFFFFF"));
 		return v;		
 
 	}

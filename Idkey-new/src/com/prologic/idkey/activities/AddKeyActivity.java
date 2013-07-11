@@ -42,14 +42,14 @@ public class AddKeyActivity extends MainActivity
 		listCategories = new ArrayList<Category>();
 		spinnerAdapter = new CategorySpinnerAdapter(this,R.layout.spinner_view,listCategories);
 		spinnerCategory.setAdapter(spinnerAdapter);
-		
+
 		if(photoPath != null)
 		{
 			currentBitmap = Utilities.decodeFile(photoPath, 256);
 
 			ivAddImage.setImageBitmap(currentBitmap);
 		}
-		
+
 		new CategoryListTask(this).execute();
 	}
 	private void updateCategoryList(List<Category> listCategories)
@@ -59,6 +59,14 @@ public class AddKeyActivity extends MainActivity
 		{
 			this.listCategories.addAll(listCategories);
 			spinnerAdapter.notifyDataSetChanged();
+			for(int i = 0; i<this.listCategories.size(); i++)
+			{
+				if(this.listCategories.get(i).getName().equalsIgnoreCase("unassigned"))
+				{
+					spinnerCategory.setSelection(i);
+					break;					
+				}
+			}
 		}
 
 	}
