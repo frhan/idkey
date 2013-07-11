@@ -34,6 +34,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 	private boolean isEditing;
 	private Button btnEditDone;
 	private Button btnAddNewCategory;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{

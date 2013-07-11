@@ -117,5 +117,21 @@ public class AddKeyActivity extends MainActivity
 		}
 	}
 
+	private class AddKeyTask extends AsyncTask<Void, Void, Void>
+	{
+
+		private Context context;
+		public AddKeyTask(Context context) 
+		{
+			this.context = context;
+			
+		}
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+	}
 
 }
