@@ -34,6 +34,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <Spinner
+            android:id="@+id/spinner_key_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"

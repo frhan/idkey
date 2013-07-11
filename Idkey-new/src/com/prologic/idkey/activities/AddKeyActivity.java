@@ -1,65 +1,112 @@
 package com.prologic.idkey.activities;
 
 
-import com.prologic.idkey.R;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.prologic.idkey.CategorySpinnerAdapter;
+import com.prologic.idkey.CustomProgressDailog;
+import com.prologic.idkey.R;
+import com.prologic.idkey.Utilities;
+import com.prologic.idkey.api.ApiConnection;
+import com.prologic.idkey.api.command.GetAllCategoriesCommand;
+import com.prologic.idkey.objects.Category;
+
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 public class AddKeyActivity extends MainActivity
 {
 	private ImageView ivAddImage;
 	private String photoPath;
+	private Bitmap currentBitmap;
+	private List<Category> listCategories;
+	private Spinner spinnerCategory;
+	private CategorySpinnerAdapter spinnerAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_key_layout);
 		ivAddImage = (ImageView) findViewById(R.id.iv_add_key_image);
+		spinnerCategory = (Spinner) findViewById(R.id.spinner_key_category);
 
 		photoPath = getIntent().getExtras().getString(AddKeyCameraActivity.IMAGE_PATH);
+		listCategories = new ArrayList<Category>();
+		spinnerAdapter = new CategorySpinnerAdapter(this,R.layout.spinner_view,listCategories);
+		spinnerCategory.setAdapter(spinnerAdapter);
+		
+		if(photoPath != null)
+		{
+			currentBitmap = Utilities.decodeFile(photoPath, 256);
 
-
-
+			ivAddImage.setImageBitmap(currentBitmap);
+		}
+		
+		new CategoryListTask(this).execute();
 	}
-	public static int calculateInSampleSize(
-			BitmapFactory.Options options, int reqWidth, int reqHeight) {
-		// Raw height and width of image
-		final int height = options.outHeight;
-		final int width = options.outWidth;
-		int inSampleSize = 1;
-
-		if (height > reqHeight || width > reqWidth) {
-
-			// Calculate ratios of height and width to requested height and width
-			final int heightRatio = Math.round((float) height / (float) reqHeight);
-			final int widthRatio = Math.round((float) width / (float) reqWidth);
-
-			// Choose the smallest ratio as inSampleSize value, this will guarantee
-			// a final image with both dimensions larger than or equal to the
-			// requested height and width.
-			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+	private void updateCategoryList(List<Category> listCategories)
+	{
+		this.listCategories.clear();
+		if(listCategories != null)
+		{
+			this.listCategories.addAll(listCategories);
+			spinnerAdapter.notifyDataSetChanged();
 		}
 
-		return inSampleSize;
 	}
-	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-			int reqWidth, int reqHeight) {
 
-		// First decode with inJustDecodeBounds=true to check dimensions
-		final BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeResource(res, resId, options);
+	private class CategoryListTask extends AsyncTask<Void, Void, Void>
+	{
+		private Context context;
+		private GetAllCategoriesCommand allCategoriesCommand;
+		private CustomProgressDailog progressDialog;
 
-		// Calculate inSampleSize
-		options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+		public CategoryListTask(Context context) 
+		{
+			this.context = context;
+			progressDialog = new CustomProgressDailog(context);
+			progressDialog.setTitle("Loading");
+			progressDialog.setMessage("Please wait...");
+		}
 
-		// Decode bitmap with inSampleSize set
-		options.inJustDecodeBounds = false;
-		return BitmapFactory.decodeResource(res, resId, options);
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog.show();
+
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) 
+		{
+			allCategoriesCommand = new GetAllCategoriesCommand();
+			allCategoriesCommand.execute(ApiConnection.getInstance(context));
+
+			return null;
+		}
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+
+			if(progressDialog != null && progressDialog.isShowing())
+			{
+				progressDialog.dismiss();
+			}
+
+			if(allCategoriesCommand != null)
+			{
+				List<Category> categories = allCategoriesCommand.getCategories();
+				updateCategoryList(categories);
+			}
+		}
 	}
 
 

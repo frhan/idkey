@@ -83,6 +83,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
+                    android:onClick="onClickAddNewKey"
                     android:background="@drawable/btn_add_new_key" />
 
                 <Button
