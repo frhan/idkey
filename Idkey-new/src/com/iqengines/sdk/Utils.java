@@ -3,6 +3,9 @@ package com.iqengines.sdk;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -130,7 +133,7 @@ public class Utils {
     
     public static File saveBmpToFile(Context ctx, Bitmap bmp) {
     	File dir = ctx.getDir("snapshots", Context.MODE_PRIVATE);
-        File of = new File(dir, "snapshot.jpg");
+        File of = new File(dir, "IMG_"+now());
         try {
             FileOutputStream fo = new FileOutputStream(of);
             
@@ -269,6 +272,15 @@ public class Utils {
         mat.postRotate(angle);
         Bitmap bMapRotate = Bitmap.createBitmap(bMap, 0, 0, bMap.getWidth(), bMap.getHeight(), mat, true);
     	return bMapRotate;
+	}
+    private static String now() {
+
+		Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		String date_format = "yyyyMMddkkmmss";
+		SimpleDateFormat sdf = new SimpleDateFormat(date_format);
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+		return sdf.format(c.getTime());
 	}
 }
 

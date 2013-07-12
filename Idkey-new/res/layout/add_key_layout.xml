@@ -59,6 +59,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/et_key_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -104,6 +105,7 @@
                     android:background="@android:color/darker_gray"
                     android:text="Use"
                     android:textColor="#FFFFFF"
+                    android:onClick="onClickUse"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Button

@@ -1,7 +1,5 @@
 package com.prologic.idkey.activities;
 
-import java.util.Currency;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
