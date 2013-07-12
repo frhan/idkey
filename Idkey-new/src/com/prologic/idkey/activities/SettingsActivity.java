@@ -24,7 +24,7 @@ public class SettingsActivity extends MainActivity {
 	}
 	public void onClickChangePassWord(View v) 
 	{
-		
+		setCurrent(com.prologic.idkey.activities.ChnagePasswordActivity.class, null);
 		
 	}
 }

@@ -34,7 +34,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 	private boolean isEditing;
 	private Button btnEditDone;
 	private Button btnAddNewCategory;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -161,7 +161,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 	public void onItemClick(AdapterView<?> parent, View v, int pos, long id)
 	{
 		final Category category = listCategories.get(pos);
-		if(isEditing)
+		if(isEditing && !category.getName().equalsIgnoreCase("Unassigned"))
 		{
 			final EditText input = new EditText(context);
 			input.setText(category.getName());
@@ -179,7 +179,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 			});
 		}else {
 			Bundle b = new Bundle();
-			
+
 			b.putInt(KeyListingActivities.USER_CATEGORY_ID, category.getId());
 			b.putString(KeyListingActivities.USER_CATEGORY_NAME, category.getName());
 

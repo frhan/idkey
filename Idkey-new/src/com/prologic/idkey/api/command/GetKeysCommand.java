@@ -36,22 +36,6 @@ public class GetKeysCommand extends JsonCommand {
 	@Override
 	protected String makeRequest(ApiConnection apiConnection)
 			throws ApiException {
-		//http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC
-		//String url = "http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC"; //ApiConnection.mainUrl+"get_keys.json"+"?auth_token="+Session.getInstance().getAuthToken();		
-		//String url = "http://50.57.84.233/cms/api/get_keys.json?auth_token=xM2e7dJNx5f5Ey7pxQqC";
-		/*		JSONObject jsonObj = null;
-		if(userCategoryId >-1)
-		{			
-			try {
-				jsonObj = new JSONObject();
-				jsonObj.put("user_category_id", userCategoryId);
-
-			} catch (JSONException e) 
-			{			
-				Log.e(TAG, e.getMessage());
-			}
-		}
-		String body = (jsonObj == null)? null : jsonObj.toString();*/
 
 		StringBuilder url = new StringBuilder(ApiConnection.mainUrl);
 		if(userCategoryId > -1)

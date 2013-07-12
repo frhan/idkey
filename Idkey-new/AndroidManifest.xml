@@ -64,6 +64,10 @@
             android:name="com.prologic.idkey.activities.AddKeyCameraActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.prologic.idkey.activities.ChnagePasswordActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
