@@ -5,8 +5,9 @@ public class Session
 	private int id;
 	private String email;
 	private String authToken;
+	private String password;
 	private static Session session = null;
-	
+
 	private Session() 
 	{
 		clearSession();
@@ -16,8 +17,9 @@ public class Session
 		id = -1;
 		email = "";
 		authToken = "";	
+		password = "";
 	}
-	
+
 	public static Session getInstance()
 	{
 		if(session == null)
@@ -41,6 +43,14 @@ public class Session
 	}
 	public void setAuthToken(String authToken) {
 		this.authToken = authToken;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}	
+
+
 
 }

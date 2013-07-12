@@ -1,7 +1,9 @@
 package com.prologic.idkey.activities;
 
+import com.prologic.idkey.IdKeyPreferences;
 import com.prologic.idkey.R;
 import com.prologic.idkey.api.ApiConnection;
+import com.prologic.idkey.api.command.Session;
 import com.prologic.idkey.api.command.SignInCommand;
 
 import android.app.ProgressDialog;
@@ -32,6 +34,17 @@ public class SignInActivity extends MainActivity implements OnClickListener
 
 		btnLogIn.setOnClickListener(this);
 		btnForgotPassword.setOnClickListener(this);
+		setPrefData();
+
+	}
+
+	private void setPrefData()
+	{
+		String email = IdKeyPreferences.getEmail();
+		String pass = IdKeyPreferences.getPassword();
+
+		etEmail.setText(email);
+		etPassword.setText(pass);
 	}
 
 	@Override
@@ -122,10 +135,12 @@ public class SignInActivity extends MainActivity implements OnClickListener
 
 			if(signInCommand != null)
 			{
-				if(!signInCommand.isSignInSuccessfull()){
+				if(!signInCommand.isSignInSuccessfull())
+				{
 					showOkAlertDailog(signInCommand.getMessage(), "Log In", signInCommand.isSignInSuccessfull());
 				}else 
 				{
+					Session.getInstance().setPassword(pass);
 					Toast.makeText(context, "Log in successfully", Toast.LENGTH_SHORT).show();
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
