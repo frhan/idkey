@@ -10,12 +10,21 @@ import com.prologic.idkey.R;
  */
 public class SettingsActivity extends MainActivity {
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
-    }
-    public void onClickSettingsClose(View v)
-    {
-    	finish();
-    }
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.settings);
+	}
+	public void onClickSettingsClose(View v)
+	{
+		finish();
+	}
+	public void onClickForgotPassword(View v) 
+	{
+		setCurrent(com.prologic.idkey.activities.ForgotPasswordActivity.class, null);
+	}
+	public void onClickChangePassWord(View v) 
+	{
+		
+		
+	}
 }

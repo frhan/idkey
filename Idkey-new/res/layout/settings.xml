@@ -110,15 +110,16 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:background="@drawable/bgtoggle"
                 android:button="@null"
-                android:layout_marginRight="5dp"
                 android:padding="5dp"
                 android:textOff=""
                 android:textOn="" />
         </RelativeLayout>
 
         <Button
+            android:id="@+id/btn_settings_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -128,15 +129,18 @@
             android:text="Change Password"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF"
+            android:onClick="onClickChangePassWord"
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/btn_settings_forgot_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/round_rect_blue"
+            android:onClick="onClickForgotPassword"
             android:text="@string/forget_password"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF"

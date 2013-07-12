@@ -37,7 +37,8 @@
             android:layout_centerVertical="true"
             android:orientation="vertical" >
 
-            <Button
+            <!--
+                 <Button
                 android:id="@+id/btn_home_tutorial"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -46,72 +47,122 @@
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_tutorial" />
+            -->
+
+            <Button
+                android:id="@+id/btn_home_tutorial"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/button_size"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_rect_blue"
+                android:text="Tutorial"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/text_size_medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:orientation="horizontal" >
 
-                <Button
+                <!--
+                     <Button
                     android:id="@+id/btn_home_my_acc"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_my_account" />
+                -->
 
                 <Button
+                    android:id="@+id/btn_home_my_acc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/button_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_rect_blue"
+                    android:text="My Account"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <!--
+                     <Button
                     android:id="@+id/btn_home_settings"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
+                    android:background="@drawable/btn_settings"
+                    android:onClick="onClickSettingsButton" />
+                -->
+
+                <Button
+                    android:id="@+id/btn_home_settings"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/button_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_rect_blue"
                     android:onClick="onClickSettingsButton"
-                    android:background="@drawable/btn_settings" />
+                    android:text="Settings"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:orientation="horizontal" >
 
                 <Button
                     android:id="@+id/btn_home_add_new_key"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="@dimen/button_size"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
+                    android:background="@drawable/round_rect_blue"
                     android:onClick="onClickAddNewKey"
-                    android:background="@drawable/btn_add_new_key" />
+                    android:text="Add New Key"
+                    android:textColor="#FFFFFF" />
 
                 <Button
                     android:id="@+id/btn_home_id_a_key"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="@dimen/button_size"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_id_a_key" />
+                    android:background="@drawable/round_rect_blue"
+                    android:text="I.D a Key"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:orientation="horizontal" >
 
                 <Button
                     android:id="@+id/btn_home_key_listing"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="@dimen/button_size"
                     android:layout_margin="3dp"
-                    android:onClick="onClickKeyList"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_key_listing" />
+                    android:background="@drawable/round_rect_blue"
+                    android:onClick="onClickKeyList"
+                    android:text="Key Listing"
+                    android:textColor="#FFFFFF" />
 
-                <Button
+                <!--
+                     <Button
                     android:id="@+id/btn_home_categories"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -120,6 +171,18 @@
                     android:layout_weight="1"
                     android:background="@drawable/btn_categories"
                     android:onClick="onClickCategories" />
+                -->
+
+                <Button
+                    android:id="@+id/btn_home_categories"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/button_size"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_rect_blue"
+                    android:onClick="onClickCategories"
+                    android:text="Categories"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

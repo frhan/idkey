@@ -7,18 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.prologic.idkey.R;
@@ -28,14 +24,10 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 {
 	protected CameraView cameraView;
 	private byte []  tempData;
-	/*private Button btnClick;
-	private Button btnRetake;
-	private Button btnUse;*/
 	private AlbumStorageDirFactory albumStorageDirFactory = null;
 	private static final String JPEG_FILE_SUFFIX = ".jpg";
 	private static final String JPEG_FILE_PREFIX = "IMG_";
 	private String currentPhotoPath = null;
-	private String action = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -43,10 +35,6 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 		super.onCreate(savedInstanceState);	
 
 		disableScreenTurnOff();
-
-		/*btnClick = (Button) findViewById(R.id.btn_camera_snap);
-		btnUse = (Button) findViewById(R.id.btn_pic_use);
-		btnRetake = (Button)findViewById(R.id.btn_pic_retake);*/
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
 			albumStorageDirFactory = new FroyoAlbumDirFactory();
@@ -113,11 +101,6 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 		if(cameraView != null)
 		{
 			cameraView.takePicture();
-
-			/*	btnClick.setVisibility(Button.GONE);
-			btnRetake.setVisibility(Button.VISIBLE);
-			btnUse.setVisibility(Button.VISIBLE);*/
-
 		}
 	}
 
@@ -126,13 +109,8 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 		if(cameraView != null)
 		{
 			cameraView.resumePreview();
-			/*
-			btnClick.setVisibility(Button.VISIBLE);
-			btnRetake.setVisibility(Button.GONE);
-			btnUse.setVisibility(Button.GONE);*/
 		}
 		tempData = null;
-
 	}
 
 	public void onClickUse(View v)
@@ -140,9 +118,6 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 		try 
 		{
 			saveToMemory();
-			/*	Bundle b = new Bundle();
-			b.putString("", value)
-			setCurrent(com.prologic.idkey.activities.AddKeyActivity.class, bundle)*/
 
 		} catch (Exception e) {
 			Toast.makeText(context, e.getMessage(),
