@@ -20,6 +20,15 @@ public class Key
 		categoryName = "";
 		createDate = "";
 	}
+	public Key()
+	{
+		this.id = -1;
+		this.name = "";
+		this.iqeToken = "";
+		this.categoryId = -1;
+		categoryName = "";
+		createDate = "";
+	}
 
 	public Key(final int id,String name,String date,String categoryName)
 	{

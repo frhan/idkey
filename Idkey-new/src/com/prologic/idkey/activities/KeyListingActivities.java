@@ -50,7 +50,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
 		etSearch = (EditText) findViewById(R.id.et_key_search);
 		tvKeyListTitle = (TextView) findViewById(R.id.txt_key_list_title);
-		
+
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
 		lvKeys.setAdapter(adapter);
@@ -100,22 +100,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 
 	private void loadKeys()
 	{
-		/*Key key = new Key(1, "aoom 15", "11/12/13", "Raddison");
-		Key key1 = new Key(2, "room 19", "11/12/13", "Raddison blu");
-		Key key2 = new Key(3, "zoom 16","11/12/13", "sonargaon");
-		Key key3 = new Key(4, "poom 17","11/12/13", "Hilton");
-		Key key4 = new Key(5, "boom 18", "11/12/13", "hilton");
-
-		listKeys.add(key);
-		listKeys.add(key2);
-		listKeys.add(key4);
-		listKeys.add(key1);
-		listKeys.add(key3);
-
-		adapter.notifyDataSetChanged();*/
 		new KeyLoadTask(context).execute();
-
-
 	}
 
 	private void updateKeyList(List<Key> keys)

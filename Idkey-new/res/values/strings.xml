@@ -12,7 +12,8 @@
     <string name="already_have_account">Already have an account?</string>
     <string name="sign_in">Log In</string>
     <string name="forget_password">Forgot Password</string>
+    <string name="close">Close</string>
+    <string name="iqe_app_key">4cb870a67b43493aa668e94ca9095b18</string>
+    <string name="iqe_app_secret">c001b534b5f34f788653cf26c2ea9172</string>
 
-     <string name="close">Close</string>
-    
 </resources>
