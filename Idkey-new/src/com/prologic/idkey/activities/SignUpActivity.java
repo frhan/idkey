@@ -36,6 +36,7 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 		btnSignUp.setOnClickListener(this);
 		btnLogIn.setOnClickListener(this);
 	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

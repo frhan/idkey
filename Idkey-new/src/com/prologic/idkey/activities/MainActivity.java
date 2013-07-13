@@ -175,5 +175,10 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 
 	}
 
+	public void onClickClose(View v)
+	{
+		finish();
+		
+	}
 
 }

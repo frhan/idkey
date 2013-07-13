@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="9sp"
             android:background="@drawable/round_rect_blue"
-            android:onClick="onClickSettingsClose"
+            android:onClick="onClickClose"
             android:text="Close"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />

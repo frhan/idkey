@@ -25,10 +25,6 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 		tbRemember.setChecked(IdKeyPreferences.isLogin());
 
 	}
-	public void onClickSettingsClose(View v)
-	{
-		finish();
-	}
 	public void onClickForgotPassword(View v) 
 	{
 		setCurrent(com.prologic.idkey.activities.ForgotPasswordActivity.class, null);

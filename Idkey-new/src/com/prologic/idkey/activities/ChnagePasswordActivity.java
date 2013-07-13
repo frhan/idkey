@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.prologic.idkey.CustomProgressDailog;
+import com.prologic.idkey.IdKeyPreferences;
 import com.prologic.idkey.R;
 import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.command.ChangePasswordCommand;
@@ -22,7 +23,7 @@ public class ChnagePasswordActivity extends MainActivity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.change_password);
-		
+
 		etNewPassword = (EditText) findViewById(R.id.et_change_new_password);
 		etOldPassword = (EditText) findViewById(R.id.et_change_old_password);
 		etRepeatNewPassword = (EditText) findViewById(R.id.et_change_password_repeat);
@@ -44,16 +45,12 @@ public class ChnagePasswordActivity extends MainActivity
 		}else if (isOnline()) 
 		{
 			new ChangePasswordTask(context, oldPassword, newPassword).execute();
-			
+
 
 		}else {
 			showOkAlertDailog("No Internet Connection", "Network", false);
 		}
 
-	}
-	public void onClickClose(View v) 
-	{
-		finish();		
 	}
 
 	private class ChangePasswordTask extends AsyncTask<Void, Void, Void>
@@ -96,6 +93,12 @@ public class ChnagePasswordActivity extends MainActivity
 			{
 				progressDialog.dismiss();
 			}
+			if(changePasswordCommand.isChangeSuccessfully())
+			{
+				IdKeyPreferences.setPassword(newPassword);
+				IdKeyPreferences.save(context);
+			}
+
 			showOkAlertDailog(changePasswordCommand.getMessage(), "Change Password", changePasswordCommand.isChangeSuccessfully());
 
 		}
