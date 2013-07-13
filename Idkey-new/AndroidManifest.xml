@@ -9,23 +9,32 @@
         android:targetSdkVersion="17" />
 
     <application
+        android:name="com.prologic.idkey.activities.IdKeyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher1"
         android:label="@string/app_name"
-        android:name="com.prologic.idkey.activities.IdKeyApplication"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.prologic.idkey.activities.SignUpActivity"
+            android:name="com.prologic.idkey.activities.SplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.prologic.idkey.activities.HomeScreenActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prologic.idkey.activities.DisclaimerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.prologic.idkey.activities.SignUpActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>

@@ -16,5 +16,9 @@ public class IdKeyApplication extends Application
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		IdKeyPreferences.initPreferences(this);
 	}
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+	}
 
 }

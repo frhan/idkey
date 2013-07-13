@@ -99,6 +99,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 		if(id > -1)
 		{
 			Category category = new Category(id, name, count);
+			
 			if(listCategories.size() >0)
 			{
 				listCategories.add(listCategories.size()-1,category);
@@ -174,7 +175,6 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 					//Toast.makeText(context,(((EditText) customView).getText().toString()),Toast.LENGTH_SHORT).show();
 					String updatedName = (((EditText) customView).getText().toString());
 					updateCategory(position,updatedName,category.getId());
-
 				}
 			});
 		}else {
@@ -379,10 +379,13 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 			{
 				progressDialog.dismiss();
 			}
+			
 			if(createCategoryCommand.isCreatedSuccessfully())
 			{
 				onListCategoryNewItemAdded(categoryName,createCategoryCommand.getId(),0);
-			}else {
+			}
+			else
+			{
 				showOkAlertDailog(createCategoryCommand.getMessage(), "Add Category", false);
 			}
 

@@ -30,7 +30,6 @@ import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.command.AddKeyCommand;
 import com.prologic.idkey.api.command.GetAllCategoriesCommand;
 import com.prologic.idkey.objects.Category;
-import com.prologic.idkey.objects.Key;
 
 public class AddKeyActivity extends MainActivity 
 {

@@ -1,7 +1,6 @@
 package com.prologic.idkey.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -49,6 +48,7 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 				IdKeyPreferences.setEmail(Session.getInstance().getEmail());
 				IdKeyPreferences.setPassword(Session.getInstance().getPassword());
 				IdKeyPreferences.setLogin(true);
+				
 				IdKeyPreferences.save(context);
 			}
 			else
