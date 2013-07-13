@@ -12,7 +12,7 @@ public class Session
 	{
 		clearSession();
 	}
-	private void clearSession() 
+	public void clearSession() 
 	{
 		id = -1;
 		email = "";

@@ -13,12 +13,15 @@ public class IdKeyPreferences {
 	private static String IS_FIRST_TIME = "is_first_time";
 	private static String IS_SIGNED_UP = "is_sign_up";
 	private static String AUTH_TOKEN = "auth_toekn";
+	private static String REMEMBER_PASSWORD = "remember_password";
+
 	private static String email = "";
 	private static String password = "";
 	private static String authToken = "";
 	private static boolean isLogin = false;
 	private static boolean isFirstTime = true;
 	private static boolean isSignedUp = false;
+	private static boolean isRememberPassword = false;
 
 	public static String getEmail() {
 		return email;
@@ -44,9 +47,16 @@ public class IdKeyPreferences {
 	public static void setLogin(boolean isLogin) {
 		IdKeyPreferences.isLogin = isLogin;
 	}
+	public static boolean isRemember() {
+		return isRememberPassword;
+	}
+	public static void setRemember(boolean isRemember) {
+		IdKeyPreferences.isRememberPassword = isRemember;
+	}
 	public static boolean isFirstTime() {
 		return isFirstTime;
 	}
+
 	public static void setFirstTime(boolean isFirstTime) {
 		IdKeyPreferences.isFirstTime = isFirstTime;
 	}
@@ -67,6 +77,7 @@ public class IdKeyPreferences {
 		editor.putBoolean(IS_FIRST_TIME, isFirstTime);
 		editor.putBoolean(IS_SIGNED_UP, isSignedUp);
 		editor.putString(AUTH_TOKEN, authToken);
+		editor.putBoolean(REMEMBER_PASSWORD, isRememberPassword);
 
 		editor.commit();
 	}
@@ -75,9 +86,10 @@ public class IdKeyPreferences {
 
 		isLogin = settings.getBoolean(ISLOGIN, isLogin);
 		isFirstTime = settings.getBoolean(IS_FIRST_TIME, isFirstTime);
-		email = settings.getString(EMAIL, "");
-		password = settings.getString(PASSWORD, "");
 		isSignedUp =  settings.getBoolean(IS_SIGNED_UP,isSignedUp);
+		isRememberPassword = settings.getBoolean(REMEMBER_PASSWORD, isRememberPassword);
+		email = settings.getString(EMAIL,email);
+		password = settings.getString(PASSWORD, password);
 		authToken = settings.getString(AUTH_TOKEN, authToken);
 		Log.i("ID-KEY", "email:"+email);
 

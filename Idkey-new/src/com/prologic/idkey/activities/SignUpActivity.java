@@ -144,8 +144,11 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 					showOkAlertDailog(signUpCommand.getMessage(), "Sign Up", signUpCommand.isSignUpSuccessfull());
 				}else {
 					Toast.makeText(context, "Sign up successfully", Toast.LENGTH_SHORT).show();
+					
 					IdKeyPreferences.setSignedUp(true);
+					IdKeyPreferences.setEmail(email);
 					IdKeyPreferences.save(context);
+					
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
 

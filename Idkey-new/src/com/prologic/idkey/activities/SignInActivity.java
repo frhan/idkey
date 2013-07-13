@@ -142,8 +142,11 @@ public class SignInActivity extends MainActivity implements OnClickListener
 				{
 					Session.getInstance().setPassword(pass);
 					Toast.makeText(context, "Log in successfully", Toast.LENGTH_SHORT).show();
-//					IdKeyPreferences.setLogin(true);
-//					IdKeyPreferences.save(context);
+
+					IdKeyPreferences.setSignedUp(true);
+					IdKeyPreferences.setEmail(email);
+					IdKeyPreferences.save(context);
+
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
 
