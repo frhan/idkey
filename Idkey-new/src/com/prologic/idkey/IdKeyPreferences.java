@@ -12,8 +12,10 @@ public class IdKeyPreferences {
 	private static String ISLOGIN = "is_login";
 	private static String IS_FIRST_TIME = "is_first_time";
 	private static String IS_SIGNED_UP = "is_sign_up";
+	private static String AUTH_TOKEN = "auth_toekn";
 	private static String email = "";
 	private static String password = "";
+	private static String authToken = "";
 	private static boolean isLogin = false;
 	private static boolean isFirstTime = true;
 	private static boolean isSignedUp = false;
@@ -29,6 +31,12 @@ public class IdKeyPreferences {
 	}
 	public static void setPassword(String password) {
 		IdKeyPreferences.password = password;
+	}
+	public static void setAuthToken(String token) {
+		IdKeyPreferences.authToken = token;
+	}
+	public static String getAuthToken() {
+		return authToken;
 	}
 	public static boolean isLogin() {
 		return isLogin;
@@ -58,6 +66,7 @@ public class IdKeyPreferences {
 		editor.putString(PASSWORD, password);
 		editor.putBoolean(IS_FIRST_TIME, isFirstTime);
 		editor.putBoolean(IS_SIGNED_UP, isSignedUp);
+		editor.putString(AUTH_TOKEN, authToken);
 
 		editor.commit();
 	}
@@ -69,6 +78,7 @@ public class IdKeyPreferences {
 		email = settings.getString(EMAIL, "");
 		password = settings.getString(PASSWORD, "");
 		isSignedUp =  settings.getBoolean(IS_SIGNED_UP,isSignedUp);
+		authToken = settings.getString(AUTH_TOKEN, authToken);
 		Log.i("ID-KEY", "email:"+email);
 
 	}

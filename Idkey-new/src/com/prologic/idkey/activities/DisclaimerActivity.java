@@ -1,5 +1,6 @@
 package com.prologic.idkey.activities;
 
+import com.prologic.idkey.IdKeyPreferences;
 import com.prologic.idkey.R;
 
 import android.os.Bundle;
@@ -16,6 +17,8 @@ public class DisclaimerActivity extends MainActivity
 
 	public void onClickToaAgree(View v) 
 	{
+		IdKeyPreferences.setFirstTime(false);
+		IdKeyPreferences.save(context);
 		setCurrent(com.prologic.idkey.activities.SignUpActivity.class,null);
 		finish();
 	}

@@ -48,7 +48,7 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 				IdKeyPreferences.setEmail(Session.getInstance().getEmail());
 				IdKeyPreferences.setPassword(Session.getInstance().getPassword());
 				IdKeyPreferences.setLogin(true);
-				
+
 				IdKeyPreferences.save(context);
 			}
 			else

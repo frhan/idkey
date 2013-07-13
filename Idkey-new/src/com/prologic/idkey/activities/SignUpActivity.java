@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.prologic.idkey.IdKeyPreferences;
 import com.prologic.idkey.R;
 import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.command.SignUpCommand;
@@ -34,6 +35,16 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 		btnLogIn = (Button)findViewById(R.id.btn_register_log_in);
 		btnSignUp.setOnClickListener(this);
 		btnLogIn.setOnClickListener(this);
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+
+	@Override
+	protected void suspendRunningTask() 
+	{
+		super.suspendRunningTask();
 	}
 
 	@Override
@@ -124,7 +135,7 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 			{
 				progressDialog.dismiss();
 			}
-
+			
 			if(signUpCommand != null)
 			{
 				if(!signUpCommand.isSignUpSuccessfull())
@@ -132,13 +143,15 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 					showOkAlertDailog(signUpCommand.getMessage(), "Sign Up", signUpCommand.isSignUpSuccessfull());
 				}else {
 					Toast.makeText(context, "Sign up successfully", Toast.LENGTH_SHORT).show();
+					IdKeyPreferences.setSignedUp(true);
+					IdKeyPreferences.save(context);
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
 
 				}
 			}
 			signUpCommand = null;	
-			
+
 		}
 	}
 }
