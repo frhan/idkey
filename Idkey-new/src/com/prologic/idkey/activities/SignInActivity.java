@@ -146,7 +146,9 @@ public class SignInActivity extends MainActivity implements OnClickListener
 					IdKeyPreferences.setSignedUp(true);
 					IdKeyPreferences.setEmail(email);
 					IdKeyPreferences.save(context);
-
+					
+					logInSuccessfully();
+					
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
 

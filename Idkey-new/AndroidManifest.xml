@@ -76,7 +76,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.prologic.idkey.activities.ChnagePasswordActivity"
+            android:name="com.prologic.idkey.activities.ChangePasswordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity

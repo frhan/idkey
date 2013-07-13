@@ -32,7 +32,7 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 	}
 	public void onClickChangePassWord(View v) 
 	{
-		setCurrent(com.prologic.idkey.activities.ChnagePasswordActivity.class, null);
+		setCurrent(com.prologic.idkey.activities.ChangePasswordActivity.class, null);
 
 	}
 

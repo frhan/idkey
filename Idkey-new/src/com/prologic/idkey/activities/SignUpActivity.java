@@ -1,9 +1,13 @@
 package com.prologic.idkey.activities;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,13 +39,31 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 		btnLogIn = (Button)findViewById(R.id.btn_register_log_in);
 		btnSignUp.setOnClickListener(this);
 		btnLogIn.setOnClickListener(this);
+		
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction("com.prologic.idkey.ACTION_LOGOUT");
+		registerReceiver(receiver, intentFilter);
+
 	}
-	
+
+
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-	}
+		unregisterReceiver(receiver);
 
+	}
+	BroadcastReceiver receiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.d("onReceive","Logout in progress");
+			//At this point you should start the login activity and finish this one
+			finish();
+		}
+	};
+	
 	@Override
 	protected void suspendRunningTask() 
 	{
@@ -136,7 +158,7 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 			{
 				progressDialog.dismiss();
 			}
-			
+
 			if(signUpCommand != null)
 			{
 				if(!signUpCommand.isSignUpSuccessfull())
@@ -144,11 +166,11 @@ public class SignUpActivity extends MainActivity implements OnClickListener
 					showOkAlertDailog(signUpCommand.getMessage(), "Sign Up", signUpCommand.isSignUpSuccessfull());
 				}else {
 					Toast.makeText(context, "Sign up successfully", Toast.LENGTH_SHORT).show();
-					
+
 					IdKeyPreferences.setSignedUp(true);
 					IdKeyPreferences.setEmail(email);
 					IdKeyPreferences.save(context);
-					
+					logInSuccessfully();
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
 

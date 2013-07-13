@@ -180,5 +180,12 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		finish();
 		
 	}
+	protected void logInSuccessfully() 
+	{
+		Intent broadcastIntent = new Intent();
+		broadcastIntent.setAction("com.prologic.idkey.ACTION_LOGOUT");
+		sendBroadcast(broadcastIntent);
+		
+	}
 
 }
