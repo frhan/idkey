@@ -1,5 +1,6 @@
 package com.prologic.idkey.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -33,6 +34,15 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 	{
 		setCurrent(com.prologic.idkey.activities.ChnagePasswordActivity.class, null);
 
+	}
+
+	public void onClickLogOut(View v)
+	{
+		Intent intent = new Intent(this, com.prologic.idkey.activities.SignInActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

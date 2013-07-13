@@ -44,6 +44,7 @@
             android:background="@drawable/round_rect_blue"
             android:padding="3dp"
             android:text="Log Out"
+            android:onClick="onClickLogOut"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
     </RelativeLayout>
