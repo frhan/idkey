@@ -7,7 +7,9 @@ public class CameraPictureCallback implements PictureCallback{
 
 	private IPictureCallback mPictureCallBack;
 	
-	public CameraPictureCallback() {
+	public CameraPictureCallback() 
+	{
+		
 	}
 	public void setPictureCallBackListener(IPictureCallback pictureCallback)
 	{

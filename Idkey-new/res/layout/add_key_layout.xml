@@ -9,6 +9,22 @@
         android:layout_height="50dp"
         android:background="#5b6574"
         android:orientation="vertical" >
+        
+        <Button
+            android:id="@+id/btn_forgot_close"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:background="@drawable/round_rect_blue"
+            android:text="@string/close"
+            android:onClick="onClickClose"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -12,30 +12,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_margin="5dp"
+        android:layout_centerVertical="true"
         android:onClick="onClickSnap"
-        android:text="Snap" />
+        android:text="Click" />
 
     <Button
         android:id="@+id/btn_pic_retake"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_size"
         android:layout_alignParentLeft="true"
-        android:layout_margin="5dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
         android:onClick="onClickRetake"
         android:text="Retake"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/btn_pic_use"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_size"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_gravity="left"
-        android:layout_margin="5dp"
-        android:background="#FFFFFF"
+        android:layout_margin="10dp"
         android:onClick="onClickUse"
         android:text="Use"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </RelativeLayout>

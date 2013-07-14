@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
@@ -56,8 +57,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	{
 		if(camera != null && this.pictureCallback != null)
 		{
-			try {
-				System.gc();
+			try {				
 				camera.takePicture(shutterCallback, 
 						rawCallback,
 						pictureCallback);					
@@ -230,6 +230,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 		}
 
 		params.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+		params.setPictureFormat(ImageFormat.JPEG);
+		params.setPictureSize(mPreviewSize.width, mPreviewSize.height);
+
 		List<String> focusModes = params.getSupportedFocusModes();
 		if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
 			params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);

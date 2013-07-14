@@ -60,11 +60,13 @@ public class AddKeyActivity extends MainActivity
 			currentBitmap = Utilities.decodeFile(photoPath, 256);
 
 			ivAddImage.setImageBitmap(currentBitmap);
+			
+			/*new CategoryListTask(this).execute();
+			setImageFile();
+			initSdk();*/
 		}
 
-		new CategoryListTask(this).execute();
-		setImageFile();
-		initSdk();
+	
 
 	}
 	private IQRemote iqremote;

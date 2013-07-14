@@ -56,6 +56,8 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 
 	@Override
 	protected void onResume() {	
+
+
 		if(cameraView != null)
 		{
 			cameraView.resumePreview();
@@ -123,6 +125,10 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 			Toast.makeText(context, e.getMessage(),
 					Toast.LENGTH_LONG).show();
 			e.printStackTrace();
+			if(cameraView != null)
+			{
+				cameraView.resumePreview();
+			}
 		} 
 
 	}

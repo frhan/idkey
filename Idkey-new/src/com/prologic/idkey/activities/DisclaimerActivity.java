@@ -13,6 +13,7 @@ public class DisclaimerActivity extends MainActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.disclaimer_view);
+		
 	}
 
 	public void onClickToaAgree(View v) 
