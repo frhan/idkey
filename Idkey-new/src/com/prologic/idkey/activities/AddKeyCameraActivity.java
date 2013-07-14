@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import com.ff.camera.CameraActivity;
 import com.ff.camera.CameraView;
-import com.ff.camera.MyCameraView;
 import com.prologic.idkey.R;
 
 public class AddKeyCameraActivity extends CameraActivity{
@@ -43,6 +42,14 @@ public class AddKeyCameraActivity extends CameraActivity{
 		View overlayView = (View) layoutInflater.inflate(R.layout.overlay_view, null);
 		addContentView(overlayView, cameraView.getLayoutParams());
 	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		btnClick.setVisibility(Button.VISIBLE);
+		btnRetake.setVisibility(Button.GONE);
+		btnUse.setVisibility(Button.GONE);
+	}
 
 	@Override
 	public void onClickUse(View v) 
@@ -54,16 +61,13 @@ public class AddKeyCameraActivity extends CameraActivity{
 			b.putString(IMAGE_PATH, getCurrentPhotoPath());
 			setCurrent(com.prologic.idkey.activities.AddKeyActivity.class, b);
 		}
-		
-		btnClick.setVisibility(Button.VISIBLE);
-		btnRetake.setVisibility(Button.GONE);
-		btnUse.setVisibility(Button.GONE);
+
 	}
 
 	@Override
 	public void onClickSnap(View v) {
 		super.onClickSnap(v);
-		
+
 		btnClick.setVisibility(Button.GONE);
 		btnRetake.setVisibility(Button.VISIBLE);
 		btnUse.setVisibility(Button.VISIBLE);

@@ -45,7 +45,12 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 		mHolder = getHolder();
 		mHolder.addCallback(this);
 		// this is needed for old android version
-		mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.GINGERBREAD) 
+		{
+			mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		     // only for gingerbread and newer versions
+		}
+		
 		this.pictureCallback = new CameraPictureCallback();
 	}
 	//	void startAutofocus() {
@@ -57,7 +62,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	{
 		if(camera != null && this.pictureCallback != null)
 		{
-			try {				
+			try {			
+				
 				camera.takePicture(shutterCallback, 
 						rawCallback,
 						pictureCallback);					

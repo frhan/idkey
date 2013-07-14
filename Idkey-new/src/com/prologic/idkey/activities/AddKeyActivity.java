@@ -60,13 +60,11 @@ public class AddKeyActivity extends MainActivity
 			currentBitmap = Utilities.decodeFile(photoPath, 256);
 
 			ivAddImage.setImageBitmap(currentBitmap);
-			
-			/*new CategoryListTask(this).execute();
-			setImageFile();
-			initSdk();*/
-		}
 
-	
+			new CategoryListTask(this).execute();
+			setImageFile();
+			initSdk();
+		}
 
 	}
 	private IQRemote iqremote;
@@ -88,11 +86,15 @@ public class AddKeyActivity extends MainActivity
 			{
 				categoryId = listCategories.get(spinnerCategory.getSelectedItemPosition()).getId();
 			}
-
-			if(name.length() >0)
+			if(name.length() == 0 )
 			{
+				showOkAlertDailog("Please put a name", "Add ID", false);
+			}else if(isOnline()){
 				new AddKeyTask(context, files,etKeyId.getText().toString(),categoryId).execute();
+			}else {
+				showOkAlertDailog("Please check your internet connection", "Internet error", false);
 			}
+
 		} catch (Exception e) {
 			Log.e(TAG,e.getMessage());
 		}
@@ -116,16 +118,19 @@ public class AddKeyActivity extends MainActivity
 		}
 
 	}
+
 	@Override
 	protected void onDestroy() 
 	{
 		super.onDestroy();
 	}
+
 	private Bitmap transformBitmapToThumb(Bitmap origBmp) {
 		int thumbSize = getResources()
 				.getDimensionPixelSize(R.dimen.image_size);
 		return Utils.cropBitmap(origBmp, thumbSize);
 	}
+
 	private File currentFile = null;
 	private void  setImageFile()
 	{
@@ -135,11 +140,11 @@ public class AddKeyActivity extends MainActivity
 		origBmp.recycle();
 		currentFile = Utils.saveBmpToFile(context, thumb);		
 	}
+
 	private File getImageFile() 
 	{
 		return currentFile;
 	}
-
 
 	private class CategoryListTask extends AsyncTask<Void, Void, Void>
 	{
@@ -254,7 +259,7 @@ public class AddKeyActivity extends MainActivity
 			try {
 				String result = iqremote.upload(imageFiles, name,null,null,true,null);
 				String [] keyResultArray = parseIqeAddResult(result);
-				
+
 
 				if(keyResultArray != null && keyResultArray[0].equalsIgnoreCase("SUCCESS"))
 				{
