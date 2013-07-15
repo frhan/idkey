@@ -9,7 +9,7 @@
         android:layout_height="50dp"
         android:background="#5b6574"
         android:orientation="vertical" >
-        
+
         <Button
             android:id="@+id/btn_forgot_close"
             android:layout_width="wrap_content"
@@ -18,10 +18,10 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="5dp"
-            android:padding="5dp"
             android:background="@drawable/round_rect_blue"
-            android:text="@string/close"
             android:onClick="onClickClose"
+            android:padding="5dp"
+            android:text="@string/close"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold" />
@@ -42,7 +42,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4c8ede"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@drawable/background_paper"
         android:orientation="vertical"
         android:weightSum="1" >
 
@@ -53,13 +55,13 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="10sp"
-            android:layout_weight="0.50"
+            android:layout_weight="0.45"
             android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.50"
+            android:layout_weight="0.55"
             android:gravity="center_vertical"
             android:orientation="vertical" >
 
@@ -70,7 +72,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="30dp"
                 android:text="I.D"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold" />
 
@@ -80,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/round_rect_white_edittext"
+                android:background="@drawable/round_rect_border_editext"
                 android:paddingBottom="4dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="4dp"
@@ -95,7 +97,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="5dp"
                 android:text="Category"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold" />
 
@@ -104,7 +106,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp" />
+                android:layout_marginRight="30dp"
+                android:background="@drawable/keydetail_button_dropdown"
+                android:gravity="center"
+                android:paddingLeft="7dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,10 +123,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="@android:color/darker_gray"
+                    android:background="@drawable/round_rect_blue"
+                    android:onClick="onClickUse"
                     android:text="Use"
                     android:textColor="#FFFFFF"
-                    android:onClick="onClickUse"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Button
@@ -129,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@android:color/darker_gray"
+                    android:background="@drawable/round_rect_red"
                     android:text="Cancel"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/text_size_medium" />

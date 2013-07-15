@@ -11,6 +11,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,7 +26,7 @@ import com.prologic.idkey.objects.Key;
 import com.prologic.idkey.objects.KeyListAdapter;
 import com.prologic.idkey.objects.KeysComparator;
 
-public class KeyListingActivities extends MainActivity implements OnClickListener
+public class KeyListingActivities extends MainActivity implements OnClickListener,OnItemClickListener
 {
 	private List<Key> listKeys;
 	private ListView lvKeys;
@@ -183,6 +185,14 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 			return null;
 		}
 
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int pos, long id) 
+	{
+		Key key = adapter.getItem(pos);
+		
+		
 	}
 
 }
