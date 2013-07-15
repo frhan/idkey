@@ -56,9 +56,9 @@ public class AddKeyActivity extends MainActivity
 
 		if(photoPath != null)
 		{
-			currentBitmap = Utilities.decodeFile(photoPath, 256);
+			//currentBitmap = Utilities.decodeFile(photoPath, 256);
 
-			ivAddImage.setImageBitmap(currentBitmap);
+			//ivAddImage.setImageBitmap(currentBitmap);
 
 			loadCategories();
 			setImageFile();
@@ -145,8 +145,9 @@ public class AddKeyActivity extends MainActivity
 	{
 		Bitmap thumb  = null ;
 		Bitmap origBmp = BitmapFactory.decodeFile(photoPath);
-		thumb = transformBitmapToThumb(origBmp);
+		currentBitmap = thumb = transformBitmapToThumb(origBmp);
 		origBmp.recycle();
+		ivAddImage.setImageBitmap(currentBitmap);
 		currentFile = Utils.saveBmpToFile(context, thumb);		
 	}
 
