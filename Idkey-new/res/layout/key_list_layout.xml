@@ -2,9 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/background_black"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#5b6574"
+        android:orientation="horizontal"
+        android:weightSum="10" >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_margin="5sp"
+            android:layout_weight="2"
+            android:background="@drawable/round_rect_blue"
+            android:onClick="onClickClose"
+            android:text="Close"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/txt_key_list_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Keys"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:background="@drawable/round_rect_blue"
+            android:onClick="onClickEditDone"
+            android:text="Categories"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
+    <!--
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -49,6 +93,7 @@
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold" />
     </RelativeLayout>
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -154,14 +199,15 @@
     <ListView
         android:id="@+id/lv_keys"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:background="@drawable/background_paper"
         android:cacheColorHint="@android:color/transparent"
         android:dividerHeight="1dp"
-        android:fadingEdge="none" >
+        android:fadingEdge="none"
+        android:paddingBottom="10dp" >
     </ListView>
 
 </LinearLayout>

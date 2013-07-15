@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/background_black"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -51,7 +51,7 @@
         android:id="@+id/btn_category_add_new"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
+        android:background="#FFFFFF"
         android:drawableLeft="@drawable/button_plus_green"
         android:gravity="left|center"
         android:onClick="onClickAddCategory"
@@ -68,7 +68,7 @@
     <ListView
         android:id="@+id/lv_categories"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
@@ -76,7 +76,8 @@
         android:cacheColorHint="@android:color/transparent"
         android:dividerHeight="2dp"
         android:fadingEdge="none"
-        android:focusable="false" >
+        android:focusable="false"
+        android:paddingBottom="5dp" >
     </ListView>
 
 </LinearLayout>
