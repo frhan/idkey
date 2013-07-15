@@ -177,7 +177,8 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 					updateCategory(position,updatedName,category.getId());
 				}
 			});
-		}else {
+		}else if(category.getCount() >0)
+		{
 			Bundle b = new Bundle();
 
 			b.putInt(KeyListingActivities.USER_CATEGORY_ID, category.getId());

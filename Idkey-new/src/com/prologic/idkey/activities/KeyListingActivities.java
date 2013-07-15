@@ -97,7 +97,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 
 	private void loadKeys()
 	{
-		new KeyLoadTask(context).execute();
+		new KeyLoadTask(context,userCategoryId).execute();
 	}
 
 	private void updateKeyList(List<Key> keys)
