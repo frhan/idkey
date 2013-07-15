@@ -57,7 +57,8 @@ public class KeyListAdapter extends ArrayAdapter<Key>
 
 		txtKeyNo.setText(String.valueOf(key.getId()));
 		txtKeyId.setText(key.getName());
-		txtKeyDate.setText(key.getCreateDate());
+		if(key.getCreateDate() != null && key.getCreateDate().split("T")[0] != null)
+			txtKeyDate.setText(key.getCreateDate().split("T")[0]);
 		txtKeyHotelName.setText(key.getCategoryName());	
 
 

@@ -56,6 +56,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
 		lvKeys.setAdapter(adapter);
+		lvKeys.setOnItemClickListener(this);
 
 		btnNoKeySort.setOnClickListener(this);
 		btnKeySortId.setOnClickListener(this);
@@ -86,7 +87,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 					int arg3) 
 			{
-				
+
 			}
 
 			@Override
@@ -191,8 +192,24 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 	public void onItemClick(AdapterView<?> parent, View v, int pos, long id) 
 	{
 		Key key = adapter.getItem(pos);
-		
-		
+		if(key != null)
+		{
+			String [] keyArray = new String[7];
+			keyArray[0] = String.valueOf(key.getId());
+			keyArray[1] = key.getName();
+			keyArray[2] = key.getIqeToken();
+			keyArray[3] = key.getScanUrl();
+			keyArray[4] = String.valueOf(key.getCategoryId());
+			keyArray[5] = key.getCategoryName();
+			keyArray[6] = key.getCreateDate();		
+			
+			Bundle b = new Bundle();
+			b.putStringArray(KeyShowActivity.CURRENT_KEY,keyArray);
+			
+			setCurrent(com.prologic.idkey.activities.KeyShowActivity.class, b);
+		}
+
+
 	}
 
 }

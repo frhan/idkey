@@ -41,7 +41,6 @@ public class AddKeyActivity extends MainActivity
 	private CategorySpinnerAdapter spinnerAdapter;
 	private EditText etKeyId;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,12 +60,17 @@ public class AddKeyActivity extends MainActivity
 
 			ivAddImage.setImageBitmap(currentBitmap);
 
-			new CategoryListTask(this).execute();
+			loadCategories();
 			setImageFile();
 			initSdk();
 		}
 
 	}
+	private void loadCategories()
+	{
+		new CategoryListTask(this).execute();
+	}
+	
 	private IQRemote iqremote;
 	private void initSdk()
 	{
@@ -100,6 +104,11 @@ public class AddKeyActivity extends MainActivity
 		}
 
 	}
+	public void onClickKeyCancelDelete(View v)
+	{
+		finish();
+	}
+
 	private void updateCategoryList(List<Category> listCategories)
 	{
 		this.listCategories.clear();

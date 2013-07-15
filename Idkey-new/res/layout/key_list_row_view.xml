@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:minHeight="50dp"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
+    android:background="#FFFFFF"
+    android:minHeight="50dp"
     android:orientation="horizontal"
     android:weightSum="10" >
 
@@ -16,8 +16,8 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1.25"
         android:gravity="center"
-        android:text="12"
         android:paddingRight="5dp"
+        android:text="12"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
 
@@ -28,7 +28,8 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="2.5"
         android:gravity="left|center"
-        android:singleLine="true"
+        android:maxLines="3"
+        android:singleLine="false"
         android:text="Room 5"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
@@ -38,11 +39,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="3dp"
         android:layout_weight="2.5"
         android:gravity="left|center"
-        android:singleLine="true"
-        android:text="3/12/13"
-        android:layout_marginLeft="5dp"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="3/12/13 jfskndssk"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
 
@@ -51,11 +53,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
         android:layout_weight="2.5"
         android:gravity="left|center"
-        android:singleLine="true"
+        android:maxLines="3"
+        android:singleLine="false"
         android:text="Raddison"
-        android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
 
@@ -70,7 +73,8 @@
             android:layout_height="25dp"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/keys_table_disclosure" />
+            android:background="@drawable/keys_table_disclosure"
+            android:focusable="false" />
     </RelativeLayout>
 
 </LinearLayout>
