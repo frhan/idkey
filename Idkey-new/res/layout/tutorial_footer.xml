@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@android:color/darker_gray"
+    android:orientation="horizontal" >
+
+    <TableRow
+        android:id="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/btn_routes"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.2"
+            android:background="#000000"
+            android:padding="5dp"
+            android:src="@drawable/tabbar_icon_hom" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="0.3sp"
+            android:layout_weight="0.2"
+            android:background="#000000"
+            android:padding="5dp"
+            android:src="@drawable/tabbar_icon_keys" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="0.3sp"
+            android:layout_weight="0.2"
+            android:background="#000000"
+            android:padding="5dp"
+            android:src="@drawable/tabbar_icon_id" />
+
+        <ImageButton
+            android:id="@+id/btn_routes"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="0.3sp"
+            android:layout_weight="0.2"
+            android:background="#000000"
+            android:padding="5dp"
+            android:src="@drawable/tabbar_icon_add" />
+
+        <ImageButton
+            android:id="@+id/btn_routes"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="0.3sp"
+            android:layout_weight="0.2"
+            android:background="#000000"
+            android:padding="5dp"
+            android:src="@drawable/tabbar_icon_about" />
+    </TableRow>
+
+    <!--
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height=" 40dip"
+        android:layout_weight="1"
+        android:src="@drawable/tabbar_icon_hom" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Ok" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Ok" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Ok" />
+    -->
+
+</LinearLayout>
