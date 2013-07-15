@@ -36,5 +36,9 @@ public class HomeScreenActivity extends MainActivity implements OnClickListener
 		setCurrent(com.tasawr.camera.CameraPictureSnapActivity.class, null);
 		
 	}
+	public void onClickTutorial(View v)
+	{
+		setCurrent(com.prologic.idkey.activities.TutorialActivity.class, null);
+	}
 
 }

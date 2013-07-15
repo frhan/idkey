@@ -83,5 +83,60 @@ Portions of the FTT Software utilize or include third party software and other c
 All third party software is utilized through the ID-a-Key application \"AS IS.\" FTT and third party vendors make no representations or warranties, express or implied, regarding the accuracy of any data in their servers. In addition, FTT and third party vendors reserve the right to delete data from servers or to change data categories for any cause deemed sufficient.  No warranty is made that the FTT or third party software or servers are error-free or that functioning of such software or servers will be uninterrupted. FTT and third party vendors are not obligated to provide you with new, enhanced, or additional data types or categories that each company may provide in the future, and each company is free to discontinue its services at any time. FTT AND THIRD PARTY VENDORS DISCLAIM ALL WARRANTIES EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. FTT AND THIRD PARTY VENDORS DO NOT WARRANT THE RESULTS THAT WILL BE OBTAINED BY YOUR USE OF THE ID-A-KEY SOFTWARE OR ANY ASSOCIATED SERVER. IN NO CASE WILL FTT BE LIABLE FOR ANY CONSEQUENTIAL OR INCIDENTAL DAMAGES OR FOR ANY LOST PROFITS OR LOST REVENUES. 
 
 If your license terminates, you agree to cease any and all use of third party vendor data, software, and servers. Furthermore, third party vendors reserve all rights relative to any and all data in their system, software, and servers, including all ownership rights.  Under no circumstances will third party vendors become liable for any payment to you for any information that you provide or have provided through ID-a-Key software use. All third party vendors may enforce their rights under this agreement against you directly in their own name. "</string>
+    <string name="tutorial_text">   
+<b>Not sure what all the keys on your keychain go to anymore? Too many keys to keep up with? </b><br/>
+
+ID-a-Key solves these problems by storing and identifying keys entered into your smartphone.  Entries are made using your phone’s built-in camera. Then, at any time or place thereafter, you can take a picture of an unknown key and the app will identify it for you.
+
+There are several main functions of the ID-a-Key app:
+
+1. Creating an ID-a-Key account,
+2. Adding additional key capability via in-app purchase,
+2. Entering new keys into your phone,
+3. Identifying a previously labeled key,
+4. Viewing or searching within your key list,
+5. Viewing your category list,
+
+<b>Creating an ID-a-Key Account</b>
+The first time you open the ID-a-Key app, you will be prompted to:
+a. accept the Five Tykes Technologies license agreement, 
+b. enter your email address (for purposes of identification of your key set), and 
+c. create a password for entry into the program. 
+
+Once these steps are completed, you will be taken to the Home screen for further navigation. 
+
+Please save your login information. If you forget your password, you will have to create a new one which will be sent to you at your email address. 
+
+<b>Adding Keys via In-App Purchases</b>
+Your purchase of the ID-a-Key app entitles you to enter 2 keys for storage and later identification. If you wish to purchase additional storage capability, select the “My Account” tab. You will see several options for adding keys. Once you make your selection, your payment will be processed through your iTunes or Google Play account.
+
+<b>Entering New Keys</b>
+Place your key flat on a white background with good lighting.  Touch the “Add New Key” button either from the Home screen or from the Tab Menu.  Center the image within the key silhouette for best results, and take the picture (the flash is automatically suppressed to prevent distortion).   Then choose either “Use” or “Retake.”  Once the picture is selected, a Key Name and Category (optional) can be added.  Selecting “Save” sends the key image and details to your database for storage. 
+
+<b>Identifying a Key</b>
+Place the key flat on a white background with good lighting.  Touch the “Identify a Key” button either from the Home page or the Tab Menu.  Once the key is centered in the key silhouette, take the picture.   Then select either “Use” or “Retake.”  When the “Use” button is selected, the app will search your database.  If the key has been previously entered, the app will identify it and display the associated label information.  If the key is not found, the app will allow the user to enter it into the system.
+
+<b>Viewing Your List of Keys</b>
+Select the “Key Listing” button from the Home screen or the Keys tab button to see a list of all stored keys.  The default system lists keys by date of entry, though they can be organized and sorted by number, name, date and category.  There is also a search button that allows search by key name.
+
+<b>Viewing Your List of Categories</b>
+Keys entered into the app can be organized according to category.  Each key detail screen identifies the key’s category (optional), and the key list page displays category assignments.  In order to view the categories, touch the “Categories” button on the Home screen or the Key List page.  This will bring up all the Categories with a notation of how many keys are in each category.  Selecting a category enables  viewing of all the keys in that category.  Categories can be edited by selecting the “Edit” button on the Categories screen.  Touching the green “Plus” button adds a new category.  Selecting the category name brings up the “Edit Category Name” screen.  The red “Delete” button appears next to each category—selecting this button will delete the category.  (Please note that categories with keys in them cannot be deleted.  Similarly, the default “Unassigned” category cannot be edited/deleted.)
+</string>
+<string  name="web_text">    
+<h2>
+Not sure what all the keys on your keychain go to anymore? Too many keys to keep up with? 
+</h2>
+<p>ID-a-Key solves these problems by storing and identifying keys entered into your smartphone.  Entries are made using your phone’s built-in camera. Then, at any time or place thereafter, you can take a picture of an unknown key and the app will identify it for you.</p><br/>
+
+<p>There are several main functions of the ID-a-Key app:</p><br/>
+<ol>
+<li>Creating an ID-a-Key account,</li>
+<li>Adding additional key capability via in-app purchase,</li>
+<li> Entering new keys into your phone,</li>
+<li>Identifying a previously labeled key,</li>
+<li>Viewing or searching within your key list,</li>
+<li>Viewing your category list,</li>
+</ol>
+</string>
 
 </resources>

@@ -2,9 +2,9 @@ package com.prologic.idkey.activities;
 
 public class Tasks_ {
 /*
- *#Splash screen
- *#Toa
- *#Settings
+ *#check key listing activity top bar
+ *#
+ *#
  *#
  * 
  */

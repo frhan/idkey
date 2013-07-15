@@ -75,16 +75,16 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		etSearch.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-				// When user changed the Text
+			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) 
+			{
 				adapter.getFilter().filter(cs);
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-				// TODO Auto-generated method stub
-
+					int arg3) 
+			{
+				
 			}
 
 			@Override
@@ -93,9 +93,6 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 			}
 		});
 		loadKeys();
-
-
-
 	}
 
 	private void loadKeys()
