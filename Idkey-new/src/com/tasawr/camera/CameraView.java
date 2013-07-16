@@ -39,7 +39,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		super(context);
 		mContext = context;
 		SurfaceHolder previewHolder = this.getHolder();
-	
+
 		previewHolder.addCallback(this);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
@@ -50,7 +50,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 		mContext = context;
 		SurfaceHolder previewHolder = this.getHolder();
-		
+
 		previewHolder.addCallback(this);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);		
 		mPictureCallback = new CameraPictureCallback();
@@ -84,7 +84,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 		mContext = context;
 		SurfaceHolder previewHolder = this.getHolder();
-		
+
 		previewHolder.addCallback(this);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);	
 
@@ -184,7 +184,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 		int w = parameters.getPreviewSize().width;
 		int h = parameters.getPreviewSize().height;
-		
+
 		Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))
 				.getDefaultDisplay();
 
@@ -205,7 +205,12 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 			throw new AssertionError("Wrong surface rotation value");
 		}
 		setDisplayOrientation(parameters, angle);
-		
+
+		List<String> focusModes = parameters.getSupportedFocusModes();
+		if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+			parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+		}
+
 		try {
 			camera.setParameters(parameters);
 		} catch (Exception e) {

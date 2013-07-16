@@ -123,7 +123,7 @@
                 <Button
                     android:id="@+id/btn_kay_use"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/button_size"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_rect_blue"
@@ -135,11 +135,10 @@
                 <Button
                     android:id="@+id/btn_key_delete_cancel"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/button_size"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/round_rect_red"
-                    android:text="Cancel"
+                    android:background="@drawable/cancel_btn_800_400"
                     android:onClick="onClickKeyCancelDelete"
                     android:textColor="#FFFFFF"
                     android:textSize="@dimen/text_size_medium" />

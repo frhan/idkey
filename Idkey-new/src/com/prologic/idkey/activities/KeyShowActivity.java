@@ -71,7 +71,7 @@ public class KeyShowActivity extends MainActivity
 		spinnerCategory.setAdapter(spinnerAdapter);
 
 		btnSave.setText("Save");
-		btnDelete.setText("Delete");
+		btnDelete.setBackgroundResource(R.drawable.delete_btn_800_400);
 
 		iqRemote  = new IQRemote(getResources().getString(R.string.iqe_app_key),getResources().getString( R.string.iqe_app_secret));
 

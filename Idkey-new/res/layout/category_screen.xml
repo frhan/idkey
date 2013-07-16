@@ -14,13 +14,12 @@
         <Button
             android:id="@+id/btn_cat_close"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_size"
             android:layout_alignParentLeft="true"
-            android:layout_margin="10sp"
-            android:background="@drawable/round_rect_blue"
+            android:background="@drawable/back_button"
             android:onClick="onClickClose"
-            android:text="Close"
             android:textColor="#FFFFFF"
+            android:layout_margin="5dp"
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
@@ -37,7 +36,7 @@
         <Button
             android:id="@+id/btn_cate_done"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_size"
             android:layout_alignParentRight="true"
             android:layout_margin="10sp"
             android:background="@drawable/round_rect_blue"

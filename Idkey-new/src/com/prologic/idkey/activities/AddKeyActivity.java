@@ -56,21 +56,31 @@ public class AddKeyActivity extends MainActivity
 
 		if(photoPath != null)
 		{
-			//currentBitmap = Utilities.decodeFile(photoPath, 256);
-
-			//ivAddImage.setImageBitmap(currentBitmap);
-
+			setImageViewImage();
 			loadCategories();
 			setImageFile();
 			initSdk();
 		}
 
 	}
+
+	private void setImageViewImage()
+	{
+		try {
+			currentBitmap = Utilities.decodeFile(photoPath, 512);
+			ivAddImage.setImageBitmap(currentBitmap);
+		} catch (OutOfMemoryError e) {
+			Log.e(TAG, e.getMessage());
+		}
+
+	}
+
+
 	private void loadCategories()
 	{
 		new CategoryListTask(this).execute();
 	}
-	
+
 	private IQRemote iqremote;
 	private void initSdk()
 	{
@@ -132,6 +142,11 @@ public class AddKeyActivity extends MainActivity
 	protected void onDestroy() 
 	{
 		super.onDestroy();
+
+		if(currentBitmap != null)
+		{
+			currentBitmap.recycle();
+		}
 	}
 
 	private Bitmap transformBitmapToThumb(Bitmap origBmp) {
@@ -143,13 +158,19 @@ public class AddKeyActivity extends MainActivity
 	private File currentFile = null;
 	private void  setImageFile()
 	{
-		Bitmap thumb  = null ;
-		Bitmap origBmp = BitmapFactory.decodeFile(photoPath);
-		currentBitmap = thumb = transformBitmapToThumb(origBmp);
-		origBmp.recycle();
-		ivAddImage.setImageBitmap(currentBitmap);
-		currentFile = Utils.saveBmpToFile(context, thumb);		
+		try {
+			Bitmap thumb  = null ;
+			Bitmap origBmp = BitmapFactory.decodeFile(photoPath);
+			thumb = transformBitmapToThumb(origBmp);
+			origBmp.recycle();
+			//ivAddImage.setImageBitmap(currentBitmap);
+			currentFile = Utils.saveBmpToFile(context, thumb);
+		} catch (OutOfMemoryError e) {
+			Log.e(TAG,e.getMessage());
+		}
+
 	}
+
 
 	private File getImageFile() 
 	{

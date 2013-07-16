@@ -7,12 +7,14 @@
     android:orientation="vertical" >
 
     <RelativeLayout
+        android:id="@+id/rl_lt_settings_top_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#5b6574"
         android:orientation="vertical" >
 
-        <Button
+        <!--
+             <Button
             android:id="@+id/btn_cat_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,6 +25,17 @@
             android:text="Close"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
+        -->
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_size"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/back_button"
+            android:onClick="onClickClose"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_size_medium" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,24 +43,35 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
-            android:text="Category"
+            android:text="Settings"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_big"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_cate_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="@dimen/button_size"
             android:layout_alignParentRight="true"
-            android:layout_margin="9sp"
-            android:background="@drawable/round_rect_blue"
-            android:padding="3dp"
-            android:text="Log Out"
+            android:layout_margin="7sp"
+            android:background="@drawable/logout_button"
             android:onClick="onClickLogOut"
+            android:padding="3dp"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_settings_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_lt_settings_top_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,8 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_margin="8dp"
-                android:text="Save Password"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Password Protect "
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -111,7 +135,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:background="@drawable/bgtoggle"
                 android:button="@null"
                 android:padding="5dp"
@@ -122,27 +145,25 @@
         <Button
             android:id="@+id/btn_settings_change_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_size"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/round_rect_blue"
-            android:text="Change Password"
+            android:background="@drawable/change_password"
+            android:onClick="onClickChangePassWord"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF"
-            android:onClick="onClickChangePassWord"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_settings_forgot_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_size"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/round_rect_blue"
+            android:background="@drawable/forgot_password"
             android:onClick="onClickForgotPassword"
-            android:text="@string/forget_password"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />

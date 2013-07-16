@@ -139,6 +139,10 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 			break;
 		}
 	}
+	public void onClickCategories(View v)
+	{
+		
+	}
 
 	private class KeyLoadTask extends AsyncTask<Void, Void, Void>
 	{

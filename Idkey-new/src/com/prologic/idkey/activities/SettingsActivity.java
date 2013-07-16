@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.prologic.idkey.IdKeyPreferences;
@@ -17,6 +19,7 @@ import com.prologic.idkey.api.command.Session;
 public class SettingsActivity extends MainActivity implements OnCheckedChangeListener 
 {
 	private ToggleButton tbRemember;
+	private TextView txtEmail;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,6 +27,12 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 		tbRemember = (ToggleButton) findViewById(R.id.toggle_button_remember);
 		tbRemember.setOnCheckedChangeListener(this);
 		tbRemember.setChecked(IdKeyPreferences.isRemember());
+		txtEmail  = (TextView) findViewById(R.id.txt_settings_email);
+		
+		if(Session.getInstance().getEmail() != null)
+		{
+			txtEmail.setText(Session.getInstance().getEmail());
+		}
 
 	}
 	public void onClickForgotPassword(View v) 

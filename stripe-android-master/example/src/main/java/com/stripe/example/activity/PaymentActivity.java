@@ -27,7 +27,7 @@ public class PaymentActivity extends FragmentActivity {
      *   private static final String publishableKey = "pk_something123456789";
      *
      */
-    public static final String PUBLISHABLE_KEY = YOUR_PUBLISHABLE_KEY;
+    public static final String PUBLISHABLE_KEY = "YOUR_PUBLISHABLE_KEY";
 
     private ProgressDialogFragment progressFragment;
 

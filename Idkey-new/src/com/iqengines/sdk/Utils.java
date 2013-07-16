@@ -133,7 +133,7 @@ public class Utils {
     
     public static File saveBmpToFile(Context ctx, Bitmap bmp) {
     	File dir = ctx.getDir("snapshots", Context.MODE_PRIVATE);
-        File of = new File(dir, "IMG_"+now());
+        File of = new File(dir, "IMG_"+"snapshot.jpg");
         try {
             FileOutputStream fo = new FileOutputStream(of);
             

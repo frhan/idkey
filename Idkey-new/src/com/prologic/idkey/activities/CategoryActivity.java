@@ -99,7 +99,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 		if(id > -1)
 		{
 			Category category = new Category(id, name, count);
-			
+
 			if(listCategories.size() >0)
 			{
 				listCategories.add(listCategories.size()-1,category);
@@ -162,6 +162,8 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 	public void onItemClick(AdapterView<?> parent, View v, int pos, long id)
 	{
 		final Category category = listCategories.get(pos);
+
+
 		if(isEditing && !category.getName().equalsIgnoreCase("Unassigned"))
 		{
 			final EditText input = new EditText(context);
@@ -177,7 +179,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 					updateCategory(position,updatedName,category.getId());
 				}
 			});
-		}else if(category.getCount() >0)
+		}else if(!isEditing && category.getCount() >0)
 		{
 			Bundle b = new Bundle();
 
@@ -380,7 +382,7 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 			{
 				progressDialog.dismiss();
 			}
-			
+
 			if(createCategoryCommand.isCreatedSuccessfully())
 			{
 				onListCategoryNewItemAdded(categoryName,createCategoryCommand.getId(),0);
