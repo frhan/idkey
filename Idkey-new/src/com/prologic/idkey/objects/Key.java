@@ -1,5 +1,7 @@
 package com.prologic.idkey.objects;
 
+import java.util.Date;
+
 
 public class Key
 {
@@ -10,6 +12,7 @@ public class Key
 	private int categoryId;
 	private String categoryName;
 	private String createDate;	
+	private Date createdDate = null;	
 
 	public Key(final int id) 
 	{
@@ -89,9 +92,15 @@ public class Key
 	public int getId() {
 		return id;
 	}
-	
-	
-	
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+
 	/*private final int no;
 	private String id;
 	private String date;

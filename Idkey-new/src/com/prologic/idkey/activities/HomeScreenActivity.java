@@ -28,7 +28,7 @@ public class HomeScreenActivity extends MainActivity implements OnClickListener
 	
 	public void onClickKeyList(View v) 
 	{
-		setCurrent(com.prologic.idkey.activities.KeyListingActivities.class, null);
+		setCurrent(com.prologic.idkey.activities.KeyListingActivity.class, null);
 		
 	}
 	public void onClickAddNewKey(View v)

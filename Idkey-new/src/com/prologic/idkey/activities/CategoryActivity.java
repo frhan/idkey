@@ -183,10 +183,10 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 		{
 			Bundle b = new Bundle();
 
-			b.putInt(KeyListingActivities.USER_CATEGORY_ID, category.getId());
-			b.putString(KeyListingActivities.USER_CATEGORY_NAME, category.getName());
+			b.putInt(KeyListingActivity.USER_CATEGORY_ID, category.getId());
+			b.putString(KeyListingActivity.USER_CATEGORY_NAME, category.getName());
 
-			setCurrent(com.prologic.idkey.activities.KeyListingActivities.class, b);
+			setCurrent(com.prologic.idkey.activities.KeyListingActivity.class, b);
 		}
 	}
 

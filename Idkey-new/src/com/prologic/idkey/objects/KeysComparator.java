@@ -12,7 +12,6 @@ public class KeysComparator implements Comparator<Key>
 
 	public static final int SORTING_TYPE_NAME = 0;
 	public static final int SORTING_TYPE_ID = 1;
-
 	public static final int SORTING_TYPE_DATE = 2;
 	public static final int SORTING_TYPE_ALL_CAT = 3;
 
@@ -45,14 +44,21 @@ public class KeysComparator implements Comparator<Key>
 	        {
 	            return lhs.getId().compareTo(rhs.getId());
 	        }*/
-			return lhs.getName().compareTo(rhs.getName());
+			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getName().compareTo(rhs.getName()):rhs.getName().compareTo(lhs.getName()));
 		}
 		else if(sortingType == SORTING_TYPE_ALL_CAT)
 		{
-			return lhs.getCategoryName().compareToIgnoreCase(rhs.getCategoryName());
+			return (sortingOrder == SORTING_ORDER_ASCENDING?lhs.getCategoryName().compareToIgnoreCase(rhs.getCategoryName()):
+				rhs.getCategoryName().compareToIgnoreCase(lhs.getCategoryName()));
 		}
-		else {
-			return lhs.getId() - rhs.getId() ;
+		else if(sortingType == SORTING_TYPE_DATE)
+		{
+			return (sortingOrder == SORTING_ORDER_ASCENDING?lhs.getCreatedDate().compareTo(rhs.getCreatedDate()):
+				rhs.getCreatedDate().compareTo(lhs.getCreatedDate()));
+		}
+		else 
+		{
+			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getId() - rhs.getId():rhs.getId() - lhs.getId()) ;
 		}
 	}
 

@@ -49,7 +49,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		disableScreenTurnOff();
 
 		setContentView(R.layout.camera_view);
@@ -83,7 +83,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		toast.setDuration(Toast.LENGTH_LONG);
 		toast.setView(toastView);
 		toast.show();
-		
+
 		View overlayView = (View) layoutInflater.inflate(R.layout.overlay_view, null);
 		addContentView(overlayView, mCameraview.getLayoutParams());
 
@@ -103,6 +103,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		if(mCameraview != null)
 		{
 			mCameraview.resumePreview();
+			//mCameraview.onResume();
 		}
 		btnClick.setVisibility(Button.VISIBLE);
 		btnRetake.setVisibility(Button.GONE);
@@ -239,7 +240,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		File imageF = File.createTempFile(imageFileName, JPEG_FILE_SUFFIX, albumF);
 		return imageF;
 	}
-	
+
 	private File getAlbumDir() {
 		File storageDir = null;
 

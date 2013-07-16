@@ -26,12 +26,11 @@
         -->
 
         <Button
-           
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_gravity="center_vertical"
-            android:layout_weight="2"
             android:layout_marginLeft="5dp"
+            android:layout_weight="2"
             android:background="@drawable/back_button"
             android:onClick="onClickClose"
             android:textColor="#FFFFFF"
@@ -55,8 +54,8 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_gravity="center_vertical"
-            android:layout_weight="3"
             android:layout_margin="5dp"
+            android:layout_weight="3"
             android:background="@drawable/round_rect_blue"
             android:onClick="onClickCategories"
             android:text="Categories"
@@ -146,11 +145,10 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1.25"
-            android:background="#e8e8e8"
+            android:background="@drawable/keys_button_selector"
             android:gravity="left|center"
             android:paddingLeft="5dp"
             android:text="NO"
-            android:textColor="#000000"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold" >
         </Button>
@@ -161,7 +159,7 @@
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
             android:layout_weight="2.5"
-            android:background="#e8e8e8"
+            android:background="@drawable/keys_button_selector"
             android:gravity="left|center"
             android:paddingLeft="5dp"
             android:text="I.D"
@@ -176,7 +174,7 @@
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
             android:layout_weight="2.5"
-            android:background="#e8e8e8"
+            android:background="@drawable/keys_button_selector"
             android:gravity="left|center"
             android:paddingLeft="5dp"
             android:text="Date"
@@ -191,7 +189,7 @@
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
             android:layout_weight="2.5"
-            android:background="#e8e8e8"
+            android:background="@drawable/keys_button_selector"
             android:gravity="left|center"
             android:paddingLeft="5dp"
             android:text="All Cat"
@@ -200,15 +198,27 @@
             android:textStyle="bold" >
         </Button>
 
-        <Button
+        <!--
+             <Button
+            android:id="@+id/btn_order_indicator"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1.25"
             android:background="#e8e8e8"
             android:drawableLeft="@drawable/keys_filter_arrow_up"
             android:gravity="left|center"
-            android:paddingLeft="5dp" >
-        </Button>
+            android:paddingLeft="5dp" />
+        -->
+
+        <ImageView
+            android:id="@+id/btn_order_indicator"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.25"
+            android:background="#e8e8e8"
+            android:gravity="left|center"
+            android:padding="5dp"
+            android:src="@drawable/keys_filter_arrow_up" />
     </LinearLayout>
 
     <ListView

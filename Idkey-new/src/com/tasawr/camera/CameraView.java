@@ -1,19 +1,18 @@
 package com.tasawr.camera;
 
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.graphics.ImageFormat;
-import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 import android.hardware.Camera.Size;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
@@ -34,6 +33,11 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	private IPreviewCallBack mIPrevCallback;
 	private String TAG = "Camera";
 	private Size mPreviewSize;
+	private static long AUTO_FOCUS_INTERVAL = 1500;
+	private Handler mHandler;
+	private Thread mAutofocusThread;
+	private Boolean mAutoFocus;
+
 	public CameraView(Context context) {
 
 		super(context);
@@ -49,12 +53,21 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		super(context, attrs);
 
 		mContext = context;
+		mHandler = new Handler();
 		SurfaceHolder previewHolder = this.getHolder();
 
 		previewHolder.addCallback(this);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);		
 		mPictureCallback = new CameraPictureCallback();
+
 	}
+	public void onResume()
+	{
+		SurfaceHolder previewHolder = this.getHolder();
+
+		previewHolder.addCallback(this);
+	}
+
 
 	public void setPictureCallback(IPictureCallback pictureCallback)
 	{
@@ -146,6 +159,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 	public void stopPreview(boolean temporaryStop){
 		if(camera != null){
+			mAutoFocus = false;
+			if (camera!=null) camera.cancelAutoFocus();
+			mAutofocusThread=null;
+
 			camera.stopPreview();
 			camera.release();
 			camera=null;
@@ -217,55 +234,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 			e.printStackTrace();
 		}
 
-		camera.startPreview();
+		startPreview();
 
-		/*
-		Camera.Parameters params = camera.getParameters();
-		Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))
-				.getDefaultDisplay();
-
-		switch (display.getRotation()) {
-		case Surface.ROTATION_0:
-			angle = 90;
-			break;
-		case Surface.ROTATION_90:
-			angle = 0;
-			break;
-		case Surface.ROTATION_180:
-			angle = 270;
-			break;
-		case Surface.ROTATION_270:
-			angle = 180;
-			break;
-		default:
-			throw new AssertionError("Wrong surface rotation value");
-		}
-		setDisplayOrientation(params, angle);
-
-		if (mPreviewSize == null) {
-			// h and w get inverted on purpose
-			mPreviewSize = getOptimalSize(params.getSupportedPreviewSizes(), width > height ? width
-					: height, width > height ? height : width);
-		}
-
-		params.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
-		params.setPictureFormat(ImageFormat.JPEG);
-		params.setPictureSize(mPreviewSize.width, mPreviewSize.height);
-
-			List<String> focusModes = params.getSupportedFocusModes();
-		if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
-			params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-		}
-
-		camera.setParameters(params);
-
-		try {
-			camera.setPreviewDisplay(this.getHolder());
-		} catch (IOException e) {
-			Log.e(TAG, "Can't set preview display", e);
-		}
-
-		initPreview(); */
 	}
 	private Size getOptimalSize(List<Size> sizes, int w, int h) {
 		final double ASPECT_TOLERANCE = 0.2;
@@ -403,6 +373,43 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	public int getAngle(){
 		return angle;
 	}
+
+	class AutoFocusRunnable implements Runnable {
+
+		@Override
+		public void run() {
+			if (mAutoFocus){
+				if (camera != null) {
+					try {
+						camera.autoFocus(new AutoFocusCallback() {
+							@Override
+							public void onAutoFocus(boolean success, Camera camera) {
+								mHandler.postDelayed(AutoFocusRunnable.this, AUTO_FOCUS_INTERVAL);
+							}
+						});
+
+					} catch (Exception e) {
+						Log.w(TAG, "Unable to auto-focus", e);
+						mHandler.postDelayed(AutoFocusRunnable.this, AUTO_FOCUS_INTERVAL);
+					}
+				}
+			}
+		}
+
+	};
+
+	void startAutofocus() {
+		mAutoFocus = true;
+		mAutofocusThread = new Thread(new AutoFocusRunnable(),"Autofocus Thread");
+		mAutofocusThread.start();
+	}
+	void startPreview(){
+		if (camera!=null){
+			camera.startPreview();
+			startAutofocus();
+		}
+	}
+
 
 	/************************* SurfaceHolder.Callback methods ****************************/	
 	@Override

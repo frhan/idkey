@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,15 +27,18 @@ import com.prologic.idkey.objects.Key;
 import com.prologic.idkey.objects.KeyListAdapter;
 import com.prologic.idkey.objects.KeysComparator;
 
-public class KeyListingActivities extends MainActivity implements OnClickListener,OnItemClickListener
+public class KeyListingActivity extends MainActivity implements OnClickListener,OnItemClickListener
 {
 	private List<Key> listKeys;
 	private ListView lvKeys;
 	private KeyListAdapter adapter;
 	private Button btnNoKeySort;
+	//private Button btnKeySortId;
 	private Button btnKeySortId;
 	private Button btnKeySortCat;
-	private KeysComparator keysComparator;
+	private Button btnKeySortDate;
+	private ImageView ivOrderIndicator;
+	//private KeysComparator keysComparator;
 	private EditText etSearch;
 	private TextView tvKeyListTitle;
 	public static final String USER_CATEGORY_ID = "user_category_id";
@@ -52,6 +56,8 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
 		etSearch = (EditText) findViewById(R.id.et_key_search);
 		tvKeyListTitle = (TextView) findViewById(R.id.txt_key_list_title);
+		ivOrderIndicator = (ImageView) findViewById(R.id.btn_order_indicator);
+		btnKeySortDate = (Button)findViewById(R.id.btn_key_sort_date);
 
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
@@ -61,8 +67,9 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		btnNoKeySort.setOnClickListener(this);
 		btnKeySortId.setOnClickListener(this);
 		btnKeySortCat.setOnClickListener(this);
+		btnKeySortDate.setOnClickListener(this);
+		btnKeySortId.setSelected(false);
 
-		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_ID, KeysComparator.SORTING_ORDER_ASCENDING);
 		userCategoryId = -1;
 		Bundle bundle = getIntent().getExtras();
 		if(bundle != null)
@@ -80,7 +87,7 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 			@Override
 			public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) 
 			{
-				adapter.getFilter().filter(cs);
+
 			}
 
 			@Override
@@ -100,7 +107,12 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 
 	private void loadKeys()
 	{
-		new KeyLoadTask(context,userCategoryId).execute();
+		if(isOnline())
+		{
+			new KeyLoadTask(context,userCategoryId).execute();
+		}else {
+			showOkAlertDailog("No internet Connection connection", "Internet", false);
+		}
 	}
 
 	private void updateKeyList(List<Key> keys)
@@ -109,39 +121,88 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 		{
 			listKeys.clear();
 			listKeys.addAll(keys);
-			adapter.notifyDataSetChanged();
+			//adapter.notifyDataSetChanged();
+			adapter.updateList(keys);
+			currentSelectedButton = btnNoKeySort;
+			btnNoKeySort.setSelected(true);
+			ivOrderIndicator.setImageResource(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING? R.drawable.keys_filter_arrow_up:R.drawable.keys_filter_arrow_down);				
 		}	
 
 	}
+	private Button currentSelectedButton  = null;
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+		if(currentSelectedButton != null)
+		{
+			currentSelectedButton.setSelected(false);
+		}
 
-		switch (v.getId()) {
+		switch (v.getId()) 
+		{
 		case R.id.btn_key_sort_id:
-			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_ID);
-			Collections.sort(listKeys,keysComparator);
-			adapter.notifyDataSetChanged();
+
+			if(adapter.getSortingType() == KeysComparator.SORTING_TYPE_ID)
+			{
+				adapter.setSortOrder(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING ? 
+						KeysComparator.SORTING_ORDER_DECENDING: KeysComparator.SORTING_ORDER_ASCENDING );
+				adapter.sortData(KeysComparator.SORTING_TYPE_ID);
+			}else {
+				adapter.sortData(KeysComparator.SORTING_TYPE_ID);
+			}
+			btnNoKeySort.setSelected(true);
+			currentSelectedButton = btnNoKeySort;
 			break;
 
 		case R.id.btn_key_sort_name:
-			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_NAME);
-			Collections.sort(listKeys,keysComparator);
-			adapter.notifyDataSetChanged();
+
+			if(adapter.getSortingType() == KeysComparator.SORTING_TYPE_NAME)
+			{
+				adapter.setSortOrder(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING ? 
+						KeysComparator.SORTING_ORDER_DECENDING: KeysComparator.SORTING_ORDER_ASCENDING );
+				adapter.sortData(KeysComparator.SORTING_TYPE_NAME);
+			}else {
+				adapter.sortData(KeysComparator.SORTING_TYPE_NAME);
+			}
+			btnKeySortId.setSelected(true);
+			currentSelectedButton = btnKeySortId;
 			break;
 		case R.id.btn_key_sort_cat:
-			keysComparator.setSortingType(KeysComparator.SORTING_TYPE_ALL_CAT);
-			Collections.sort(listKeys,keysComparator);
-			adapter.notifyDataSetChanged();
+
+			if(adapter.getSortingType() == KeysComparator.SORTING_TYPE_ALL_CAT)
+			{
+				adapter.setSortOrder(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING ? 
+						KeysComparator.SORTING_ORDER_DECENDING: KeysComparator.SORTING_ORDER_ASCENDING );
+				adapter.sortData(KeysComparator.SORTING_TYPE_ALL_CAT);
+			}else {
+				adapter.sortData(KeysComparator.SORTING_TYPE_ALL_CAT);
+			}
+			btnKeySortCat.setSelected(true);
+			currentSelectedButton = btnKeySortCat;
+			break;
+		case R.id.btn_key_sort_date:
+			if(adapter.getSortingType() == KeysComparator.SORTING_TYPE_DATE)
+			{
+				adapter.setSortOrder(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING ? 
+						KeysComparator.SORTING_ORDER_DECENDING: KeysComparator.SORTING_ORDER_ASCENDING );
+				adapter.sortData(KeysComparator.SORTING_TYPE_DATE);
+			}else {
+				adapter.sortData(KeysComparator.SORTING_TYPE_DATE);
+			}
+			btnKeySortDate.setSelected(true);
+			currentSelectedButton = btnKeySortDate;
 			break;
 
 		default:
 			break;
 		}
+
+		ivOrderIndicator.setImageResource(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING? R.drawable.keys_filter_arrow_up:R.drawable.keys_filter_arrow_down);	
+
 	}
 	public void onClickCategories(View v)
 	{
-		
+
 	}
 
 	private class KeyLoadTask extends AsyncTask<Void, Void, Void>
@@ -206,10 +267,10 @@ public class KeyListingActivities extends MainActivity implements OnClickListene
 			keyArray[4] = String.valueOf(key.getCategoryId());
 			keyArray[5] = key.getCategoryName();
 			keyArray[6] = key.getCreateDate();		
-			
+
 			Bundle b = new Bundle();
 			b.putStringArray(KeyShowActivity.CURRENT_KEY,keyArray);
-			
+
 			setCurrent(com.prologic.idkey.activities.KeyShowActivity.class, b);
 		}
 

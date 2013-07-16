@@ -28,8 +28,8 @@ public class ForgotPasswordActivity extends MainActivity implements OnClickListe
 		etEmail = (EditText) findViewById(R.id.et_forgot_email);
 		btnForgotPassword = (Button) findViewById(R.id.btn_forgot_password_lay);
 		btnForgotPassword.setOnClickListener(this);
-		btnClose = (Button) findViewById(R.id.btn_forgot_close);
-		btnClose.setOnClickListener(this);
+		//btnClose = (Button) findViewById(R.id.btn_forgot_close);
+		//btnClose.setOnClickListener(this);
 	}
 
 	@Override
@@ -53,9 +53,6 @@ public class ForgotPasswordActivity extends MainActivity implements OnClickListe
 			{
 				showOkAlertDailog("No Internet connection", "Connection", false);
 			}
-		}else if (v == btnClose) 
-		{
-			finish();			
 		}
 	}
 

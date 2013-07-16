@@ -1,5 +1,7 @@
 package com.prologic.idkey.objects;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.prologic.idkey.R;
@@ -10,37 +12,75 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class KeyListAdapter extends ArrayAdapter<Key>
+public class KeyListAdapter extends BaseAdapter
 {
 
 	private List<Key> listKeys;
 	private LayoutInflater layoutInflater;
 	private int [] rowColors = {Color.parseColor("#ffffff"),Color.parseColor("#accdf3")};
+	private List<Key> filterKeys  = null;
+	private KeysComparator keysComparator;
 	
+
 	public KeyListAdapter(Context context, int textViewResourceId,
 			List<Key> objects) 
 	{
-		super(context, textViewResourceId, objects);
+		//super(context, textViewResourceId, objects);
 		this.listKeys = objects;
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+		filterKeys = new ArrayList<Key>();
+		filterKeys.addAll(objects);
+		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_ID, KeysComparator.SORTING_ORDER_ASCENDING);
 	}
+	
+	public void sortData(int sortingType)
+	{
+		keysComparator.setSortingType(sortingType);
+		Collections.sort(filterKeys,keysComparator);
+		notifyDataSetChanged();
+	}
+	public void setSortOrder(int orderType)
+	{
+		keysComparator.setSortingOrder(orderType);
+	}
+	public int getSortingType()
+	{
+		return keysComparator.getSortingType();
+	}
+	public int getSortingOrder()
+	{
+		return keysComparator.getSortingOrder();
+	}
+	
 	@Override
 	public int getCount() {
-		return listKeys.size();
+		return filterKeys.size();
 	}
 
-    @Override
-    public Key getItem(int position) {
-        return  listKeys.get(position);
-    }
+	@Override
+	public Key getItem(int position) {
+		return  filterKeys.get(position);
+	}
+	@Override
+	public long getItemId(int position) 
+	{
+		return position;
+	}
 
-    @Override
+	public void updateList(List<Key> keys)
+	{
+		filterKeys.addAll(keys);	
+		Collections.sort(filterKeys,keysComparator);
+		notifyDataSetChanged();		
+	}	
+
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) 
 	{
-		Key key = listKeys.get(position);
+		Key key = getItem(position);
 		if(convertView == null)
 		{
 			convertView = (View) layoutInflater.inflate(R.layout.key_list_row_view, null);
@@ -63,6 +103,11 @@ public class KeyListAdapter extends ArrayAdapter<Key>
 
 
 		return convertView;
+	}
+
+	public void filter(String charText)
+	{
+
 	}
 
 

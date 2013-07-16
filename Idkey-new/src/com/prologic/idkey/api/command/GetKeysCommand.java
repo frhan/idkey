@@ -1,7 +1,11 @@
 package com.prologic.idkey.api.command;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,14 +23,17 @@ public class GetKeysCommand extends JsonCommand {
 
 	int userCategoryId;
 	private List<Key> listKeys;
+	private SimpleDateFormat dateTimeFormat;
 	public GetKeysCommand()
 	{
-		userCategoryId = -1;
+		this(-1);	
+		
 
 	}
 	public GetKeysCommand(int userCategoryId) 
 	{
 		this.userCategoryId = userCategoryId;
+		dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-SS:S",Locale.US);
 	}
 	public List<Key> getListKeys() {
 		return listKeys;
@@ -76,7 +83,7 @@ public class GetKeysCommand extends JsonCommand {
 							String scan_url = "";
 							String category_name = "";
 							String created = "";
-
+							Date date = null;
 							JSONObject jsonCategoryObj = userKeysJsonArray.getJSONObject(i);
 							if(jsonCategoryObj.has("id"))
 							{
@@ -104,7 +111,16 @@ public class GetKeysCommand extends JsonCommand {
 							}
 							if(jsonCategoryObj.has("created"))
 							{
-								created = jsonCategoryObj.getString("created");								
+								created = jsonCategoryObj.getString("created");	
+								try {
+									date = dateTimeFormat.parse(created);								
+								
+								} catch (ParseException e) 
+								{									
+									e.printStackTrace();
+									Log.e(TAG, e.getMessage());
+								}
+								
 							}
 							if(id >-1)
 							{
@@ -112,7 +128,8 @@ public class GetKeysCommand extends JsonCommand {
 								key.setIqeToken(iqe_token);
 								key.setCategoryId(category_id);
 								key.setScanUrl(scan_url);
-
+								key.setCreatedDate(date);
+								
 								listKeys.add(key);
 							}
 						}
