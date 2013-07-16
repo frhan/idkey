@@ -3,6 +3,7 @@ package com.prologic.idkey.objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import com.prologic.idkey.R;
 
@@ -23,7 +24,7 @@ public class KeyListAdapter extends BaseAdapter
 	private int [] rowColors = {Color.parseColor("#ffffff"),Color.parseColor("#accdf3")};
 	private List<Key> filterKeys  = null;
 	private KeysComparator keysComparator;
-	
+
 
 	public KeyListAdapter(Context context, int textViewResourceId,
 			List<Key> objects) 
@@ -35,7 +36,7 @@ public class KeyListAdapter extends BaseAdapter
 		filterKeys.addAll(objects);
 		keysComparator = new KeysComparator(KeysComparator.SORTING_TYPE_ID, KeysComparator.SORTING_ORDER_ASCENDING);
 	}
-	
+
 	public void sortData(int sortingType)
 	{
 		keysComparator.setSortingType(sortingType);
@@ -54,7 +55,7 @@ public class KeyListAdapter extends BaseAdapter
 	{
 		return keysComparator.getSortingOrder();
 	}
-	
+
 	@Override
 	public int getCount() {
 		return filterKeys.size();
@@ -108,6 +109,24 @@ public class KeyListAdapter extends BaseAdapter
 	public void filter(String charText)
 	{
 
+		charText = charText.toLowerCase(Locale.getDefault());
+		filterKeys.clear();
+		if (charText.length() == 0) {
+			filterKeys.addAll(this.listKeys);
+		}
+		  else
+	        {
+	            for (Key key : listKeys) 
+	            {
+	                if (key.getName().toLowerCase(Locale.getDefault()).contains(charText) ||
+	                	key.getCategoryName().toLowerCase(Locale.getDefault()).contains(charText)) 
+	                {
+	                	filterKeys.add(key);
+	                }
+	            }
+	        }
+		Collections.sort(filterKeys,keysComparator);
+		notifyDataSetChanged();	
 	}
 
 

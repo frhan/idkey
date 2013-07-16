@@ -3,6 +3,7 @@ package com.prologic.idkey.activities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -33,12 +34,10 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 	private ListView lvKeys;
 	private KeyListAdapter adapter;
 	private Button btnNoKeySort;
-	//private Button btnKeySortId;
 	private Button btnKeySortId;
 	private Button btnKeySortCat;
 	private Button btnKeySortDate;
 	private ImageView ivOrderIndicator;
-	//private KeysComparator keysComparator;
 	private EditText etSearch;
 	private TextView tvKeyListTitle;
 	public static final String USER_CATEGORY_ID = "user_category_id";
@@ -98,8 +97,10 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 			}
 
 			@Override
-			public void afterTextChanged(Editable editable) {
-
+			public void afterTextChanged(Editable editable) 
+			{
+				String text = etSearch.getText().toString().toLowerCase(Locale.getDefault());
+				adapter.filter(text);
 			}
 		});
 		loadKeys();
@@ -121,8 +122,8 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 		{
 			listKeys.clear();
 			listKeys.addAll(keys);
-			//adapter.notifyDataSetChanged();
 			adapter.updateList(keys);
+			//need to optimize
 			currentSelectedButton = btnNoKeySort;
 			btnNoKeySort.setSelected(true);
 			ivOrderIndicator.setImageResource(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING? R.drawable.keys_filter_arrow_up:R.drawable.keys_filter_arrow_down);				
@@ -130,6 +131,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 
 	}
 	private Button currentSelectedButton  = null;
+	//need to optimize
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
@@ -202,7 +204,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 	}
 	public void onClickCategories(View v)
 	{
-
+		setCurrent(com.prologic.idkey.activities.CategoryActivity.class, null);
 	}
 
 	private class KeyLoadTask extends AsyncTask<Void, Void, Void>
