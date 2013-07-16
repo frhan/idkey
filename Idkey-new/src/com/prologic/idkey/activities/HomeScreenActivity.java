@@ -40,5 +40,9 @@ public class HomeScreenActivity extends MainActivity implements OnClickListener
 	{
 		setCurrent(com.prologic.idkey.activities.TutorialActivity.class, null);
 	}
+	public void onClickIdentifyKey(View v)
+	{
+		setCurrent(com.prologic.idkey.activities.IdentifyKeyActivity.class, null);
+	}
 
 }

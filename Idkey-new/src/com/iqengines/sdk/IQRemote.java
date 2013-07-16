@@ -86,6 +86,7 @@ public class IQRemote implements Serializable {
 
 		return query(image, null, null, deviceId, true, null, null, null,qid);
 	}
+	
 
 	public String DefineQueryId(File image, String webhook, String extra,
 			String device_id, boolean json,

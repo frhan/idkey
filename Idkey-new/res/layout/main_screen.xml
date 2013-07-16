@@ -164,6 +164,7 @@
                     android:layout_height="@dimen/button_size"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
+                    android:onClick="onClickIdentifyKey"
                     android:background="@drawable/home_button_id"
                     android:textColor="#FFFFFF" />
             </LinearLayout>

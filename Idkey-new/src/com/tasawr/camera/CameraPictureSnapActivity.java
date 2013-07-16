@@ -34,13 +34,11 @@ import com.prologic.idkey.R;
 import com.prologic.idkey.activities.AddKeyActivity;
 import com.prologic.idkey.activities.AddKeyCameraActivity;
 import com.prologic.idkey.activities.MainActivity;
-import com.tasawr.camera.CameraView;
-import com.tasawr.camera.IPictureCallback;
 
 public class CameraPictureSnapActivity extends MainActivity implements IPictureCallback,OnClickListener
 {
 	private Button btnClick,btnRetake,btnUse;
-	private IDKeyCameraView mCameraview;
+	protected IDKeyCameraView mCameraview;
 	private byte[] tempData;
 	private String TAG = "Camera";
 	public static final String SELECTED_IMAGE_PATH = "IMAGE_PATH";
@@ -157,64 +155,75 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		}
 	}
 
+	protected void  onClickSnap() {
+
+		if(mCameraview != null)
+		{
+			mCameraview.takePicture();
+
+			btnClick.setVisibility(Button.GONE);
+			btnRetake.setVisibility(Button.VISIBLE);
+			btnUse.setVisibility(Button.VISIBLE);
+
+		}
+
+	}
+
+	protected void onClickRetake()
+	{
+
+		if(mCameraview != null)
+		{
+			mCameraview.resumePreview();
+
+			btnClick.setVisibility(Button.VISIBLE);
+			btnRetake.setVisibility(Button.GONE);
+			btnUse.setVisibility(Button.GONE);
+		}
+	}
+
+	protected void onClickUse()
+	{
+		try 
+		{
+			saveToMemory();
+		} catch (Exception e) {
+			Toast.makeText(CameraPictureSnapActivity.this, e.getMessage(),
+					Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		} 
+
+		if(currentPhotoPath != null && currentFile != null)
+		{	
+			Intent intent = new Intent(CameraPictureSnapActivity.this,AddKeyActivity.class); 
+			intent.putExtra(AddKeyCameraActivity.IMAGE_PATH, currentPhotoPath);
+			intent.putExtra(AddKeyActivity.IMAGE_FILE, currentFile);
+
+			startActivity(intent);
+			//finish();
+		}else {
+			Toast.makeText(context, "Image not saved successfully", Toast.LENGTH_SHORT).show();
+		}
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_camera_snap:
-
-			if(mCameraview != null)
-			{
-				mCameraview.takePicture();
-
-				btnClick.setVisibility(Button.GONE);
-				btnRetake.setVisibility(Button.VISIBLE);
-				btnUse.setVisibility(Button.VISIBLE);
-
-			}
-
+			onClickSnap();
 			break;
 		case R.id.btn_pic_retake:
-
-			if(mCameraview != null)
-			{
-				mCameraview.resumePreview();
-
-				btnClick.setVisibility(Button.VISIBLE);
-				btnRetake.setVisibility(Button.GONE);
-				btnUse.setVisibility(Button.GONE);
-			}
-
+			onClickRetake();
 			break;
 		case R.id.btn_pic_use:
-
-			try 
-			{
-				saveToMemory();
-			} catch (Exception e) {
-				Toast.makeText(CameraPictureSnapActivity.this, e.getMessage(),
-						Toast.LENGTH_LONG).show();
-				e.printStackTrace();
-			} 
-
-			if(currentPhotoPath != null && currentFile != null)
-			{	
-				Intent intent = new Intent(CameraPictureSnapActivity.this,AddKeyActivity.class); 
-				intent.putExtra(AddKeyCameraActivity.IMAGE_PATH, currentPhotoPath);
-				intent.putExtra(AddKeyActivity.IMAGE_FILE, currentFile);
-
-				startActivity(intent);
-				//finish();
-			}else {
-				Toast.makeText(context, "Image not saved successfully", Toast.LENGTH_SHORT).show();
-			}
-
+			onClickUse();
 			break;
 
 		default:
 			break;
 		}
 	}
-	private void saveToMemory()
+	protected void saveToMemory()
 	{
 
 		FileOutputStream outStream = null;
@@ -238,7 +247,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 			currentPhotoPath = null;
 		}
 	}
-	private File currentFile = null;
+	protected File currentFile = null;
 
 	public void setCropImage()
 	{
