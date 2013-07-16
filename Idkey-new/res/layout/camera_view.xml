@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:layout_weight="1" >
 
-    <com.tasawr.camera.CameraView
+    <com.tasawr.camera.IDKeyCameraView
         android:id="@+id/camera_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

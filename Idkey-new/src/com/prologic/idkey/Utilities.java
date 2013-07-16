@@ -119,5 +119,10 @@ public class Utilities {
 		}
 
 	}
+	
+	public static boolean deleteFile(String filePath)
+	{
+		return false;
+	}
 
 }

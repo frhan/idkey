@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.ff.camera.CameraActivity;
 
-public class IdentifyCameraKayActivity extends CameraActivity {
+public class IdentifyCameraKeyActivity extends CameraActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -1,18 +1,16 @@
 package com.tasawr.camera;
 
-
 import java.lang.reflect.Method;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 import android.hardware.Camera.Size;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
@@ -21,7 +19,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
-public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
+public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 	private Camera camera;
 	private int width;
@@ -32,34 +30,18 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	private IPictureCallback mIpicCallback;
 	private IPreviewCallBack mIPrevCallback;
 	private String TAG = "Camera";
-	private Size mPreviewSize;
-	//private static long AUTO_FOCUS_INTERVAL = 1500;
-	//private Handler mHandler;
-	//private Thread mAutofocusThread;
-	//private Boolean mAutoFocus;
-
-	public CameraView(Context context) {
-
-		super(context);
-		mContext = context;
-		SurfaceHolder previewHolder = this.getHolder();
-
-		previewHolder.addCallback(this);
-		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-
+	public IDKeyCameraView(Context context)
+	{
+		this(context,null);
 	}
-	public CameraView(Context context, AttributeSet attrs) {		
+	public IDKeyCameraView(Context context, AttributeSet attrs) {		
 		super(context, attrs);
 
 		mContext = context;
-		//mHandler = new Handler();
-		SurfaceHolder previewHolder = this.getHolder();
-		
+		SurfaceHolder previewHolder = this.getHolder();		
 		previewHolder.addCallback(this);
 		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);		
 		mPictureCallback = new CameraPictureCallback();
-
 	}
 
 	public void setPictureCallback(IPictureCallback pictureCallback)
@@ -82,24 +64,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 	}
 
-
-	public CameraView(Context context,
-			IPictureCallback pictureCallback, 
-			IPreviewCallBack previewCallback) {		
-		super(context);
-
-		mContext = context;
-		SurfaceHolder previewHolder = this.getHolder();
-
-		previewHolder.addCallback(this);
-		previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);	
-
-		mPictureCallback = new CameraPictureCallback();
-		mPictureCallback.setPictureCallBackListener(pictureCallback);
-
-		mPreviewCallBack = new CameraPreviewCallback();
-		mPreviewCallBack.setPreviewCallbackListener(previewCallback);		
-	}
 	@Override
 	protected void finalize() throws Throwable {
 		stopPreview(false);
@@ -114,32 +78,11 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 			Parameters params = camera.getParameters();
 
-			/*	if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE)
+			if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE)
 			{
 				params.set("orientation", "portrait");
 				camera.setDisplayOrientation(90);
-			}*/
-			Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))
-					.getDefaultDisplay();
-
-			switch (display.getRotation()) {
-			case Surface.ROTATION_0:
-				angle = 90;
-				break;
-			case Surface.ROTATION_90:
-				angle = 0;
-				break;
-			case Surface.ROTATION_180:
-				angle = 270;
-				break;
-			case Surface.ROTATION_270:
-				angle = 180;
-				break;
-			default:
-				throw new AssertionError("Wrong surface rotation value");
 			}
-
-			setDisplayOrientation(params, angle);
 			camera.setPreviewDisplay(this.getHolder());
 		}
 		catch (Throwable t) {
@@ -152,21 +95,16 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 
 	public void stopPreview(boolean temporaryStop){
 		if(camera != null){
-			//			mAutoFocus = false;
-			//			if (camera!=null) camera.cancelAutoFocus();
-			//			mAutofocusThread=null;
-
 			camera.stopPreview();
 			camera.release();
 			camera=null;
 		}		
 		if(temporaryStop != true){
-			SurfaceHolder previewHolder = this.getHolder();
+			SurfaceHolder previewHolder = this.getHolder();			
 			previewHolder.removeCallback(this);
 		}
 	}
-
-
+	private Size mPreviewSize;
 	public void resumePreview(){
 		// height width is not initialized yet
 		if(height == 0 || width == 0)
@@ -179,9 +117,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 
 		Camera.Parameters parameters = camera.getParameters();
-		int format = parameters.getPreviewFormat();
+		int format = parameters.getPreviewFormat();		
 
 		List<Camera.Size> supportedSizes = parameters.getSupportedPreviewSizes();
+
 		if(isPreviewSizeSupported(supportedSizes) == true){
 			parameters.setPreviewSize(width,height);
 		}
@@ -189,11 +128,15 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 			parameters.setPreviewSize(supportedSizes.get(0).width, supportedSizes.get(0).height);			
 
 		parameters.setPictureFormat(ImageFormat.JPEG);
-		//parameters.setPreviewFormat(PixelFormat.RGBA_8888);
-		parameters.setPictureSize(width, height);
+		//parameters.setPictureSize(width, height);
 
-		int w = parameters.getPreviewSize().width;
-		int h = parameters.getPreviewSize().height;
+		if (mPreviewSize == null) {
+			// h and w get inverted on purpose
+			mPreviewSize = getOptimalSize(parameters.getSupportedPictureSizes(), width > height ? width
+					: height, width > height ? height : width);
+		}
+
+		parameters.setPictureSize(mPreviewSize.width, mPreviewSize.height);
 
 		Display display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))
 				.getDefaultDisplay();
@@ -216,20 +159,15 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 		setDisplayOrientation(parameters, angle);
 
-		/*List<String> focusModes = parameters.getSupportedFocusModes();
-		if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
-			parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-		}*/
-
 		try {
 			camera.setParameters(parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		startPreview();
-
+		camera.startPreview();	
 	}
+	
 	private Size getOptimalSize(List<Size> sizes, int w, int h) {
 		final double ASPECT_TOLERANCE = 0.2;
 		double targetRatio = (double) w / h;
@@ -295,7 +233,31 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		return optimalSize;
 	}
 
+	private void setDisplayOrientation(Camera.Parameters params, int angle) {
+		try {
+			Method method = camera.getClass().getMethod("setDisplayOrientation", new Class[] {
+					int.class
+			});
+			if (method != null)
+				method.invoke(camera, new Object[] {
+						angle
+				});
+		} catch (Exception e) 
+		{
+			Log.d(TAG, "Can't call Camera.setDisplayOrientation on this device, trying another way");
+			if (angle == 90 || angle == 270) params.set("orientation", "portrait");
+			else if (angle == 0 || angle == 180)  params.set("orientation", "landscape");
+		}
+		params.setRotation(angle);
+	}
 
+	/**
+	 * @return the default angle of the camera
+	 */
+	private int angle = 0;
+	public int getAngle(){
+		return angle;
+	}
 	private boolean isPreviewSizeSupported(List<Size> prevSizes){
 		for (Size size : prevSizes) {
 			if(size.width == width && size.height == height)
@@ -342,69 +304,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		}
 	};
 
-	private void setDisplayOrientation(Camera.Parameters params, int angle) {
-		try {
-			Method method = camera.getClass().getMethod("setDisplayOrientation", new Class[] {
-					int.class
-			});
-			if (method != null)
-				method.invoke(camera, new Object[] {
-						angle
-				});
-		} catch (Exception e) 
-		{
-			Log.d(TAG, "Can't call Camera.setDisplayOrientation on this device, trying another way");
-			if (angle == 90 || angle == 270) params.set("orientation", "portrait");
-			else if (angle == 0 || angle == 180)  params.set("orientation", "landscape");
-		}
-		params.setRotation(angle);
-	}
-
-	/**
-	 * @return the default angle of the camera
-	 */
-	private int angle = 0;
-	public int getAngle(){
-		return angle;
-	}
-
-	//	class AutoFocusRunnable implements Runnable {
-	//
-	//		@Override
-	//		public void run() {
-	//			if (mAutoFocus){
-	//				if (camera != null) {
-	//					try {
-	//						camera.autoFocus(new AutoFocusCallback() {
-	//							@Override
-	//							public void onAutoFocus(boolean success, Camera camera) {
-	//								mHandler.postDelayed(AutoFocusRunnable.this, AUTO_FOCUS_INTERVAL);
-	//							}
-	//						});
-	//
-	//					} catch (Exception e) {
-	//						Log.w(TAG, "Unable to auto-focus", e);
-	//						mHandler.postDelayed(AutoFocusRunnable.this, AUTO_FOCUS_INTERVAL);
-	//					}
-	//				}
-	//			}
-	//		}
-	//
-	//	};
-
-	//	void startAutofocus() {
-	//		mAutoFocus = true;
-	//		mAutofocusThread = new Thread(new AutoFocusRunnable(),"Autofocus Thread");
-	//		mAutofocusThread.start();
-	//	}
-	void startPreview(){
-		if (camera!=null){
-			camera.startPreview();
-			//startAutofocus();
-		}
-	}
-
-
 	/************************* SurfaceHolder.Callback methods ****************************/	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
@@ -416,7 +315,8 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 	}
 
 	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
+	public void surfaceCreated(SurfaceHolder holder)
+	{
 		initPreview();
 	}	
 	@Override
@@ -424,3 +324,4 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback{
 		stopPreview(true);		
 	}
 }
+

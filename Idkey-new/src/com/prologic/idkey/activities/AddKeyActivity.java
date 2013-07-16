@@ -40,7 +40,8 @@ public class AddKeyActivity extends MainActivity
 	private Spinner spinnerCategory;
 	private CategorySpinnerAdapter spinnerAdapter;
 	private EditText etKeyId;
-
+	private File currentFile = null;
+	public static final String IMAGE_FILE = "image_file";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +50,10 @@ public class AddKeyActivity extends MainActivity
 		spinnerCategory = (Spinner) findViewById(R.id.spinner_key_category);
 		etKeyId = (EditText) findViewById(R.id.et_key_id);
 
+
 		photoPath = getIntent().getExtras().getString(AddKeyCameraActivity.IMAGE_PATH);
+		currentFile = (File) getIntent().getExtras().get(AddKeyActivity.IMAGE_FILE);
+
 		listCategories = new ArrayList<Category>();
 		spinnerAdapter = new CategorySpinnerAdapter(this,R.layout.spinner_view,listCategories);
 		spinnerCategory.setAdapter(spinnerAdapter);
@@ -58,7 +62,7 @@ public class AddKeyActivity extends MainActivity
 		{
 			setImageViewImage();
 			loadCategories();
-			setImageFile();
+			//setImageFile();
 			initSdk();
 		}
 
@@ -78,7 +82,10 @@ public class AddKeyActivity extends MainActivity
 
 	private void loadCategories()
 	{
-		new CategoryListTask(this).execute();
+		if(isOnline())
+		{
+			new CategoryListTask(this).execute();
+		}
 	}
 
 	private IQRemote iqremote;
@@ -90,27 +97,32 @@ public class AddKeyActivity extends MainActivity
 	}
 	public void onClickUse(View v)
 	{
-		try {
-			//need to optimize
-			ArrayList<File> files = new ArrayList<File>();
-			files.add(getImageFile());
-			String name = etKeyId.getText().toString();
-			int categoryId = -1;
-			if(spinnerCategory.getSelectedItemPosition()> -1)
-			{
-				categoryId = listCategories.get(spinnerCategory.getSelectedItemPosition()).getId();
-			}
-			if(name.length() == 0 )
-			{
-				showOkAlertDailog("Please put a name", "Add ID", false);
-			}else if(isOnline()){
-				new AddKeyTask(context, files,etKeyId.getText().toString(),categoryId).execute();
-			}else {
-				showOkAlertDailog("Please check your internet connection", "Internet error", false);
-			}
 
-		} catch (Exception e) {
-			Log.e(TAG,e.getMessage());
+		if(currentFile != null)
+		{
+			try {
+
+				String name = etKeyId.getText().toString();
+				int categoryId = -1;
+				if(spinnerCategory.getSelectedItemPosition()> -1)
+				{
+					categoryId = listCategories.get(spinnerCategory.getSelectedItemPosition()).getId();
+				}
+				if(name.length() == 0 )
+				{
+					showOkAlertDailog("Please put a name", "Add ID", false);
+				}else if(isOnline())
+				{
+					ArrayList<File> files = new ArrayList<File>();
+					files.add(currentFile);
+					new AddKeyTask(context, files,etKeyId.getText().toString(),categoryId).execute();
+				}else {
+					showOkAlertDailog("Please check your internet connection", "Internet error", false);
+				}
+
+			} catch (Exception e) {
+				Log.e(TAG,e.getMessage());
+			}
 		}
 
 	}
@@ -142,7 +154,7 @@ public class AddKeyActivity extends MainActivity
 	protected void onDestroy() 
 	{
 		super.onDestroy();
-
+		System.gc();
 		if(currentBitmap != null)
 		{
 			currentBitmap.recycle();
@@ -155,7 +167,8 @@ public class AddKeyActivity extends MainActivity
 		return Utils.cropBitmap(origBmp, thumbSize);
 	}
 
-	private File currentFile = null;
+
+
 	private void  setImageFile()
 	{
 		try {
@@ -163,10 +176,10 @@ public class AddKeyActivity extends MainActivity
 			Bitmap origBmp = BitmapFactory.decodeFile(photoPath);
 			thumb = transformBitmapToThumb(origBmp);
 			origBmp.recycle();
-			//ivAddImage.setImageBitmap(currentBitmap);
 			currentFile = Utils.saveBmpToFile(context, thumb);
 		} catch (OutOfMemoryError e) {
 			Log.e(TAG,e.getMessage());
+			currentFile = null;
 		}
 
 	}

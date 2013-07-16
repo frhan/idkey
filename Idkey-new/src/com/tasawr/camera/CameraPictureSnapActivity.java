@@ -11,6 +11,8 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 import com.ff.camera.AlbumStorageDirFactory;
 import com.ff.camera.BaseAlbumDirFactory;
 import com.ff.camera.FroyoAlbumDirFactory;
+import com.iqengines.sdk.Utils;
 import com.prologic.idkey.R;
 import com.prologic.idkey.activities.AddKeyActivity;
 import com.prologic.idkey.activities.AddKeyCameraActivity;
@@ -37,7 +40,7 @@ import com.tasawr.camera.IPictureCallback;
 public class CameraPictureSnapActivity extends MainActivity implements IPictureCallback,OnClickListener
 {
 	private Button btnClick,btnRetake,btnUse;
-	private CameraView mCameraview;
+	private IDKeyCameraView mCameraview;
 	private byte[] tempData;
 	private String TAG = "Camera";
 	public static final String SELECTED_IMAGE_PATH = "IMAGE_PATH";
@@ -58,9 +61,9 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		btnRetake = (Button) findViewById(R.id.btn_pic_retake);
 		btnUse = (Button) findViewById(R.id.btn_pic_use);
 
-		mCameraview = (CameraView) findViewById(R.id.camera_view);		
+		mCameraview = (IDKeyCameraView) findViewById(R.id.camera_view);		
 		mCameraview.setPictureCallback(this);
-		mCameraview.initPreview();
+		//mCameraview.initPreview();
 
 		btnClick.setOnClickListener(this);     
 		btnRetake.setOnClickListener(this);   
@@ -193,12 +196,16 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 				e.printStackTrace();
 			} 
 
-			if(currentPhotoPath != null)
+			if(currentPhotoPath != null && currentFile != null)
 			{	
 				Intent intent = new Intent(CameraPictureSnapActivity.this,AddKeyActivity.class); 
 				intent.putExtra(AddKeyCameraActivity.IMAGE_PATH, currentPhotoPath);
+				intent.putExtra(AddKeyActivity.IMAGE_FILE, currentFile);
+
 				startActivity(intent);
 				//finish();
+			}else {
+				Toast.makeText(context, "Image not saved successfully", Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -220,12 +227,39 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 			outStream.close();
 			Log.d(TAG, "onPictureTaken - wrote bytes: " + tempData.length);
 
+			if(currentPhotoPath != null)
+			{
+				setCropImage();
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			f = null;
 			currentPhotoPath = null;
 		}
 	}
+	private File currentFile = null;
+
+	public void setCropImage()
+	{
+		try {
+			Bitmap thumb  = null ;
+			Bitmap origBmp = BitmapFactory.decodeFile(currentPhotoPath);
+			thumb = transformBitmapToThumb(origBmp);
+			origBmp.recycle();
+			currentFile = Utils.saveBmpToFile(context, thumb);
+		} catch (OutOfMemoryError e) {
+			Log.e(TAG,e.getMessage());
+			currentFile = null;
+		}
+	}
+
+	private Bitmap transformBitmapToThumb(Bitmap origBmp) {
+		int thumbSize = getResources()
+				.getDimensionPixelSize(R.dimen.image_size);
+		return Utils.cropBitmap(origBmp, thumbSize);
+	}
+
 	private File setUpPhotoFile() throws IOException {
 
 		File f = createImageFile();
