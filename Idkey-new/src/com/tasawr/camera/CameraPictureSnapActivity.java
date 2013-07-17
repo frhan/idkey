@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ff.camera.AlbumStorageDirFactory;
@@ -46,7 +47,8 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 	private static final String JPEG_FILE_SUFFIX = ".jpg";
 	private static final String JPEG_FILE_PREFIX = "IMG_";
 	private String currentPhotoPath = null;
-
+	protected 	LayoutInflater layoutInflater;
+	protected ImageView ivOverlayView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,7 +77,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		} else {
 			albumStorageDirFactory = new BaseAlbumDirFactory();
 		}
-		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		View toastView = (View) layoutInflater.inflate(R.layout.toast_view, null);
 
@@ -86,7 +88,16 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 		toast.show();
 
 		View overlayView = (View) layoutInflater.inflate(R.layout.overlay_view, null);
+		ivOverlayView = (ImageView) overlayView.findViewById(R.id.iv_overlay_view);
 		addContentView(overlayView, mCameraview.getLayoutParams());
+		setOverlayBackground(R.drawable.add_cameraoverlay);
+
+	}
+
+
+	protected void setOverlayBackground(int resId)
+	{
+		ivOverlayView.setImageResource(resId);
 
 	}
 	@Override

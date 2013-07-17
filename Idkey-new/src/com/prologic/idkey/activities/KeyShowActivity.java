@@ -33,7 +33,6 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.prologic.idkey.CategorySpinnerAdapter;
 import com.prologic.idkey.CustomProgressDailog;
 import com.prologic.idkey.R;
-import com.prologic.idkey.activities.MainActivity.IDailogOKClickListener;
 import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.WebService;
 import com.prologic.idkey.api.command.GetAllCategoriesCommand;
@@ -94,7 +93,9 @@ public class KeyShowActivity extends MainActivity
 				currentKey.setIqeToken(keyArray[2]);
 				currentKey.setScanUrl(keyArray[3]);
 				currentKey.setCategoryName(keyArray[5]);
-				currentKey.setCreateDate(keyArray[6]);				
+				currentKey.setCreateDate(keyArray[6]);		
+				
+				Log.i(TAG, keyArray[2]);
 			}			
 		}
 

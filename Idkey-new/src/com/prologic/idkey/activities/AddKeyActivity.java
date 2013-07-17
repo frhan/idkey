@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -268,6 +269,29 @@ public class AddKeyActivity extends MainActivity
 		return resultArray;
 	}
 
+	private void onSuccessAddingKey(String message,boolean status)
+	{
+		showOkCancelAlertDailog(message, "Key Add", "Go to Home", "Add key Now", status, new IDailogOKClickListener() {
+
+			@Override
+			public void onOkClick() {
+
+				Intent intent = new Intent(context, com.prologic.idkey.activities.HomeScreenActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+
+			}
+
+			@Override
+			public void onCancelClick() 
+			{			
+				finish();				
+			}
+		});
+	}
+
 	private class AddKeyTask extends AsyncTask<Void, Void, String>
 	{
 
@@ -328,7 +352,7 @@ public class AddKeyActivity extends MainActivity
 			{
 				progressDialog.dismiss();
 			}
-			showOkAlertDailog(message, "Add key", isAddedSuccessfully);
+			onSuccessAddingKey(message, isAddedSuccessfully);
 			addKeyCommand = null;
 		}
 

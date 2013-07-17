@@ -106,6 +106,39 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		// show it
 		alertDialog.show();
 	}
+	public void showOkCancelAlertDailog(String message,String title,final String posButtonName,final String negButtonName,boolean status,final IDailogOKClickListener listener)
+	{
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		alertDialogBuilder.setTitle(title);
+
+		alertDialogBuilder.setMessage(message)	
+		.setCancelable(true)
+		.setIcon((status) ? R.drawable.success : R.drawable.fail)
+		.setPositiveButton(posButtonName,new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) 
+			{
+				
+				dialog.dismiss();			
+				if(listener != null)
+					listener.onOkClick();
+			}
+		})
+		.setNegativeButton(negButtonName, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				dialog.dismiss();			
+				if(listener != null)
+					listener.onCancelClick();
+			}
+		});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+	}
 	public void showOkAlertDailog(String message,String title,boolean status,final IDailogOKClickListener clickListener)
 	{
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);

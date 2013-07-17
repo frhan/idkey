@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.os.Build;
@@ -41,7 +43,9 @@ public abstract class CameraActivity extends MainActivity implements IPictureCal
 		} else {
 			albumStorageDirFactory = new BaseAlbumDirFactory();
 		}
-		tempData = null;	
+		tempData = null;
+		
+		
 
 	}
 	@Override

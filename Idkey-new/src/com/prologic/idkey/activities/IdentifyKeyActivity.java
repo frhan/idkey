@@ -23,7 +23,7 @@ public class IdentifyKeyActivity extends CameraPictureSnapActivity{
 		super.onCreate(savedInstanceState);
 		
 		iqRemote = new IQRemote(getResources().getString(R.string.iqe_app_key), getResources().getString(R.string.iqe_app_secret));
-		
+		setOverlayBackground(R.drawable.id_cameraoverlay);
 	}
 
 	@Override
