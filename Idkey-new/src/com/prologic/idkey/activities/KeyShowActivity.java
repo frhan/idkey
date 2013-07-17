@@ -8,7 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,8 +33,11 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.prologic.idkey.CategorySpinnerAdapter;
 import com.prologic.idkey.CustomProgressDailog;
 import com.prologic.idkey.R;
+import com.prologic.idkey.activities.MainActivity.IDailogOKClickListener;
 import com.prologic.idkey.api.ApiConnection;
+import com.prologic.idkey.api.WebService;
 import com.prologic.idkey.api.command.GetAllCategoriesCommand;
+import com.prologic.idkey.api.command.MoveKeyCommand;
 import com.prologic.idkey.objects.Category;
 import com.prologic.idkey.objects.Key;
 
@@ -53,6 +58,7 @@ public class KeyShowActivity extends MainActivity
 
 	private DisplayImageOptions options;
 	private ImageLoader imageLoader;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -95,6 +101,7 @@ public class KeyShowActivity extends MainActivity
 		if(currentKey != null)
 		{
 			etKeyName.setText(currentKey.getName());
+			etKeyName.setEnabled(false);
 			txtKeyTitle.setText("Key"+currentKey.getId());
 			loadCategories();
 		}
@@ -191,11 +198,59 @@ public class KeyShowActivity extends MainActivity
 	public void onClickUse(View v)
 	{
 
+		int spinnerPosition = spinnerCategory.getSelectedItemPosition();
+		int changedCategoryId = -1;
+
+		if(spinnerPosition > -1 )
+		{
+			int currentSelectedKeyId = listCategories.get(spinnerPosition).getId();
+			if(currentKey.getCategoryId() != currentSelectedKeyId)
+			{
+				changedCategoryId = currentSelectedKeyId;
+			}
+		}
+		if(changedCategoryId > -1)
+		{
+			new UpdateKeyTask(context, currentKey.getCategoryId(), changedCategoryId).execute();
+
+		}else {
+			showOkAlertDailog("Please Change Id or Category", "Save Key", false);
+		}
+	}
+
+	private void deleteKey()
+	{
+		new DeleteKeyTask(context, currentKey.getIqeToken(), currentKey.getId()).execute();
 	}
 
 	public void onClickKeyCancelDelete(View v)
 	{
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		alertDialogBuilder.setTitle("Delete Key");
 
+		alertDialogBuilder.setMessage("Are you sure you want to delete?")	
+		.setCancelable(true)
+		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) 
+			{
+				dialog.dismiss();			
+
+				deleteKey();
+			}
+		})
+		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+
+			}
+		});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();		
 	}
 
 	private String[] parseIqeRetrieveData(String data)
@@ -248,6 +303,7 @@ public class KeyShowActivity extends MainActivity
 		}
 		return resultArray;
 	}
+
 	private class CategoryListTask extends AsyncTask<Void, Void, Void>
 	{
 		private Context context;
@@ -310,7 +366,161 @@ public class KeyShowActivity extends MainActivity
 		}
 	}
 
+	private class UpdateKeyTask extends AsyncTask<Void, Void, Void>
+	{
+		private Context context;
+		private int oldCategoryId;
+		private int newCategoryId;
+		private MoveKeyCommand moveKeyCommand;
+		private String message;
+		private boolean status;
+		private CustomProgressDailog progressDialog;
 
+		public UpdateKeyTask(Context context,int oldCategoryId,int newCategoryId) 
+		{
+			this.context = context;
+			this.oldCategoryId = oldCategoryId;
+			this.newCategoryId = newCategoryId;
 
+			progressDialog = new CustomProgressDailog(context);
+			progressDialog.setTitle("Loading");
+			progressDialog.setMessage("Please wait...");
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) 
+		{
+			moveKeyCommand = new MoveKeyCommand(oldCategoryId, newCategoryId);
+			moveKeyCommand.execute(ApiConnection.getInstance(context));
+			message = moveKeyCommand.getMessage();
+			status = moveKeyCommand.isMovedSuccessfully();
+			return null;
+		}
+
+		@Override
+		protected void onPreExecute() 
+		{
+			super.onPreExecute();
+			progressDialog.show();
+
+		}
+		@Override
+		protected void onPostExecute(Void result) {			
+			super.onPostExecute(result);
+			if(progressDialog != null && progressDialog.isShowing())
+			{
+				progressDialog.dismiss();
+			}
+
+			showOkAlertDailog(message, "Move Key", status);
+		}
+	}
+
+	private String [] parseDeleteKey(String data)
+	{
+		String [] parsedData = new String[2];
+		try {
+			JSONObject jsonObject = new JSONObject(data);
+			if(jsonObject.has("comment"))
+			{
+				parsedData[0] =  jsonObject.getString("comment");				
+			}
+			if(jsonObject.has("error"))
+			{
+				parsedData[1] =  String.valueOf(jsonObject.getInt("error"));				
+			}
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return parsedData;
+	}
+
+	private class DeleteKeyTask extends AsyncTask<Void, Void, Void>
+	{
+		private Context context;
+		private int userKeyId;
+		private String sqeId;		
+		private String message;
+		private boolean status;
+		private CustomProgressDailog progressDialog;
+
+		public DeleteKeyTask(Context context,String sqeId,int userKeyId) 
+		{
+			this.context = context;
+			this.sqeId = sqeId;
+			this.userKeyId = userKeyId;
+			message = "";
+			status = false;
+			progressDialog = new CustomProgressDailog(context);
+			progressDialog.setTitle("Loading");
+			progressDialog.setMessage("Please wait...");			
+		}
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			try {
+				String iqdata = iqRemote.deleteKey(sqeId, true);
+				String [] iqDeleteArray = parseDeleteKey(iqdata);
+				if(iqDeleteArray != null && iqDeleteArray[0] != null)
+				{
+					message = iqDeleteArray[0];					
+				}
+				if(iqDeleteArray != null && iqDeleteArray[1] != null)
+				{
+					if(Integer.valueOf(iqDeleteArray[1]) == 0)
+					{
+
+						status = WebService.getInstance().deleteKey(userKeyId);
+						message = status?"Key deleted succesfully":"Key Delete failed";							
+					}
+				}
+			} catch (IOException e) 
+			{
+				Log.e(TAG, e.getMessage());
+				e.printStackTrace();
+			}catch (Exception e) 
+			{
+
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+
+			if(progressDialog.isShowing())
+			{
+				progressDialog.dismiss();
+			}
+
+			afterDeleteKey();
+		}
+
+		private void afterDeleteKey()
+		{
+			showOkAlertDailog(message, "Delete Key", status,new IDailogOKClickListener() {
+
+				@Override
+				public void onOkClick() {
+					finish();					
+				}
+
+				@Override
+				public void onCancelClick() 
+				{	
+
+				}
+			});
+		}
+
+	}
 
 }

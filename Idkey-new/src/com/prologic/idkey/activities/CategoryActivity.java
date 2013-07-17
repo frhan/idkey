@@ -140,6 +140,12 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 				addNewCategory(name);
 				Log.i(TAG, name);
 			}
+
+			@Override
+			public void onCancelClick(View customView) {
+				
+				
+			}
 		});
 
 	}
@@ -177,6 +183,12 @@ public class CategoryActivity extends MainActivity implements OnItemClickListene
 					//Toast.makeText(context,(((EditText) customView).getText().toString()),Toast.LENGTH_SHORT).show();
 					String updatedName = (((EditText) customView).getText().toString());
 					updateCategory(position,updatedName,category.getId());
+				}
+
+				@Override
+				public void onCancelClick(View customView) {
+					
+					
 				}
 			});
 		}else if(!isEditing && category.getCount() >0)

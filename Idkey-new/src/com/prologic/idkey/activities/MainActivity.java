@@ -150,6 +150,7 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
 				dialog.dismiss();
+				clickListener.onCancelClick(v);
 			}
 		});
 		// create alert dialog
@@ -171,7 +172,7 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	public interface ICustomDailogClickListener 
 	{
 		void onOkClick(final View customView);
-		//void onCancelClick(final View customView);	
+		void onCancelClick(final View customView);	
 
 	}
 

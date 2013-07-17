@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
@@ -19,7 +20,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
-public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callback{
+public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callback,AutoFocusCallback{
 
 	private Camera camera;
 	private int width;
@@ -159,6 +160,11 @@ public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callba
 		}
 		setDisplayOrientation(parameters, angle);
 
+		List<String> focusModes = parameters.getSupportedFocusModes();
+		if (focusModes != null && focusModes.contains(Camera.Parameters.FOCUS_MODE_AUTO)) {
+			parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+		}
+
 		try {
 			camera.setParameters(parameters);
 		} catch (Exception e) {
@@ -167,7 +173,7 @@ public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callba
 
 		camera.startPreview();	
 	}
-	
+
 	private Size getOptimalSize(List<Size> sizes, int w, int h) {
 		final double ASPECT_TOLERANCE = 0.2;
 		double targetRatio = (double) w / h;
@@ -270,15 +276,16 @@ public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callba
 	{
 		if(camera != null && mPictureCallback != null)
 		{
-			try {
-				System.gc();
+			/*try {
+				//System.gc();
 				camera.takePicture(shutterCallback, 
 						rawCallback,
 						mPictureCallback);					
 			} catch (Exception e) {
 				Log.e(TAG, e.getMessage());
 				e.printStackTrace();
-			}
+			}*/
+			camera.autoFocus(this);
 
 		}
 	}
@@ -322,6 +329,21 @@ public class IDKeyCameraView extends SurfaceView implements SurfaceHolder.Callba
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		stopPreview(true);		
+	}
+	@Override
+	public void onAutoFocus(boolean success, Camera camera) 
+	{
+		try {
+			//System.gc();
+			camera.takePicture(shutterCallback, 
+					rawCallback,
+					mPictureCallback);					
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+			e.printStackTrace();
+		}
+
+
 	}
 }
 

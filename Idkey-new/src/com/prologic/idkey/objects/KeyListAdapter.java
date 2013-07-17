@@ -73,6 +73,7 @@ public class KeyListAdapter extends BaseAdapter
 
 	public void updateList(List<Key> keys)
 	{
+		filterKeys.clear();
 		filterKeys.addAll(keys);	
 		Collections.sort(filterKeys,keysComparator);
 		notifyDataSetChanged();		

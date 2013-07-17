@@ -20,6 +20,7 @@ public class CameraPictureCallback implements PictureCallback{
 		if(mPictureCallBack != null)
 		{
 			mPictureCallBack.pictureTakenData(data,camera);
+			camera.cancelAutoFocus();
 		}
 		
 	}

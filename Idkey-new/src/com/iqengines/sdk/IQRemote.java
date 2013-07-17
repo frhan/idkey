@@ -26,6 +26,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
@@ -35,6 +36,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
+
+import com.prologic.idkey.api.HttpDeleteWithBody;
 
 import android.R.string;
 import android.util.Log;
@@ -86,7 +89,7 @@ public class IQRemote implements Serializable {
 
 		return query(image, null, null, deviceId, true, null, null, null,qid);
 	}
-	
+
 
 	public String DefineQueryId(File image, String webhook, String extra,
 			String device_id, boolean json,
@@ -464,6 +467,77 @@ public class IQRemote implements Serializable {
 		return result;
 	}
 
+	public String deleteKey(String objId,boolean json) throws IOException
+	{
+		TreeMap<String, String> fields = new TreeMap<String, String>();
+
+		// Optional parameters
+		if (json) {
+			fields.put("json", "1");
+		}
+
+		//required field
+		fields.put("time_stamp", now());
+		fields.put("api_key", key);
+		fields.put("api_sig", buildSignature(fields));
+
+		return delete(IQESelector.object, fields, objId);
+
+	}
+
+	private String delete(IQESelector selector, TreeMap<String, String> fields,String id) throws IOException 
+	{
+
+		String result = "error";
+		String url = "http://api.iqengines.com/v1.2/" + selector +"/"+id+"/" ;
+
+		HttpClient client = new DefaultHttpClient();		
+		HttpDeleteWithBody httpDelete = new HttpDeleteWithBody(url);
+		MultipartEntity entity = new MultipartEntity();
+
+		Iterator<String> i = fields.keySet().iterator();
+		while (i.hasNext()) {
+			String tmpKey = i.next();
+			entity.addPart(tmpKey, new StringBody(fields.get(tmpKey)));
+		}
+
+		httpDelete.setEntity(entity);
+		HttpResponse response = client.execute(httpDelete);
+		HttpEntity resEntity = response.getEntity();
+
+		if (resEntity != null) {
+			Log.d(TAG,"resEntity is not null");
+			long length = resEntity.getContentLength();
+			// Check if we have to stream the result of the query
+			if (length != -1 && length < 2048) {
+				result = EntityUtils.toString(resEntity);
+				Log.d(TAG, "result :"+result);
+
+			} else {
+				InputStream instream = resEntity.getContent();
+
+				Writer writer = new StringWriter();
+				char[] buffer = new char[1024];
+
+				try {
+					Reader reader = new BufferedReader(new InputStreamReader(instream));
+
+					int n;
+					while ((n = reader.read(buffer)) != -1) {
+						Log.d(TAG,""+reader.read(buffer));
+						writer.write(buffer, 0, n);
+					}
+				} finally {
+					instream.close();
+				}
+				result = writer.toString();
+			}
+			resEntity.consumeContent();
+		}
+
+		return result;
+
+	}
 
 	/**
 	 * Post fields and files to an http host as multipart/form-data.
@@ -544,17 +618,17 @@ public class IQRemote implements Serializable {
 		if (custom_id != null) {
 			fields.put("custom_id", custom_id);
 		}
-		
+
 		if (json) {
 			fields.put("json", "1");
 		}
 
 		//required field
-		
+
 		fields.put("time_stamp", now());
 		fields.put("api_key", key);
 		fields.put("api_sig", buildSignature(fields));
-		
+
 		return get(IQESelector.object, fields, objectId);
 
 	}
@@ -562,10 +636,10 @@ public class IQRemote implements Serializable {
 	{
 		String result = "error";
 		String url = "http://api.iqengines.com/v1.2/"+selector+"/"+id+"/" ;
-		
+
 		HttpClient client = new DefaultHttpClient();
-		
-		
+
+
 		//MultipartEntity entity = new MultipartEntity();
 
 		Iterator<String> i = fields.keySet().iterator();
@@ -575,14 +649,14 @@ public class IQRemote implements Serializable {
 			//
 			String tmpKey = i.next();
 			//entity.addPart(tmpKey, new StringBody(fields.get(tmpKey)));
-			
+
 			sb.append(tmpKey)
 			.append('=')
 			.append(fields.get(tmpKey))
 			.append('&');
 		}	
 
-	
+
 		HttpGet httpget = new HttpGet(sb.toString());
 		HttpResponse response = client.execute(httpget);
 		HttpEntity resEntity = response.getEntity();

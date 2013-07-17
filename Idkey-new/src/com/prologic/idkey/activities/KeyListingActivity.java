@@ -103,9 +103,18 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 				adapter.filter(text);
 			}
 		});
-		loadKeys();
+		
 	}
 
+	@Override
+	protected void onResume() {
+		
+		super.onResume();
+		
+		loadKeys();
+		
+		etSearch.setText("");
+	}
 	private void loadKeys()
 	{
 		if(isOnline())

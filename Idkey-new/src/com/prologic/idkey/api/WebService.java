@@ -243,5 +243,39 @@ public class WebService {
 
 		}
 	}
+	
+	public boolean deleteKey(int userKeyId)
+	{
+		boolean isDeletedSuccessfully = false;
+		try {
+			String url = ApiConnection.mainUrl+"delete_key.json"+"?auth_token="+Session.getInstance().getAuthToken();;
+			
+			JSONObject jsonObj = new JSONObject();
+			jsonObj.put("user_key_id",userKeyId);
+			
+			HttpResponse response = getDeleteResponseWithBody(url, jsonObj.toString());
+
+			if(response != null && response.getStatusLine().getStatusCode() == HttpsURLConnection.HTTP_OK)
+			{
+				String result =   EntityUtils.toString(response.getEntity());
+				Log.i(TAG, result);
+
+				if(result != null && result.length() > 0)
+				{
+					Log.i(TAG, result);
+					isDeletedSuccessfully = parseJsonForDelete(result);
+
+				}
+			}
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) 
+		{
+			Log.e(TAG, e.getMessage());
+		}
+		return isDeletedSuccessfully;
+
+		
+	}
 
 }

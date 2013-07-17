@@ -170,17 +170,6 @@ public final class HttpRequestBuilder {
 		return this;
 	}
 
-//	public HttpRequestBuilder jsonParam(JSONObject jsonObject)
-//	{
-//		if (jsonObject == null) {
-//			throw new IllegalArgumentException("Parameter name cannot be null");
-//		}
-//		this.jsonParam = jsonObject;
-//		return this;
-//
-//	}
-
-
 	public HttpRequestBuilder cookie(String name, String value) {
 		if (name == null) {
 			throw new IllegalArgumentException("Cookie name cannot be null");
@@ -310,20 +299,6 @@ public final class HttpRequestBuilder {
 					conn.setFixedLengthStreamingMode(0);
 				}
 			}
-
-//			//test code
-//			if(jsonParam != null && jsonParam.toString().length() >0 && !HTTP_DELETE.equals(method))
-//			{
-//				conn.setRequestProperty("Content-Type", "application/json");
-//				//conn.setDoOutput(true). 
-//				conn.setDoOutput(true);
-//				conn.setFixedLengthStreamingMode(
-//						jsonParam.toString().getBytes().length);
-//				PrintWriter out = new PrintWriter(conn.getOutputStream());
-//				out.print(jsonParam);
-//				out.close();
-//			}
-
 
 			for (final HttpRequestHandler connHandler : reqHandlers) {
 				try {
