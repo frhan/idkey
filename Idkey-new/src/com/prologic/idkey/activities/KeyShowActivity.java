@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,7 +77,11 @@ public class KeyShowActivity extends MainActivity
 		spinnerCategory.setAdapter(spinnerAdapter);
 
 		btnSave.setText("Save");
-		btnDelete.setBackgroundResource(R.drawable.delete_btn_800_400);
+		btnSave.setTextColor(Color.WHITE);
+		btnDelete.setBackgroundResource(R.drawable.round_rect_grey);
+		btnSave.setBackgroundResource(R.drawable.round_rect_grey);
+		btnDelete.setText("Delete");
+		btnDelete.setTextColor(Color.WHITE);
 
 		iqRemote  = new IQRemote(getResources().getString(R.string.iqe_app_key),getResources().getString( R.string.iqe_app_secret));
 

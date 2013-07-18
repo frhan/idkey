@@ -234,12 +234,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/in_lt_key_footer"
         android:layout_below="@+id/ln_lt_sort_bar"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
         android:background="@drawable/background_paper"
         android:cacheColorHint="@android:color/transparent"
         android:dividerHeight="1dp"
+        
         android:fadingEdge="none"
         android:paddingBottom="10dp" >
     </ListView>

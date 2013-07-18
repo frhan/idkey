@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentRight="true"
-            android:layout_margin="10sp"
+            android:layout_margin="6dp"
             android:background="@drawable/round_rect_blue"
             android:onClick="onClickEditDone"
             android:text="Edit"
