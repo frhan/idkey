@@ -103,17 +103,19 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 				adapter.filter(text);
 			}
 		});
-		
+
 	}
 
 	@Override
 	protected void onResume() {
-		
+
 		super.onResume();
-		
+
 		loadKeys();
-		
+
 		etSearch.setText("");
+		adapter.setSortOrder(KeysComparator.SORTING_ORDER_ASCENDING);
+		adapter.setSortingType(KeysComparator.SORTING_TYPE_ID);
 	}
 	private void loadKeys()
 	{
@@ -133,29 +135,34 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 			listKeys.addAll(keys);
 			adapter.updateList(keys);
 			//need to optimize
-			currentSelectedButton = btnNoKeySort;
+			if(currentSelectedButton != null)
+			{
+				currentSelectedButton.setSelected(false);			
+			}
+			
+			currentSelectedButton = btnNoKeySort;			
 			btnNoKeySort.setSelected(true);
 			ivOrderIndicator.setImageResource(adapter.getSortingOrder() == KeysComparator.SORTING_ORDER_ASCENDING? R.drawable.keys_filter_arrow_up:R.drawable.keys_filter_arrow_down);				
-		}	
-
+		}
 	}
-	
+
+
 	@Override
 	public void onClickMainKeys(View v) 
 	{
-		
+
 	}
-	
+
 	private Button currentSelectedButton  = null;
 	//need to optimize
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+
 		if(currentSelectedButton != null)
 		{
-			currentSelectedButton.setSelected(false);
+			currentSelectedButton.setSelected(false);			
 		}
-
 		switch (v.getId()) 
 		{
 		case R.id.btn_key_sort_id:

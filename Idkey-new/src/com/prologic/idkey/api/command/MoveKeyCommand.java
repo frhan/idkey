@@ -34,7 +34,7 @@ public class MoveKeyCommand extends JsonCommand
 	@Override
 	protected String makeRequest(ApiConnection apiConnection)
 			throws ApiException {
-		String url = ApiConnection.mainUrl+"move_keys.json"+"?auth_token="+Session.getInstance().getAuthToken();
+		String url = ApiConnection.mainUrl+"move_key.json"+"?auth_token="+Session.getInstance().getAuthToken();
 		
 		JSONObject jsonObj = null;
 		try {

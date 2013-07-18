@@ -47,15 +47,21 @@ public class KeyListAdapter extends BaseAdapter
 	{
 		keysComparator.setSortingOrder(orderType);
 	}
-	public int getSortingType()
-	{
-		return keysComparator.getSortingType();
-	}
+
 	public int getSortingOrder()
 	{
 		return keysComparator.getSortingOrder();
 	}
-
+	public void setSortingType(int sortingType)
+	{
+		 keysComparator.setSortingType(sortingType);
+	}
+	
+	public int getSortingType()
+	{
+		return keysComparator.getSortingType();
+	}
+	
 	@Override
 	public int getCount() {
 		return filterKeys.size();

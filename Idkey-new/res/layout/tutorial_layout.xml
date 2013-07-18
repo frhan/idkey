@@ -12,25 +12,18 @@
         android:background="#5b6574"
         android:orientation="vertical" >
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="9sp"
+            android:background="@drawable/close_button"
+            android:onClick="onClickClose"
+            android:text="Close"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/text_size_medium" />
         <!--
              <Button
-            android:id="@+id/btn_forgot_close"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/round_rect_blue"
-            android:onClick="onClickClose"
-            android:padding="3dp"
-            android:text="@string/close"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold" />
-        -->
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentLeft="true"
@@ -39,6 +32,7 @@
             android:onClick="onClickClose"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
+        -->
 
         <TextView
             android:layout_width="wrap_content"

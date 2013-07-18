@@ -11,7 +11,8 @@
         android:background="#5b6574"
         android:orientation="vertical" >
 
-        <Button
+        <!--
+             <Button
             android:id="@+id/btn_cat_close"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
@@ -20,6 +21,19 @@
             android:onClick="onClickClose"
             android:textColor="#FFFFFF"
             android:layout_margin="5dp"
+            android:textSize="@dimen/text_size_medium" />
+        -->
+
+        <Button
+            android:id="@+id/btn_cat_close"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_size"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_button"
+            android:onClick="onClickClose"
+            android:textColor="#FFFFFF"
+            android:text="Close"
             android:textSize="@dimen/text_size_medium" />
 
         <TextView

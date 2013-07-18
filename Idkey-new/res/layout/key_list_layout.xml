@@ -35,7 +35,8 @@
             android:background="@drawable/back_button"
             android:onClick="onClickClose"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_medium"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txt_key_list_title"
@@ -55,10 +56,11 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
+            android:layout_margin="3dp"
             android:layout_weight="3"
             android:background="@drawable/round_rect_blue"
             android:onClick="onClickCategories"
+            android:padding="1dp"
             android:text="Categories"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
@@ -140,8 +142,8 @@
         android:id="@+id/ln_lt_sort_bar"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:background="#000000"
         android:layout_below="@+id/ln_lt_search_bar"
+        android:background="#000000"
         android:orientation="horizontal"
         android:weightSum="10" >
 
@@ -228,10 +230,10 @@
 
     <ListView
         android:id="@+id/lv_keys"
-        android:layout_below="@+id/ln_lt_sort_bar"
         android:layout_width="fill_parent"
-        android:layout_above="@+id/in_lt_key_footer"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/in_lt_key_footer"
+        android:layout_below="@+id/ln_lt_sort_bar"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
@@ -241,10 +243,12 @@
         android:fadingEdge="none"
         android:paddingBottom="10dp" >
     </ListView>
+
     <include
         android:id="@+id/in_lt_key_footer"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         layout="@layout/tutorial_footer" />
+
 </RelativeLayout>

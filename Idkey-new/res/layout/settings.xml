@@ -13,21 +13,20 @@
         android:background="#5b6574"
         android:orientation="vertical" >
 
-        <!--
-             <Button
+        <Button
             android:id="@+id/btn_cat_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="9sp"
-            android:background="@drawable/round_rect_blue"
+            android:background="@drawable/close_button"
             android:onClick="onClickClose"
             android:text="Close"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
-        -->
 
-        <Button
+        <!--
+             <Button
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentLeft="true"
@@ -36,6 +35,7 @@
             android:onClick="onClickClose"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
+        -->
 
         <TextView
             android:layout_width="wrap_content"
