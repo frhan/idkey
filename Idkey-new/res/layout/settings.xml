@@ -50,13 +50,14 @@
 
         <Button
             android:id="@+id/btn_cate_done"
-            android:layout_width="72dp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentRight="true"
             android:layout_margin="5dp"
-            android:background="@drawable/logout_button"
+            android:background="@drawable/close_button"
             android:onClick="onClickLogOut"
             android:padding="3dp"
+            android:text="Logout"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
     </RelativeLayout>

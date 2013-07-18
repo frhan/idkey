@@ -58,9 +58,9 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="3dp"
             android:layout_weight="3"
-            android:background="@drawable/round_rect_blue"
+            android:background="@drawable/close_button"
             android:onClick="onClickCategories"
-            android:padding="1dp"
+            android:padding="2dp"
             android:text="Categories"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
