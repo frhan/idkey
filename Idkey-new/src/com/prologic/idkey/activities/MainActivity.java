@@ -117,17 +117,17 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		.setPositiveButton(posButtonName,new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog,int id) 
 			{
-				
+
 				dialog.dismiss();			
 				if(listener != null)
 					listener.onOkClick();
 			}
 		})
 		.setNegativeButton(negButtonName, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				
+
 				dialog.dismiss();			
 				if(listener != null)
 					listener.onCancelClick();
@@ -212,14 +212,40 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	public void onClickClose(View v)
 	{
 		finish();
-		
+
 	}
 	protected void logInSuccessfully() 
 	{
 		Intent broadcastIntent = new Intent();
 		broadcastIntent.setAction("com.prologic.idkey.ACTION_LOGOUT");
 		sendBroadcast(broadcastIntent);
-		
+
+	}
+	public void onClickMainHome(View v)
+	{
+		Intent intent = new Intent(context, com.prologic.idkey.activities.HomeScreenActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+
+	}
+	public void onClickMainKeys(View v)
+	{
+		setCurrent(com.prologic.idkey.activities.KeyListingActivity.class, null);
+
+	}
+	public void onClickMainIdAKey(View v)
+	{
+		//setCurrent(com.prologic.idkey.activities.IdentifyKeyActivity.class, null);
+	}
+	public void onClickMainAddNew(View v)
+	{
+		setCurrent(com.tasawr.camera.CameraPictureSnapActivity.class, null);
+	}
+	public void onClickMainAbout(View v)
+	{
+
 	}
 
 }

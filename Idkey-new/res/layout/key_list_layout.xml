@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_black"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/rl_lt_key_list_top_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#5b6574"
@@ -110,8 +111,10 @@
     -->
 
     <LinearLayout
+        android:id="@+id/ln_lt_search_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@+id/rl_lt_key_list_top_bar"
         android:background="#5191e0"
         android:orientation="horizontal" >
 
@@ -134,9 +137,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ln_lt_sort_bar"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:background="#000000"
+        android:layout_below="@+id/ln_lt_search_bar"
         android:orientation="horizontal"
         android:weightSum="10" >
 
@@ -223,7 +228,9 @@
 
     <ListView
         android:id="@+id/lv_keys"
+        android:layout_below="@+id/ln_lt_sort_bar"
         android:layout_width="fill_parent"
+        android:layout_above="@+id/in_lt_key_footer"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="3dp"
@@ -234,5 +241,10 @@
         android:fadingEdge="none"
         android:paddingBottom="10dp" >
     </ListView>
-
-</LinearLayout>
+    <include
+        android:id="@+id/in_lt_key_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/tutorial_footer" />
+</RelativeLayout>

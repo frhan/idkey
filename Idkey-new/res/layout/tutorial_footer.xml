@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@android:color/darker_gray"
     android:orientation="horizontal" >
 
     <!--
@@ -58,32 +57,46 @@
     <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="0.5dp"
         android:layout_weight="1"
-        android:paddingBottom="15dp"
+        android:onClick="onClickMainHome"
+        android:paddingBottom="10dp"
         android:src="@drawable/key_listing_home" />
 
     <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="1dp"
         android:layout_weight="1"
+        android:onClick="onClickMainKeys"
         android:paddingBottom="15dp"
         android:src="@drawable/key_listing_keys" />
 
-    <Button
+    <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="1dp"
         android:layout_weight="1"
-        android:text="Ok" />
+        android:onClick="onClickMainIdAKey"
+        android:paddingBottom="10dp"
+        android:src="@drawable/key_listing_idakey" />
 
-    <Button
+    <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="1dp"
         android:layout_weight="1"
-        android:text="Ok" />
+        android:onClick="onClickMainAddNew"
+        android:paddingBottom="10dp"
+        android:src="@drawable/key_listing_add_new" />
 
-    <Button
+    <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_marginRight="1dp"
+        android:layout_weight="1"
+        android:onClick="onClickMainAbout"
+        android:paddingBottom="10dp"
+        android:src="@drawable/key_listing_about" />
 
 </LinearLayout>
