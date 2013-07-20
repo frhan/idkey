@@ -211,7 +211,12 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 
 	public void onClickClose(View v)
 	{
-		finish();
+		//finish();
+		Intent intent = new Intent(context, com.prologic.idkey.activities.HomeScreenActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
 
 	}
 	protected void logInSuccessfully() 
@@ -245,6 +250,7 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	}
 	public void onClickMainAbout(View v)
 	{
+		setCurrent(com.prologic.idkey.activities.AboutActivity.class, null);
 
 	}
 

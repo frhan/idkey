@@ -13,7 +13,7 @@ public class Key
 	private String categoryName;
 	private String createDate;	
 	private Date createdDate = null;	
-
+	
 	public Key(final int id) 
 	{
 		this.id = id;
@@ -23,6 +23,7 @@ public class Key
 		categoryName = "";
 		createDate = "";
 	}
+	
 	public Key()
 	{
 		this.id = -1;

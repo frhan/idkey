@@ -54,14 +54,14 @@ public class KeyListAdapter extends BaseAdapter
 	}
 	public void setSortingType(int sortingType)
 	{
-		 keysComparator.setSortingType(sortingType);
+		keysComparator.setSortingType(sortingType);
 	}
-	
+
 	public int getSortingType()
 	{
 		return keysComparator.getSortingType();
 	}
-	
+
 	@Override
 	public int getCount() {
 		return filterKeys.size();
@@ -102,8 +102,9 @@ public class KeyListAdapter extends BaseAdapter
 		TextView txtKeyId = (TextView) convertView.findViewById(R.id.txt_key_id);
 		TextView txtKeyDate = (TextView) convertView.findViewById(R.id.txt_key_date);
 		TextView txtKeyHotelName = (TextView) convertView.findViewById(R.id.txt_hotel_name);
+		
+		txtKeyNo.setText(String.valueOf(position+1));	
 
-		txtKeyNo.setText(String.valueOf(key.getId()));
 		txtKeyId.setText(key.getName());
 		if(key.getCreateDate() != null && key.getCreateDate().split("T")[0] != null)
 			txtKeyDate.setText(key.getCreateDate().split("T")[0]);
@@ -121,17 +122,17 @@ public class KeyListAdapter extends BaseAdapter
 		if (charText.length() == 0) {
 			filterKeys.addAll(this.listKeys);
 		}
-		  else
-	        {
-	            for (Key key : listKeys) 
-	            {
-	                if (key.getName().toLowerCase(Locale.getDefault()).contains(charText) ||
-	                	key.getCategoryName().toLowerCase(Locale.getDefault()).contains(charText)) 
-	                {
-	                	filterKeys.add(key);
-	                }
-	            }
-	        }
+		else
+		{
+			for (Key key : listKeys) 
+			{
+				if (key.getName().toLowerCase(Locale.getDefault()).contains(charText) ||
+						key.getCategoryName().toLowerCase(Locale.getDefault()).contains(charText)) 
+				{
+					filterKeys.add(key);
+				}
+			}
+		}
 		Collections.sort(filterKeys,keysComparator);
 		notifyDataSetChanged();	
 	}

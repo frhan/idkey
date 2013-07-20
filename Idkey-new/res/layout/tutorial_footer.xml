@@ -97,6 +97,7 @@
         android:layout_weight="1"
         android:onClick="onClickMainAbout"
         android:paddingBottom="10dp"
+       
         android:src="@drawable/key_listing_about" />
 
 </LinearLayout>

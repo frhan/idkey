@@ -16,11 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:background="@drawable/close_button"
             android:onClick="onClickClose"
             android:text="Close"
-            android:layout_centerVertical="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
         <!--
@@ -36,23 +36,21 @@
         -->
 
         <TextView
-            
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
-            android:text="Tutorial"
+            android:text="About"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_big"
             android:textStyle="bold" />
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/sv_web_lt"
+        android:id="@+id/sv_web_lt_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/in_lt_footer"
         android:layout_below="@id/rl_lt_tut_top_bar"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="5dp"
@@ -72,17 +70,10 @@
         -->
 
         <WebView
-            android:id="@+id/wv_tutorial"
+            android:id="@+id/wv_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp" />
     </ScrollView>
-
-    <include
-        android:id="@+id/in_lt_footer"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        layout="@layout/tutorial_footer" />
 
 </RelativeLayout>

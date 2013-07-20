@@ -14,11 +14,11 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
-        android:layout_weight="1.25"
+        android:layout_weight="1.24"
         android:gravity="center"
         android:paddingRight="5dp"
         android:text="12"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+       android:textSize="@dimen/text_size_medium_2"
         android:textColor="#000000" />
 
     <TextView
@@ -26,12 +26,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_weight="2.5"
+        android:layout_weight="2.92"
         android:gravity="left|center"
         android:maxLines="3"
         android:singleLine="false"
         android:text="Room 5"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+       android:textSize="@dimen/text_size_medium_2"
         android:textColor="#000000" />
 
     <TextView
@@ -40,12 +40,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="3dp"
-        android:layout_weight="2.5"
+        android:layout_weight="2.92"
         android:gravity="left|center"
         android:maxLines="3"
         android:singleLine="false"
         android:text="3/12/13 jfskndssk"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+    	android:textSize="@dimen/text_size_medium_2"
         android:textColor="#000000" />
 
     <TextView
@@ -54,19 +54,20 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="5dp"
-        android:layout_weight="2.5"
+        android:layout_weight="2.92"
         android:gravity="left|center"
         android:maxLines="3"
         android:singleLine="false"
         android:text="Raddison"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+       android:textSize="@dimen/text_size_medium_2"
         android:textColor="#000000" />
 
-    <RelativeLayout
+<!--     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1.25"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <Button
             android:layout_width="20dp"
@@ -74,7 +75,8 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:background="@drawable/keys_table_disclosure"
-            android:focusable="false" />
-    </RelativeLayout>
+            android:focusable="false"
+            android:visibility="gone" />
+    </RelativeLayout> -->
 
 </LinearLayout>

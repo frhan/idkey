@@ -7,8 +7,8 @@ public class KeysComparator implements Comparator<Key>
 
 	private int sortingOrder;
 	private int sortingType;
-	public static final int SORTING_ORDER_ASCENDING = 0;
-	public static final int SORTING_ORDER_DECENDING = 1;
+	public static final int SORTING_ORDER_ASCENDING = 6;
+	public static final int SORTING_ORDER_DECENDING = 7;
 
 	public static final int SORTING_TYPE_NAME = 0;
 	public static final int SORTING_TYPE_ID = 1;
