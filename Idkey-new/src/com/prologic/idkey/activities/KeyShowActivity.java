@@ -55,7 +55,7 @@ public class KeyShowActivity extends MainActivity
 	private TextView txtKeyTitle;
 	private IQRemote iqRemote;
 	private ImageView ivIqImage;
-
+	private String keyNo;
 	private DisplayImageOptions options;
 	private ImageLoader imageLoader;
 
@@ -82,7 +82,7 @@ public class KeyShowActivity extends MainActivity
 		btnSave.setBackgroundResource(R.drawable.round_rect_grey);
 		btnDelete.setText("Delete");
 		btnDelete.setTextColor(Color.WHITE);
-
+		keyNo = "";
 		iqRemote  = new IQRemote(getResources().getString(R.string.iqe_app_key),getResources().getString( R.string.iqe_app_secret));
 
 		Bundle b = getIntent().getExtras();
@@ -99,6 +99,7 @@ public class KeyShowActivity extends MainActivity
 				currentKey.setScanUrl(keyArray[3]);
 				currentKey.setCategoryName(keyArray[5]);
 				currentKey.setCreateDate(keyArray[6]);		
+				keyNo = keyArray[7];		
 				
 				Log.i(TAG, keyArray[2]);
 			}			
@@ -108,7 +109,7 @@ public class KeyShowActivity extends MainActivity
 		{
 			etKeyName.setText(currentKey.getName());
 			etKeyName.setEnabled(false);
-			txtKeyTitle.setText("Key"+currentKey.getId());
+			txtKeyTitle.setText("Key"+keyNo);
 			loadCategories();
 		}
 

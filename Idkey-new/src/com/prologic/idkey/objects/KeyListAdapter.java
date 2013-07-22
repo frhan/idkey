@@ -101,14 +101,14 @@ public class KeyListAdapter extends BaseAdapter
 		TextView txtKeyNo = (TextView) convertView.findViewById(R.id.txt_key_no);
 		TextView txtKeyId = (TextView) convertView.findViewById(R.id.txt_key_id);
 		TextView txtKeyDate = (TextView) convertView.findViewById(R.id.txt_key_date);
-		TextView txtKeyHotelName = (TextView) convertView.findViewById(R.id.txt_hotel_name);
+		TextView txtKeyCatName = (TextView) convertView.findViewById(R.id.txt_hotel_name);
 		
-		txtKeyNo.setText(String.valueOf(position+1));	
-
+		txtKeyNo.setText(String.valueOf(key.getNo()));	
 		txtKeyId.setText(key.getName());
+		
 		if(key.getCreateDate() != null && key.getCreateDate().split("T")[0] != null)
 			txtKeyDate.setText(key.getCreateDate().split("T")[0]);
-		txtKeyHotelName.setText(key.getCategoryName());	
+		txtKeyCatName.setText(key.getCategoryName());	
 
 
 		return convertView;

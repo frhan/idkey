@@ -153,8 +153,7 @@
             android:background="@drawable/change_password"
             android:onClick="onClickChangePassWord"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/btn_settings_forgot_password"
@@ -166,8 +165,7 @@
             android:background="@drawable/forgot_password"
             android:onClick="onClickForgotPassword"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 </RelativeLayout>

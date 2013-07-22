@@ -80,7 +80,7 @@
       <file leaf-file-name="AlbumStorageDirFactory.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ff/camera/AlbumStorageDirFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="22" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+            <state line="4" column="22" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="221">
               <folding />
             </state>
           </provider>
@@ -89,7 +89,7 @@
       <file leaf-file-name="BaseAlbumDirFactory.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ff/camera/BaseAlbumDirFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="34" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="40" max-vertical-offset="408">
+            <state line="14" column="34" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="442">
               <folding />
             </state>
           </provider>
@@ -98,10 +98,8 @@
       <file leaf-file-name="IQRemote.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/iqengines/sdk/IQRemote.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="13" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="10608">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="45" column="13" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0" vertical-offset="494" max-vertical-offset="13345">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,10 +107,8 @@
       <file leaf-file-name="CameraActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ff/camera/CameraActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="22" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0" vertical-offset="256" max-vertical-offset="3570">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="24" column="22" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0" vertical-offset="290" max-vertical-offset="3672">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,7 +116,7 @@
       <file leaf-file-name="CameraView.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ff/camera/CameraView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="19" selection-start="4674" selection-end="4674" vertical-scroll-proportion="4.884507" vertical-offset="1275" max-vertical-offset="5865">
+            <state line="184" column="19" selection-start="4864" selection-end="4864" vertical-scroll-proportion="4.7119565" vertical-offset="1105" max-vertical-offset="5746">
               <folding />
             </state>
           </provider>
@@ -129,16 +125,7 @@
       <file leaf-file-name="AddKeyActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/prologic/idkey/activities/AddKeyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="13" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="4471">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CameraSnapActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/prologic/idkey/activities/CameraSnapActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+            <state line="34" column="13" selection-start="989" selection-end="989" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="6222">
               <folding />
             </state>
           </provider>
@@ -147,10 +134,8 @@
       <file leaf-file-name="AddKeyCameraActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/prologic/idkey/activities/AddKeyCameraActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="57" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1445">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="43" column="5" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="1530">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,7 +146,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="46" selection-start="476" selection-end="476" vertical-scroll-proportion="-6.448276" vertical-offset="0" max-vertical-offset="476">
+            <state line="10" column="43" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="476">
               <folding />
             </state>
           </provider>
@@ -189,6 +174,7 @@
         <option value="$PROJECT_DIR$/src/com/ff/camera/CameraActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/add_camera_view.xml" />
         <option value="$PROJECT_DIR$/src/com/prologic/idkey/activities/AddKeyCameraActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/ff/camera/CameraView.java" />
       </list>
     </option>
   </component>
@@ -224,7 +210,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -255,6 +240,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Idkey-new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Idkey-new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -323,24 +326,6 @@
               <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Idkey-new" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Idkey-new" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="camera" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -348,6 +333,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,11 +351,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="avd_2.7_4.0.3" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -543,18 +529,18 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3277027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25460368" sideWeight="0.6722973" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25460368" sideWeight="0.6722973" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -636,9 +622,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/drawable/background_fenced.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="591" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main_screen.xml">
@@ -681,42 +665,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/iqengines/sdk/IQRemote.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="13" selection-start="1147" selection-end="1147" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="10608">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/prologic/idkey/activities/CameraSnapActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="53" selection-end="53" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+        <state line="45" column="13" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.0" vertical-offset="494" max-vertical-offset="13345">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/prologic/idkey/activities/AddKeyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="13" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4471">
+        <state line="34" column="13" selection-start="989" selection-end="989" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="6222">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/prologic/idkey/activities/AddKeyCameraActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="57" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1445">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/add_camera_view.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="46" selection-start="476" selection-end="476" vertical-scroll-proportion="-6.448276" vertical-offset="0" max-vertical-offset="476">
+        <state line="43" column="5" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="1530">
           <folding />
         </state>
       </provider>
@@ -726,28 +689,30 @@
         <state line="51" column="37" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.33239436" vertical-offset="749" max-vertical-offset="5967">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2548#2667#0" expanded="true" />
-            <element signature="e#2660#2661#0" expanded="true" />
-            <element signature="e#2740#2899#0" expanded="true" />
-            <element signature="e#2892#2893#0" expanded="true" />
-            <element signature="e#2974#3141#0" expanded="true" />
-            <element signature="e#3134#3135#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ff/camera/CameraActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="22" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0" vertical-offset="256" max-vertical-offset="3570">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="24" column="22" selection-start="606" selection-end="606" vertical-scroll-proportion="0.0" vertical-offset="290" max-vertical-offset="3672">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ff/camera/CameraView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="19" selection-start="4674" selection-end="4674" vertical-scroll-proportion="4.884507" vertical-offset="1275" max-vertical-offset="5865">
+        <state line="184" column="19" selection-start="4864" selection-end="4864" vertical-scroll-proportion="4.7119565" vertical-offset="1105" max-vertical-offset="5746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/add_camera_view.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="43" selection-start="427" selection-end="427" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="476">
           <folding />
         </state>
       </provider>

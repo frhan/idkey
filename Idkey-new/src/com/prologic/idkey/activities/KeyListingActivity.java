@@ -284,14 +284,15 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 		Key key = adapter.getItem(pos);
 		if(key != null)
 		{
-			String [] keyArray = new String[7];
+			String [] keyArray = new String[8];
 			keyArray[0] = String.valueOf(key.getId());
 			keyArray[1] = key.getName();
 			keyArray[2] = key.getIqeToken();
 			keyArray[3] = key.getScanUrl();
 			keyArray[4] = String.valueOf(key.getCategoryId());
 			keyArray[5] = key.getCategoryName();
-			keyArray[6] = key.getCreateDate();		
+			keyArray[6] = key.getCreateDate();	
+			keyArray[7] =String.valueOf(key.getNo());
 
 			Bundle b = new Bundle();
 			b.putStringArray(KeyShowActivity.CURRENT_KEY,keyArray);

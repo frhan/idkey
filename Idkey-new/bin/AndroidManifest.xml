@@ -52,7 +52,8 @@
         <activity
             android:name="com.prologic.idkey.activities.SignInActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.prologic.idkey.activities.CategoryActivity"
@@ -87,8 +88,9 @@
         <activity
             android:name=".activities.KeyShowActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-         <activity
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
             android:name=".activities.AboutActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
@@ -96,11 +98,11 @@
             android:name="com.tasawr.camera.CameraPictureSnapActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-         <activity
+        <activity
             android:name="com.prologic.idkey.activities.IdentifyKeyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-           <activity
+        <activity
             android:name="com.prologic.idkey.activities.ShowIdentifiedKeyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />

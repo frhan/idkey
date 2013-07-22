@@ -58,7 +58,8 @@ public class KeysComparator implements Comparator<Key>
 		}
 		else 
 		{
-			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getId() - rhs.getId():rhs.getId() - lhs.getId()) ;
+			//return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getId() - rhs.getId():rhs.getId() - lhs.getId()) ;
+			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getNo() - rhs.getNo():rhs.getNo() - lhs.getNo()) ;
 		}
 	}
 

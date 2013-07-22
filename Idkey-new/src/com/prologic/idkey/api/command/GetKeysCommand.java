@@ -24,6 +24,7 @@ public class GetKeysCommand extends JsonCommand {
 	int userCategoryId;
 	private List<Key> listKeys;
 	private SimpleDateFormat dateTimeFormat;
+	private int keyNo;
 	public GetKeysCommand()
 	{
 		this(-1);	
@@ -34,6 +35,7 @@ public class GetKeysCommand extends JsonCommand {
 	{
 		this.userCategoryId = userCategoryId;
 		dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-SS:S",Locale.US);
+		keyNo = 1;
 	}
 	public List<Key> getListKeys() {
 		return listKeys;
@@ -129,7 +131,7 @@ public class GetKeysCommand extends JsonCommand {
 								key.setCategoryId(category_id);
 								key.setScanUrl(scan_url);
 								key.setCreatedDate(date);
-								
+								key.setNo(keyNo++);								
 								listKeys.add(key);
 							}
 						}

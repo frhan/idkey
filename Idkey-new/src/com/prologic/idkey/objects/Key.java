@@ -6,6 +6,7 @@ import java.util.Date;
 public class Key
 {
 	private final int id;
+	private int no;	
 	private String name;
 	private String iqeToken;
 	private String scanUrl;
@@ -99,6 +100,13 @@ public class Key
 	}
 	public Date getCreatedDate() {
 		return createdDate;
+	}
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 
