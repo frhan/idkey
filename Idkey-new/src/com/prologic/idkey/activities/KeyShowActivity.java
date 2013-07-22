@@ -3,6 +3,7 @@ package com.prologic.idkey.activities;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,7 @@ import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.WebService;
 import com.prologic.idkey.api.command.GetAllCategoriesCommand;
 import com.prologic.idkey.api.command.MoveKeyCommand;
+import com.prologic.idkey.api.command.UpdateKeyCommand;
 import com.prologic.idkey.objects.Category;
 import com.prologic.idkey.objects.Key;
 
@@ -58,7 +60,8 @@ public class KeyShowActivity extends MainActivity
 	private String keyNo;
 	private DisplayImageOptions options;
 	private ImageLoader imageLoader;
-
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -84,7 +87,7 @@ public class KeyShowActivity extends MainActivity
 		btnDelete.setTextColor(Color.WHITE);
 		keyNo = "";
 		iqRemote  = new IQRemote(getResources().getString(R.string.iqe_app_key),getResources().getString( R.string.iqe_app_secret));
-
+		
 		Bundle b = getIntent().getExtras();
 		if(b != null)
 		{
@@ -100,7 +103,7 @@ public class KeyShowActivity extends MainActivity
 				currentKey.setCategoryName(keyArray[5]);
 				currentKey.setCreateDate(keyArray[6]);		
 				keyNo = keyArray[7];		
-				
+
 				Log.i(TAG, keyArray[2]);
 			}			
 		}
@@ -108,7 +111,7 @@ public class KeyShowActivity extends MainActivity
 		if(currentKey != null)
 		{
 			etKeyName.setText(currentKey.getName());
-			etKeyName.setEnabled(false);
+			//etKeyName.setEnabled(false);
 			txtKeyTitle.setText("Key"+keyNo);
 			loadCategories();
 		}
@@ -135,6 +138,26 @@ public class KeyShowActivity extends MainActivity
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(config); 
 		imageLoader.handleSlowNetwork(true);
+		
+		
+	}
+	@Override
+	protected void onDestroy() 
+	{
+		super.onDestroy();
+		
+		activityRunning.set(false);
+	}
+
+	@Override
+	protected void suspendRunningTask() 
+	{
+		super.suspendRunningTask();
+		if(categoryTask != null && categoryTask.getStatus() == AsyncTask.Status.RUNNING)
+		{
+			categoryTask.cancel(true);
+			categoryTask = null;
+		}
 	}
 
 	private void loadCategories()
@@ -207,7 +230,8 @@ public class KeyShowActivity extends MainActivity
 
 		int spinnerPosition = spinnerCategory.getSelectedItemPosition();
 		int changedCategoryId = -1;
-
+		String currentText = etKeyName.getText().toString();	
+		
 		if(spinnerPosition > -1 )
 		{
 			int currentSelectedKeyId = listCategories.get(spinnerPosition).getId();
@@ -216,12 +240,14 @@ public class KeyShowActivity extends MainActivity
 				changedCategoryId = currentSelectedKeyId;
 			}
 		}
-		if(changedCategoryId > -1)
+		
+		if((currentText.equalsIgnoreCase("") || currentText.equals(currentKey.getName())) && changedCategoryId == -1 )
 		{
-			new UpdateKeyTask(context, currentKey.getCategoryId(), changedCategoryId).execute();
-
-		}else {
 			showOkAlertDailog("Please Change Id or Category", "Save Key", false);
+
+		}else 
+		{
+			new UpdateKeyTask(context,currentKey.getId(),currentText,changedCategoryId).execute();
 		}
 	}
 
@@ -376,17 +402,18 @@ public class KeyShowActivity extends MainActivity
 	private class UpdateKeyTask extends AsyncTask<Void, Void, Void>
 	{
 		private Context context;
-		private int oldCategoryId;
+		private String name;
 		private int newCategoryId;
-		private MoveKeyCommand moveKeyCommand;
-		private String message;
-		private boolean status;
+		//private MoveKeyCommand moveKeyCommand;
+		private int keyId;
+		private UpdateKeyCommand updateKeyCommand;		
 		private CustomProgressDailog progressDialog;
 
-		public UpdateKeyTask(Context context,int oldCategoryId,int newCategoryId) 
+		public UpdateKeyTask(Context context,int keyId,String name,int newCategoryId) 
 		{
 			this.context = context;
-			this.oldCategoryId = oldCategoryId;
+			this.name = name;
+			this.keyId = keyId;
 			this.newCategoryId = newCategoryId;
 
 			progressDialog = new CustomProgressDailog(context);
@@ -397,10 +424,9 @@ public class KeyShowActivity extends MainActivity
 		@Override
 		protected Void doInBackground(Void... params) 
 		{
-			moveKeyCommand = new MoveKeyCommand(oldCategoryId, newCategoryId);
-			moveKeyCommand.execute(ApiConnection.getInstance(context));
-			message = moveKeyCommand.getMessage();
-			status = moveKeyCommand.isMovedSuccessfully();
+			updateKeyCommand = new UpdateKeyCommand(keyId, name,newCategoryId);
+			updateKeyCommand.execute(ApiConnection.getInstance(context));
+
 			return null;
 		}
 
@@ -418,8 +444,23 @@ public class KeyShowActivity extends MainActivity
 			{
 				progressDialog.dismiss();
 			}
-
-			showOkAlertDailog(message, "Move Key", status);
+			
+			showOkAlertDailog(updateKeyCommand.getMessage(), "Update Key", updateKeyCommand.isUpdatedSuccessfully(), new IDailogOKClickListener() {
+				
+				@Override
+				public void onOkClick() {
+					if(updateKeyCommand.isUpdatedSuccessfully())
+					{
+						finish();
+					}
+				}
+				
+				@Override
+				public void onCancelClick() {
+					
+					
+				}
+			});
 		}
 	}
 
@@ -502,12 +543,12 @@ public class KeyShowActivity extends MainActivity
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-
+			
 			if(progressDialog.isShowing())
 			{
 				progressDialog.dismiss();
 			}
-
+			
 			afterDeleteKey();
 		}
 

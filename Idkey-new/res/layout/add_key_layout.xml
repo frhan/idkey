@@ -100,6 +100,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="4dp"
                 android:paddingTop="4dp"
+                android:singleLine="true"
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView

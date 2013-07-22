@@ -2,6 +2,9 @@ package com.prologic.idkey.activities;
 
 
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.prologic.idkey.CustomProgressDailog;
 import com.prologic.idkey.R;
 
 import android.app.Activity;
@@ -22,14 +25,25 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	protected Context context;
 	protected Resources resources;
 	protected static final String TAG = MainActivity.class.getName();
+	private CustomProgressDailog progressDailog;
+	protected AtomicBoolean activityRunning = new AtomicBoolean(false);
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);		
 		context = MainActivity.this;
 		resources = this.getResources();
-
+		progressDailog = new CustomProgressDailog(context);
+		activityRunning.set(true);
 	}
+	@Override
+	protected void onResume() 
+	{	
+		super.onResume();
+		activityRunning.set(true);
+	}
+	
 	protected void requestCustomTitle()
 	{
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -65,6 +79,13 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	protected void onStop() {
 		super.onStop();		
 		suspendRunningTask();
+		activityRunning.set(false);
+	}
+	@Override
+	protected void onDestroy() 
+	{
+		super.onDestroy();
+		activityRunning.set(false);
 	}
 	protected void suspendRunningTask(){}
 	public  boolean isOnline() {
@@ -251,6 +272,25 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	public void onClickMainAbout(View v)
 	{
 		setCurrent(com.prologic.idkey.activities.AboutActivity.class, null);
+
+	}
+
+	protected void showProgressDaoilog(String title,String message,boolean isCancelable)
+	{
+		if(progressDailog != null)
+		{
+			progressDailog.setCancelable(isCancelable);
+			progressDailog.setTitle(title);
+			progressDailog.setMessage(message);
+
+			progressDailog.show();
+		}
+
+	}
+	protected void hideProgressDaoilog(String title,String message,boolean isCancelable)
+	{
+		if(progressDailog != null && progressDailog.isShowing())
+			progressDailog.dismiss();
 
 	}
 
