@@ -16,11 +16,11 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_size"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:background="@drawable/close_button"
             android:onClick="onClickClose"
             android:text="Close"
-            android:layout_centerVertical="true"
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_medium" />
         <!--
@@ -36,7 +36,6 @@
         -->
 
         <TextView
-            
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -81,8 +80,8 @@
     <include
         android:id="@+id/in_lt_footer"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        layout="@layout/tutorial_footer" />
+        layout="@layout/tut_footer" />
 
 </RelativeLayout>

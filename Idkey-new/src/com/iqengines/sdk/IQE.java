@@ -79,14 +79,7 @@ public class IQE extends Handler {
 	 * Tells if remote search is enable.
 	 */
 	private boolean remoteSearch;
-	/**
-	 * Tells if local search is enable.
-	 */
-	private boolean localSearch;
-	/**
-	 * Tells if Barcode search is enable.
-	 */
-	private boolean barcodeSearch;
+
 
 
 
@@ -96,15 +89,15 @@ public class IQE extends Handler {
 
 	public static final int CMD_DECODE=1;
 
-	public static final int CMD_DECODE_LOCAL=2;
+	//public static final int CMD_DECODE_LOCAL=2;
 
-	public static final int CMD_DECODE_BARCODE=3;
+	//public static final int CMD_DECODE_BARCODE=3;
 
 	public static final int CMD_DECODE_REMOTE=4;
 
-	public static final int CMD_SUCCESS_BARCODE=5;
+	//public static final int CMD_SUCCESS_BARCODE=5;
 
-	public static final int CMD_SUCCESS_LOCAL = 6;
+	//public static final int CMD_SUCCESS_LOCAL = 6;
 
 	public static final int CMD_SUCCESS_REMOTE = 7;
 
@@ -116,16 +109,16 @@ public class IQE extends Handler {
 
 	public static final int CMD_SERVER_RECEIVED =11;
 
-	public static final int CMD_NO_RESULT_BARCODE  =12;
+	//public static final int CMD_NO_RESULT_BARCODE  =12;
 
-	public static final int CMD_NO_RESULT_LOCAL = 13;
+	//public static final int CMD_NO_RESULT_LOCAL = 13;
 
 
 	/**
 	 * Call types.
 	 */
 
-	public static final int scan = 1;
+	//public static final int scan = 1;
 
 	public static final int snap = 2;
 
@@ -138,14 +131,6 @@ public class IQE extends Handler {
 	public static final int oneDFormat = 1;
 
 	public static final int twoDFormat = 2;
-
-	/**
-	 * Tells from which engine the match comes.
-	 */
-
-	public static final int local = 1;
-
-	public static final int barcode = 2;
 
 	public static final int remote = 3;
 
@@ -203,17 +188,15 @@ public class IQE extends Handler {
 	 */
 
 
-	public IQE(Activity activity, boolean remoteSearch, boolean localSearch, boolean barcodeSearch, OnResultCallback onResultCallback, 
+	public IQE(Activity activity, boolean remoteSearch,OnResultCallback onResultCallback, 
 			String remoteKey, String remoteSecret) {
 
-		if (!remoteSearch && !localSearch && !barcodeSearch) { 
+		if (!remoteSearch) { 
 			throw new IllegalArgumentException("At least one type of search must be enabled");
 		}
 		this.onResultCallback=onResultCallback;
 		this.activity = activity;
 		this.remoteSearch = remoteSearch;
-		this.localSearch = localSearch;
-		this.barcodeSearch = barcodeSearch;
 
 		deviceId = Utils.getDeviceId(activity);
 
@@ -254,78 +237,7 @@ public class IQE extends Handler {
 
 		switch (message.what) {
 
-		/**
-		 * CMD_DECODE
-		 * message :
-		 * obj = YuvImage
-		 * arg1 = callType
-		 */
 
-		case CMD_DECODE:
-
-			// we send messages according to the callType, those messages defines the pipeLine we want to use in order to recognize items.
-			// in our case :
-			// a snap > We search for a barcode and in the local dataset (in the same time),
-			//			If nothing is found we send the picture to our database.
-			// a scan > We search for a barcode and in the local dataset (in the same time).
-
-			callType = (Integer) message.arg1;
-
-			switch (callType) {
-
-			case(snap):
-
-				goSnap();
-			obtainMessage(CMD_COMPRESS_IMG,IQE.snap, 0,(YuvImage) message.obj).sendToTarget();
-			obtainMessage(CMD_DECODE_BARCODE,IQE.snap, 0,(YuvImage) message.obj).sendToTarget();
-			obtainMessage(CMD_DECODE_LOCAL,IQE.snap, 0, (YuvImage) message.obj).sendToTarget();
-			if(!barcodeSearch &&!localSearch) obtainMessage(CMD_DECODE_REMOTE).sendToTarget();
-			break;
-
-			case(scan):
-
-				if(isSnaping()) break;			
-
-			goScan();
-			obtainMessage(CMD_DECODE_BARCODE,IQE.scan, 0,(YuvImage) message.obj).sendToTarget(); 
-			obtainMessage(CMD_DECODE_LOCAL,IQE.scan, 0, (YuvImage) message.obj).sendToTarget();
-			break;	
-
-			}
-			break;
-
-			/**
-			 * CMD_DECODE_LOCAL
-			 * message :
-			 * arg1 = callType
-			 */
-
-		case CMD_DECODE_LOCAL:
-
-			if (localSearch){
-
-				// do not decode a scan if a snap occured in between
-				if (message.arg1==scan && isSnaping()) break;
-				if (DEBUG) Log.d(TAG,"Searching for local match ");
-				searchWithImageLocal(null, (Integer) message.arg1, (YuvImage) message.obj);
-			}
-
-			break;
-
-			/**CMD_DECODE_BARCODE
-			 * message :
-			 * obj = yuvImage
-			 * arg1 = callType
-			 */
-
-		case CMD_DECODE_BARCODE:
-
-
-			break;
-
-			/**CMD_DECODE_REMOTE
-			 * message :
-			 */
 
 		case CMD_DECODE_REMOTE:
 
@@ -341,44 +253,6 @@ public class IQE extends Handler {
 			 * obj = String label
 			 * arg1 = callType
 			 * arg2 = Barcode dimension
-			 */
-
-		case CMD_SUCCESS_BARCODE:
-			if (DEBUG) Log.d(TAG, "-------------- BARCODE MATCH ---------------");
-			String queryIdBarcode = Long.toString(SystemClock.elapsedRealtime());
-			String path =null;
-
-			switch (message.arg2){
-
-			case(oneDFormat):
-				path = "1DBarcode";
-			break;
-
-			case(twoDFormat):
-				path = "2DBarcode";
-			break;
-			}
-
-			// When scanning, QueryAssigned is called only for successful matching.
-			onResultCallback.onQueryIdAssigned(queryIdBarcode,path, scan);
-
-			Result barcodeResult = new Result(queryIdBarcode, null, (String) message.obj, null, barcode);
-			obtainMessage(CMD_RESULT,message.arg1, 0, barcodeResult).sendToTarget();;
-			break;
-
-			/**CMD_SUCCESS_LOCAL
-			 * message :
-			 * obj = String ObjId in the local database
-			 * arg1 = callType
-			 */
-
-		case CMD_SUCCESS_LOCAL:
-			break;
-
-			/**CMD_SUCCESS_REMOTE
-			 * message :
-			 * obj = result
-			 * arg1 = callType
 			 */
 
 		case CMD_SUCCESS_REMOTE:
@@ -397,15 +271,8 @@ public class IQE extends Handler {
 
 		case CMD_RESULT:
 
-			switch(message.arg1){
-
-			case(scan):
-				if(isSnaping()) break;
-			// show the result of the scan unless its interrupted by a snap
-			Result resultScan = (Result) message.obj;
-			onResultCallback.onResult(resultScan.queryId, resultScan.objId, resultScan.objName, resultScan.objMeta, resultScan.engine, message.arg1);
-			break;
-
+			switch(message.arg1)
+			{
 			case(snap):
 				Result resultSnap = (Result) message.obj;
 			onResultCallback.onResult(resultSnap.queryId, resultSnap.objId, resultSnap.objName, resultSnap.objMeta, resultSnap.engine, message.arg1);
@@ -420,9 +287,6 @@ public class IQE extends Handler {
 			 */
 
 		case CMD_NO_RESULT:
-
-			// send another a scan query unless a snap occurs
-			if(message.arg1 == scan && isSnaping()) break;
 
 			// ugly hack to get rid of some bugs
 			if(message.arg2 == 0) break;
@@ -442,215 +306,11 @@ public class IQE extends Handler {
 			 * arg1 = callType
 			 */
 
-		case CMD_COMPRESS_IMG:
-
-			switch(message.arg1){
-
-			case (scan):
-				// scan does not require any compression
-				if(isSnaping()) break;
-			break;
-
-			case (snap):
-				// compress the picture to be send more quickly to the server
-				imgFile = Utils.cropYuv((YuvImage) message.obj ,IQRemote.MAX_IMAGE_SIZE ,activity);
-			break;
-			}
-			break;
-
-			/**CMD_NO_RESULT_BARCODE
-			 * message :
-			 * arg1 = callType
-			 */
-
-		case CMD_NO_RESULT_BARCODE:
-
-			// since there is no defined order between barcode and local search,
-			// we cannot predict which will finish first.
-			// this tells that barcode search is done.
-
-			Log.d(TAG,"------ no barcode results ------");
-
-			switch(message.arg1){
-
-			case(snap):
-
-				if(localSearch){
-
-					// check if local search is done
-					if (isLastEngineSnap){
-
-						if(remoteSearch){
-							// both local and barcode are done, now send picture to the server
-							obtainMessage(CMD_DECODE_REMOTE).sendToTarget();
-						} else {
-							compteur++;
-							obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-						}
-
-					} else {
-						if (DEBUG) Log.d(TAG, " waiting for local search to finish");
-						// barcode is done, just local left
-						isLastEngineSnap=true;
-					}
-
-				} else {
-
-					if(remoteSearch){
-						// no local is not available, send picture to the server
-						obtainMessage(CMD_DECODE_REMOTE).sendToTarget();
-					} else {
-						compteur++;
-						obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-					}
-
-				}
-			break;
-
-
-			case(scan):
-
-				// do not handle this message if a snap occurs
-				if(isSnaping()) break;
-
-			if(localSearch){
-
-				if (isLastEngineScan){
-					compteur++;
-					obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-				} else {
-					if (DEBUG) Log.d(TAG, " waiting for local search to finish");
-					// barcode is done, just local left
-					isLastEngineScan=true;
-				}
-
-			} else {
-				compteur++;
-				obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-			}
-			break;
-			}
-			break;
-
-			/**CMD_NO_RESULT_LOCAL
-			 * message :
-			 * arg1 = callType
-			 */
-
-		case CMD_NO_RESULT_LOCAL:
-
-			Log.d(TAG,"------ no local results ------");
-
-			// since there is no defined order between barcode and local search,
-			// we cannot predict which will finish first.
-			// this tells that local search is done.
-			switch(message.arg1){
-
-			case(snap):
-
-				if(barcodeSearch){
-					// check if barcode is finished
-					if (isLastEngineSnap){
-
-						if(remoteSearch){
-							// both local and barcode are done, now send picture to the server
-							obtainMessage(CMD_DECODE_REMOTE).sendToTarget();
-						}else{
-							compteur++;
-							obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-						}
-
-					} else {
-						Log.d(TAG,"wait for barcode to finish");
-						// local is done, just barcode left
-						isLastEngineSnap=true;
-					}
-
-				} else {
-
-					if(remoteSearch){
-						// both local and barcode are done, now send picture to the server
-						obtainMessage(CMD_DECODE_REMOTE).sendToTarget();
-					}else{
-						compteur++;
-						obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-					}
-
-				}
-			break;
-
-			case(scan):
-
-				// do not handle this message if a snap occurs
-				if(isSnaping()) break;
-
-			if (barcodeSearch){
-
-				// check if barcode search if finished
-				if (isLastEngineScan){
-					compteur++;
-					obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-				} else {
-					Log.d(TAG,"wait for barcode to finish");
-					// local is done, just barcode left
-					isLastEngineScan=true;
-				}
-
-			} else {
-				compteur++;
-				obtainMessage(CMD_NO_RESULT,message.arg1,compteur).sendToTarget();
-			}
-
-			break;
-			}
-			break;
 		}
 	}
 
-	/**
-	 * Perform matching step. Points to native code.
-	 * Timeout native matching after 1000 ms.
-	 * 
-	 * @param img 
-	 * 		  A {@link Mat} object containing the image to be matched
-	 */
 
-	private void performMatching(Mat img, int callType){
 
-	}
-
-	/**
-	 * Searches in local index. Method blocks caller until search result is ready.
-	 * 
-	 * Calls CMD_SUCCESS_LOCAL when a match is found and removes other messages.
-	 * 
-	 * @param imgFile
-	 *        A {@link File} object containing an image to find match for.
-	 * @param onResultCallback
-	 * 		  An {@link OnResultCallback} object to be called when query id is assigned and when result is found. 
-	 * 
-	 * @throws IllegalStateException
-	 */
-
-	public void searchWithImageLocal(File imgFile, int callType, YuvImage Image) {
-
-		if (!localSearch && !barcodeSearch &&!remoteSearch) {
-			throw new IllegalStateException("localSearch is disabled");
-		}
-
-		if (Image != null){
-			int width = Image.getWidth(); 
-			int height = Image.getHeight();
-			Mat img = new Mat(Image.getYuvData(), width, height);
-			performMatching(img, callType);
-		}
-
-		// this is used for the scan test at the beginning of the app
-		if (imgFile != null){
-			Mat img = new Mat(imgFile.getAbsolutePath());
-			performMatching(img, callType);
-		}      
-	}
 
 	/**
 	 * Searches on IQ Engines server. this Method upload the query to our server and instantiate the updating Thread.
@@ -911,18 +571,12 @@ public class IQE extends Handler {
 
 	public void removeAllMessages(){
 		removeMessages(CMD_DECODE, null);
-		removeMessages(CMD_DECODE_BARCODE, null);
-		removeMessages(CMD_DECODE_LOCAL, null);
 		removeMessages(CMD_DECODE_REMOTE, null);
-		removeMessages(CMD_SUCCESS_BARCODE, null);
-		removeMessages(CMD_SUCCESS_LOCAL, null);
 		removeMessages(CMD_SUCCESS_REMOTE, null);
 		removeMessages(CMD_RESULT, null);
 		removeMessages(CMD_NO_RESULT, null);
 		removeMessages(CMD_COMPRESS_IMG, null);
 		removeMessages(CMD_SERVER_RECEIVED,null);
-		removeMessages(CMD_NO_RESULT_BARCODE,null);
-		removeMessages(CMD_NO_RESULT_LOCAL,null);
 	}
 
 	/**

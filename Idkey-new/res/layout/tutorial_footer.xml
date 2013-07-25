@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="60dp"
     android:orientation="horizontal" >
 
     <!--
@@ -54,50 +54,111 @@
     </TableRow>
     -->
 
-    <ImageButton
+
+    <!--
+         <Button
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:layout_marginRight="0.5dp"
         android:layout_weight="1"
+        android:background="@drawable/bg_tut_footer"
+        android:drawablePadding="1dp"
+        android:drawableTop="@drawable/ic_home"
+        
         android:onClick="onClickMainHome"
-        android:paddingBottom="10dp"
-        android:src="@drawable/key_listing_home" />
+        android:text="Home"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
+    -->
 
-    <ImageButton
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="1dp"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:background="@drawable/bg_tut_footer"
+        android:orientation="vertical"
+        android:weightSum="10" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_home" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:text="Home"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="0.5dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_key"
+        android:drawablePadding="1dp"
         android:onClick="onClickMainKeys"
-        android:paddingBottom="15dp"
-        android:src="@drawable/key_listing_keys" />
+        android:text="Keys"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
 
-    <ImageButton
+    <Button
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="1dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="0.5dp"
         android:layout_weight="1"
+        android:background="@drawable/bg_tut_footer"
+        android:drawablePadding="1dp"
+        android:drawableTop="@drawable/ic_id_key"
         android:onClick="onClickMainIdAKey"
-        android:paddingBottom="10dp"
-        android:src="@drawable/key_listing_idakey" />
+        android:text="I.D a Key"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
 
-    <ImageButton
+    <Button
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="1dp"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="0.5dp"
         android:layout_weight="1"
+        android:background="@drawable/bg_tut_footer"
+        android:drawablePadding="1dp"
+        android:drawableTop="@drawable/ic_add"
         android:onClick="onClickMainAddNew"
-        android:paddingBottom="10dp"
-        android:src="@drawable/key_listing_add_new" />
+        android:text="Add New"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
 
-    <ImageButton
+    <Button
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="1dp"
+        android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:background="@drawable/bg_tut_footer"
+        android:drawablePadding="1dp"
+        android:drawableTop="@drawable/ic_about"
         android:onClick="onClickMainAbout"
-        android:paddingBottom="10dp"
-       
-        android:src="@drawable/key_listing_about" />
+        android:text="About"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -150,9 +150,10 @@
                     android:layout_height="@dimen/button_size"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/cancel_btn_800_400"
+                    android:background="@drawable/delete_button"
                     android:onClick="onClickKeyCancelDelete"
                     android:textColor="#FFFFFF"
+                    android:text="Cancel"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </LinearLayout>

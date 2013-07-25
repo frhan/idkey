@@ -1,10 +1,15 @@
 package com.prologic.idkey;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 public class Utilities {
 
@@ -119,10 +124,37 @@ public class Utilities {
 		}
 
 	}
-	
+
 	public static boolean deleteFile(String filePath)
 	{
 		return false;
 	}
+
+
+	@SuppressWarnings("deprecation")
+	public static int[] getScreenSize(Context context)
+	{
+		int screenSize [] = new int[2]; 
+		int Measuredwidth = 0;
+		int Measuredheight = 0;
+		Point size = new Point();
+		//WindowManager w = (WindowManager) getActivity().getWindowManager();
+		WindowManager w = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2){
+			w.getDefaultDisplay().getSize(size);
+
+			Measuredwidth = size.x;
+			Measuredheight = size.y; 
+		}else{
+			Display d = w.getDefaultDisplay(); 
+			Measuredwidth = d.getWidth(); 
+			Measuredheight = d.getHeight(); 
+		}
+		screenSize[0] = Measuredwidth;
+		screenSize[1] = Measuredheight;
+
+		return screenSize;
+	}
+
 
 }

@@ -33,6 +33,8 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 		{
 			txtEmail.setText(Session.getInstance().getEmail());
 		}
+		
+		protectPassword(IdKeyPreferences.isRemember());
 
 	}
 	public void onClickForgotPassword(View v) 
@@ -57,32 +59,39 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 	}
+	
+	private void protectPassword(boolean protect)
+	{
+		if(protect)
+		{
+
+			/*IdKeyPreferences.setEmail(Session.getInstance().getEmail());
+			IdKeyPreferences.setPassword(Session.getInstance().getPassword());
+			IdKeyPreferences.setLogin(true);
+			 */
+			IdKeyPreferences.setRemember(true);
+			IdKeyPreferences.setPassword(Session.getInstance().getPassword());
+			IdKeyPreferences.save(context);
+		}
+		else
+		{
+			/*IdKeyPreferences.setEmail(Session.getInstance().getEmail());
+			IdKeyPreferences.setPassword("");
+			IdKeyPreferences.setLogin(false);
+
+			IdKeyPreferences.save(context);*/
+			IdKeyPreferences.setRemember(false);
+			IdKeyPreferences.setPassword("");
+			IdKeyPreferences.save(context);
+		}
+		
+	}
+	
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		if(buttonView == tbRemember)
 		{
-			if(isChecked)
-			{
-
-				/*IdKeyPreferences.setEmail(Session.getInstance().getEmail());
-				IdKeyPreferences.setPassword(Session.getInstance().getPassword());
-				IdKeyPreferences.setLogin(true);
-				 */
-				IdKeyPreferences.setRemember(true);
-				IdKeyPreferences.setPassword(Session.getInstance().getPassword());
-				IdKeyPreferences.save(context);
-			}
-			else
-			{
-				/*IdKeyPreferences.setEmail(Session.getInstance().getEmail());
-				IdKeyPreferences.setPassword("");
-				IdKeyPreferences.setLogin(false);
-
-				IdKeyPreferences.save(context);*/
-				IdKeyPreferences.setRemember(false);
-				IdKeyPreferences.setPassword("");
-				IdKeyPreferences.save(context);
-			}
+			protectPassword(isChecked);
 		}
 
 	}

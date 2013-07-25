@@ -22,6 +22,7 @@ public class SignUpCommand extends JsonCommand
 		this.email = email;
 		this.password = password;
 		signUpSuccessfull = false;
+		message = "Sign Up failed";
 	}
 	@Override
 	protected String makeRequest(ApiConnection apiConnection)

@@ -129,7 +129,7 @@
             android:background="@drawable/round_rect_white_edittext"
             android:drawableLeft="@drawable/serach_2"
             android:imeOptions="actionSearch"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -244,8 +244,8 @@
     <include
         android:id="@+id/in_lt_key_footer"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        layout="@layout/tutorial_footer" />
+        layout="@layout/tut_footer" />
 
 </RelativeLayout>

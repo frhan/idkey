@@ -81,8 +81,8 @@ public class KeyShowActivity extends MainActivity
 
 		btnSave.setText("Save");
 		btnSave.setTextColor(Color.WHITE);
-		btnDelete.setBackgroundResource(R.drawable.round_rect_grey);
-		btnSave.setBackgroundResource(R.drawable.round_rect_grey);
+		//btnDelete.setBackgroundResource(R.drawable.round_rect_grey);
+		//btnSave.setBackgroundResource(R.drawable.round_rect_grey);
 		btnDelete.setText("Delete");
 		btnDelete.setTextColor(Color.WHITE);
 		keyNo = "";
@@ -437,6 +437,8 @@ public class KeyShowActivity extends MainActivity
 			progressDialog.show();
 
 		}
+		
+		
 		@Override
 		protected void onPostExecute(Void result) {			
 			super.onPostExecute(result);

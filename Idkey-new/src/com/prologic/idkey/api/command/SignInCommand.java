@@ -20,6 +20,8 @@ public class SignInCommand extends JsonCommand
 	{
 		this.email = email;
 		this.pass = pass; 
+		message = "Log in Failed";
+		signInSuccessfull = false;
 		
 	}
 	public boolean isSignInSuccessfull() {
