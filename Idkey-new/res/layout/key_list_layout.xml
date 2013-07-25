@@ -198,7 +198,8 @@
             android:orientation="horizontal"
             android:weightSum="10" >
 
-            <Button
+            <!--
+                 <Button
                 android:id="@+id/btn_key_sort_cat"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
@@ -212,6 +213,21 @@
                 android:textSize="@dimen/text_size_medium"
                 android:textStyle="bold" >
             </Button>
+            -->
+
+            <Spinner
+                android:id="@+id/spinr_category"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="7"
+                android:background="@drawable/keys_button_selector"
+                android:gravity="left|center"
+                android:paddingLeft="2dp"
+                android:textColor="#000000"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" >
+            </Spinner>
 
             <ImageView
                 android:id="@+id/btn_order_indicator"

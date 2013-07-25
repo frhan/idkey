@@ -18,6 +18,7 @@ public class AddKeyCameraActivity extends CameraActivity{
 	private Button btnRetake;
 	private Button btnUse;
 	public static final String IMAGE_PATH = "IMAGE_PATH";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +43,7 @@ public class AddKeyCameraActivity extends CameraActivity{
 		View overlayView = (View) layoutInflater.inflate(R.layout.overlay_view, null);
 		addContentView(overlayView, cameraView.getLayoutParams());
 	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();

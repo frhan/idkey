@@ -104,7 +104,6 @@ int id btn_home_tutorial 0x7f0a003f
 int id btn_idq_done 0x7f0a0029
 int id btn_kay_use 0x7f0a000b
 int id btn_key_delete_cancel 0x7f0a000c
-int id btn_key_sort_cat 0x7f0a0032
 int id btn_key_sort_date 0x7f0a0031
 int id btn_key_sort_id 0x7f0a002f
 int id btn_key_sort_name 0x7f0a0030
@@ -153,6 +152,7 @@ int id rl_lt_tut_top_bar 0x7f0a0000
 int id rl_top_view_register 0x7f0a0023
 int id scrollView1 0x7f0a001e
 int id spinner_key_category 0x7f0a000a
+int id spinr_category 0x7f0a0032
 int id sv_web_lt 0x7f0a0055
 int id sv_web_lt_ 0x7f0a0001
 int id text 0x7f0a0053

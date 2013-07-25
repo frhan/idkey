@@ -1,9 +1,9 @@
 package com.prologic.idkey.activities;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,28 +14,32 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.prologic.idkey.CategorySpinnerAdapter;
 import com.prologic.idkey.CustomProgressDailog;
 import com.prologic.idkey.R;
 import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.command.GetKeysCommand;
+import com.prologic.idkey.objects.Category;
 import com.prologic.idkey.objects.Key;
 import com.prologic.idkey.objects.KeyListAdapter;
 import com.prologic.idkey.objects.KeysComparator;
 
-public class KeyListingActivity extends MainActivity implements OnClickListener,OnItemClickListener
+public class KeyListingActivity extends MainActivity implements OnClickListener,OnItemClickListener,OnItemSelectedListener
 {
 	private List<Key> listKeys;
 	private ListView lvKeys;
 	private KeyListAdapter adapter;
 	private Button btnNoKeySort;
 	private Button btnKeySortId;
-	private Button btnKeySortCat;
+	//private Button btnKeySortCat;
 	private Button btnKeySortDate;
 	private ImageView ivOrderIndicator;
 	private EditText etSearch;
@@ -44,6 +48,10 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 	public static final String USER_CATEGORY_NAME = "user_category_name";
 
 	int userCategoryId;
+	
+	private Spinner spinnerCategory; 
+	private CategorySpinnerAdapter spinnerAdapter;
+	private List<Category> listCategories;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -52,12 +60,19 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 		lvKeys = (ListView) findViewById(R.id.lv_keys);
 		btnNoKeySort = (Button) findViewById(R.id.btn_key_sort_id);
 		btnKeySortId = (Button) findViewById(R.id.btn_key_sort_name);
-		btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
+		//btnKeySortCat = (Button) findViewById(R.id.btn_key_sort_cat);
 		etSearch = (EditText) findViewById(R.id.et_key_search);
 		tvKeyListTitle = (TextView) findViewById(R.id.txt_key_list_title);
 		ivOrderIndicator = (ImageView) findViewById(R.id.btn_order_indicator);
 		btnKeySortDate = (Button)findViewById(R.id.btn_key_sort_date);
-
+		
+		listCategories = new ArrayList<Category>();
+		spinnerCategory = (Spinner) findViewById(R.id.spinr_category);
+		spinnerAdapter = new CategorySpinnerAdapter(context, R.layout.spinner_view, listCategories);
+		spinnerAdapter.setTextSize(R.dimen.text_size_small);
+		spinnerCategory.setAdapter(spinnerAdapter);
+		spinnerCategory.setOnItemSelectedListener(this);
+		
 		listKeys = new ArrayList<Key>();
 		adapter = new KeyListAdapter(this, R.layout.key_list_row_view, listKeys);
 		lvKeys.setAdapter(adapter);
@@ -65,7 +80,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 
 		btnNoKeySort.setOnClickListener(this);
 		btnKeySortId.setOnClickListener(this);
-		btnKeySortCat.setOnClickListener(this);
+		//btnKeySortCat.setOnClickListener(this);
 		btnKeySortDate.setOnClickListener(this);
 		btnKeySortId.setSelected(false);
 
@@ -79,8 +94,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 				tvKeyListTitle.setText(userCategoryName);
 
 		}
-
-
+		
 		etSearch.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -101,6 +115,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 			{
 				String text = etSearch.getText().toString().toLowerCase(Locale.getDefault());
 				adapter.filter(text);
+				setSpinnerPosWithCategoryId(-1);
 			}
 		});
 
@@ -117,6 +132,37 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 		adapter.setSortOrder(KeysComparator.SORTING_ORDER_ASCENDING);
 		adapter.setSortingType(KeysComparator.SORTING_TYPE_ID);
 	}
+	
+	private void setSpinnerPosWithCategoryId(int categoryId)
+	{
+		if(listCategories.size() >0)
+		{
+			for(int i =0; i<listCategories.size(); i++)
+			{
+				if(listCategories.get(i).getId() == categoryId)
+				{
+					spinnerCategory.setSelection(i);
+					break;
+				}
+					
+			}
+		}
+		
+	}
+	private void updateSpinner(List<Category> categories)
+	{
+		if(categories != null)
+		{
+			listCategories.clear();
+			listCategories.addAll(categories);
+			
+			spinnerAdapter.notifyDataSetChanged();
+			
+			setSpinnerPosWithCategoryId(-1);
+		}
+		
+	}
+	
 	private void loadKeys()
 	{
 		if(isOnline())
@@ -192,7 +238,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 			btnKeySortId.setSelected(true);
 			currentSelectedButton = btnKeySortId;
 			break;
-		case R.id.btn_key_sort_cat:
+/*		case R.id.btn_key_sort_cat:
 
 			if(adapter.getSortingType() == KeysComparator.SORTING_TYPE_ALL_CAT)
 			{
@@ -204,7 +250,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 			}
 			btnKeySortCat.setSelected(true);
 			currentSelectedButton = btnKeySortCat;
-			break;
+			break;*/
 		case R.id.btn_key_sort_date:
 			if(adapter.getSortingType() == KeysComparator.SORTING_TYPE_DATE)
 			{
@@ -264,6 +310,12 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 				progressDialog.dismiss();
 			}
 			updateKeyList(keysCommand.getListKeys());
+			
+			Map<Integer, Category> categoris = keysCommand.getCategories();
+			List<Category> list = new ArrayList<Category>(categoris.values());
+			
+			updateSpinner(list);
+			
 			keysCommand = null;		
 
 		}
@@ -301,6 +353,19 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 		}
 
 
+	}
+
+	@Override
+	public void onItemSelected(AdapterView<?> parent, View v, int pos,
+			long id) 
+	{		
+		Category category = listCategories.get(pos);
+		adapter.filter(category.getId());
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		
 	}
 
 }

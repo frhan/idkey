@@ -5,16 +5,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import com.prologic.idkey.R;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.prologic.idkey.R;
 
 public class KeyListAdapter extends BaseAdapter
 {
@@ -102,10 +101,10 @@ public class KeyListAdapter extends BaseAdapter
 		TextView txtKeyId = (TextView) convertView.findViewById(R.id.txt_key_id);
 		TextView txtKeyDate = (TextView) convertView.findViewById(R.id.txt_key_date);
 		TextView txtKeyCatName = (TextView) convertView.findViewById(R.id.txt_hotel_name);
-		
+
 		txtKeyNo.setText(String.valueOf(key.getNo()));	
 		txtKeyId.setText(key.getName());
-		
+
 		if(key.getCreateDate() != null && key.getCreateDate().split("T")[0] != null)
 			txtKeyDate.setText(key.getCreateDate().split("T")[0]);
 		txtKeyCatName.setText(key.getCategoryName());	
@@ -133,6 +132,29 @@ public class KeyListAdapter extends BaseAdapter
 				}
 			}
 		}
+		Collections.sort(filterKeys,keysComparator);
+		notifyDataSetChanged();	
+	}
+
+	public void filter(int categoryId)
+	{
+		filterKeys.clear();
+
+		if(categoryId == -1)
+		{
+			filterKeys.addAll(this.listKeys);
+		}else
+		{
+
+			for (Key key : listKeys) 
+			{
+				if (key.getCategoryId() == categoryId) 
+				{
+					filterKeys.add(key);
+				}
+			}
+		}
+
 		Collections.sort(filterKeys,keysComparator);
 		notifyDataSetChanged();	
 	}

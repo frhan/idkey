@@ -79,6 +79,7 @@ public class ForgotPasswordActivity extends MainActivity implements OnClickListe
 			forgotPasswordCommand.execute(ApiConnection.getInstance(context));
 			return null;
 		}
+		
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -101,7 +102,6 @@ public class ForgotPasswordActivity extends MainActivity implements OnClickListe
 			}
 			
 			forgotPasswordCommand = null;	
-
 		}
 
 

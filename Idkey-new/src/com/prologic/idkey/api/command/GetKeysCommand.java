@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +27,8 @@ public class GetKeysCommand extends JsonCommand {
 	private List<Key> listKeys;
 	private SimpleDateFormat dateTimeFormat;
 	private int keyNo;
+	private Map<Integer, Category> categories;
+	
 	public GetKeysCommand()
 	{
 		this(-1);	
@@ -36,11 +40,15 @@ public class GetKeysCommand extends JsonCommand {
 		this.userCategoryId = userCategoryId;
 		dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss-SS:S",Locale.US);
 		keyNo = 1;
+		
 	}
 	public List<Key> getListKeys() {
 		return listKeys;
 	}
 
+	public Map<Integer, Category> getCategories() {
+		return categories;
+	}
 
 	@Override
 	protected String makeRequest(ApiConnection apiConnection)
@@ -74,6 +82,8 @@ public class GetKeysCommand extends JsonCommand {
 				if(userKeysJsonArray.length() >0)
 				{
 					listKeys = new ArrayList<Key>();
+					categories = new HashMap<Integer, Category>();
+					categories.put(-1, new Category(-1, "All Cat"));
 					for(int i = 0; i<userKeysJsonArray.length(); i++)
 					{
 						if(userKeysJsonArray.get(i) instanceof JSONObject)
@@ -133,6 +143,9 @@ public class GetKeysCommand extends JsonCommand {
 								key.setCreatedDate(date);
 								key.setNo(keyNo++);								
 								listKeys.add(key);
+								
+								categories.put(category_id, new Category(category_id,category_name));
+								
 							}
 						}
 					}

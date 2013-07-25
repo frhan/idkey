@@ -123,7 +123,6 @@ public final class R {
         public static final int btn_idq_done=0x7f0a0029;
         public static final int btn_kay_use=0x7f0a000b;
         public static final int btn_key_delete_cancel=0x7f0a000c;
-        public static final int btn_key_sort_cat=0x7f0a0032;
         public static final int btn_key_sort_date=0x7f0a0031;
         public static final int btn_key_sort_id=0x7f0a002f;
         public static final int btn_key_sort_name=0x7f0a0030;
@@ -172,6 +171,7 @@ public final class R {
         public static final int rl_top_view_register=0x7f0a0023;
         public static final int scrollView1=0x7f0a001e;
         public static final int spinner_key_category=0x7f0a000a;
+        public static final int spinr_category=0x7f0a0032;
         public static final int sv_web_lt=0x7f0a0055;
         public static final int sv_web_lt_=0x7f0a0001;
         public static final int text=0x7f0a0053;

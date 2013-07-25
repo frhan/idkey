@@ -48,12 +48,12 @@ public class KeysComparator implements Comparator<Key>
 		}
 		else if(sortingType == SORTING_TYPE_ALL_CAT)
 		{
-			return (sortingOrder == SORTING_ORDER_ASCENDING?lhs.getCategoryName().compareToIgnoreCase(rhs.getCategoryName()):
+			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getCategoryName().compareToIgnoreCase(rhs.getCategoryName()):
 				rhs.getCategoryName().compareToIgnoreCase(lhs.getCategoryName()));
 		}
 		else if(sortingType == SORTING_TYPE_DATE)
 		{
-			return (sortingOrder == SORTING_ORDER_ASCENDING?lhs.getCreatedDate().compareTo(rhs.getCreatedDate()):
+			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getCreatedDate().compareTo(rhs.getCreatedDate()):
 				rhs.getCreatedDate().compareTo(lhs.getCreatedDate()));
 		}
 		else 
