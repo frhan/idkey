@@ -69,7 +69,7 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 		listCategories = new ArrayList<Category>();
 		spinnerCategory = (Spinner) findViewById(R.id.spinr_category);
 		spinnerAdapter = new CategorySpinnerAdapter(context, R.layout.spinner_view, listCategories);
-		spinnerAdapter.setTextSize(R.dimen.text_size_small);
+		spinnerAdapter.setTextSize(R.dimen.text_size_medium_2);
 		spinnerCategory.setAdapter(spinnerAdapter);
 		spinnerCategory.setOnItemSelectedListener(this);
 		

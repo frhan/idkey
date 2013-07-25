@@ -11,6 +11,6 @@
         android:padding="3dp"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textSize="@dimen/text_size_big" />
+        android:textSize="@dimen/text_size_medium" />
 
 </RelativeLayout>

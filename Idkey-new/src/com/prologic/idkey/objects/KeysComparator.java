@@ -13,7 +13,7 @@ public class KeysComparator implements Comparator<Key>
 	public static final int SORTING_TYPE_NAME = 0;
 	public static final int SORTING_TYPE_ID = 1;
 	public static final int SORTING_TYPE_DATE = 2;
-	public static final int SORTING_TYPE_ALL_CAT = 3;
+	//public static final int SORTING_TYPE_ALL_CAT = 3;
 
 	public KeysComparator(int sortingType,int sortingOrder) 
 	{
@@ -46,11 +46,11 @@ public class KeysComparator implements Comparator<Key>
 	        }*/
 			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getName().compareTo(rhs.getName()):rhs.getName().compareTo(lhs.getName()));
 		}
-		else if(sortingType == SORTING_TYPE_ALL_CAT)
+		/*else if(sortingType == SORTING_TYPE_ALL_CAT)
 		{
 			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getCategoryName().compareToIgnoreCase(rhs.getCategoryName()):
 				rhs.getCategoryName().compareToIgnoreCase(lhs.getCategoryName()));
-		}
+		}*/
 		else if(sortingType == SORTING_TYPE_DATE)
 		{
 			return (sortingOrder == SORTING_ORDER_ASCENDING? lhs.getCreatedDate().compareTo(rhs.getCreatedDate()):

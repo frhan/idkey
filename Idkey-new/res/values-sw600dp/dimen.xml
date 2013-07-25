@@ -5,7 +5,7 @@
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_mini">12sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
-    <dimen name="image_size">480px</dimen>
-    <dimen name="logo_size">200dp</dimen>
+    <dimen name="button_size">48dp</dimen>
+    <dimen name="logo_size">350dp</dimen>
 
 </resources>

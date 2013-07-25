@@ -2,6 +2,7 @@ package com.prologic.idkey.activities;
 
 import com.prologic.idkey.R;
 import com.prologic.idkey.Utilities;
+import com.prologic.idkey.objects.SquareImageView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,15 @@ import android.widget.Button;
 public class HomeScreenActivity extends MainActivity implements OnClickListener
 {
 	private Button btnTutorial;
+	//private SquareImageView ivSquare;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.main_screen);
 		btnTutorial  = (Button) findViewById(R.id.btn_home_tutorial);
+		//ivSquare = (SquareImageView) findViewById(R.id.iv_square);
+		//ivSquare.getLayoutParams().width = 3*Utilities.getScreenSize(context)[0]/2;
 
 		btnTutorial.getLayoutParams().width = Utilities.getScreenSize(context)[0]/2 - 10;
 	}

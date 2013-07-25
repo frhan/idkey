@@ -141,7 +141,7 @@
     <LinearLayout
         android:id="@+id/ln_lt_sort_bar"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="42dp"
         android:layout_below="@+id/ln_lt_search_bar"
         android:background="#000000"
         android:orientation="horizontal"
@@ -192,7 +192,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="42dp"
             android:layout_weight="2.92"
             android:background="#000000"
             android:orientation="horizontal"

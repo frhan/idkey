@@ -6,5 +6,6 @@
     <dimen name="text_size_mini">12sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="button_size">56dp</dimen>
-
+  <dimen name="logo_size">250dp</dimen>
+    
 </resources>

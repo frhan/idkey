@@ -17,11 +17,12 @@ public final class R {
         public static final int red=0x7f050000;
     }
     public static final class dimen {
-        public static final int button_size=0x7f060006;
+        public static final int button_size=0x7f060007;
         public static final int image_size=0x7f060004;
+        public static final int logo_size=0x7f060005;
         public static final int text_size_big=0x7f060000;
         public static final int text_size_medium=0x7f060001;
-        public static final int text_size_medium_2=0x7f060005;
+        public static final int text_size_medium_2=0x7f060006;
         public static final int text_size_mini=0x7f060002;
         public static final int text_size_small=0x7f060003;
     }
@@ -130,10 +131,10 @@ public final class R {
         public static final int btn_order_indicator=0x7f0a0033;
         public static final int btn_pic_retake=0x7f0a000e;
         public static final int btn_pic_use=0x7f0a000f;
-        public static final int btn_reg_sign_up=0x7f0a0050;
-        public static final int btn_register_log_in=0x7f0a0051;
-        public static final int btn_settings_change_password=0x7f0a004b;
-        public static final int btn_settings_forgot_password=0x7f0a004c;
+        public static final int btn_reg_sign_up=0x7f0a0051;
+        public static final int btn_register_log_in=0x7f0a0052;
+        public static final int btn_settings_change_password=0x7f0a004c;
+        public static final int btn_settings_forgot_password=0x7f0a004d;
         public static final int buttonagree=0x7f0a0021;
         public static final int buttoncan=0x7f0a0022;
         public static final int camera_frame_preview=0x7f0a0003;
@@ -146,16 +147,17 @@ public final class R {
         public static final int et_key_search=0x7f0a002d;
         public static final int et_login_email=0x7f0a003b;
         public static final int et_login_pass=0x7f0a003c;
-        public static final int et_register_email=0x7f0a004d;
-        public static final int et_register_password=0x7f0a004e;
-        public static final int et_register_password_conf=0x7f0a004f;
-        public static final int in_lt_footer=0x7f0a0056;
+        public static final int et_register_email=0x7f0a004e;
+        public static final int et_register_password=0x7f0a004f;
+        public static final int et_register_password_conf=0x7f0a0050;
+        public static final int in_lt_footer=0x7f0a0057;
         public static final int in_lt_key_footer=0x7f0a0035;
-        public static final int iv=0x7f0a0054;
+        public static final int iv=0x7f0a0055;
         public static final int iv_add_key_image=0x7f0a0008;
         public static final int iv_idq_key_image=0x7f0a0026;
         public static final int iv_key_image=0x7f0a003a;
-        public static final int iv_overlay_view=0x7f0a0047;
+        public static final int iv_overlay_view=0x7f0a0048;
+        public static final int iv_square=0x7f0a0047;
         public static final int iv_tut=0x7f0a0046;
         public static final int ln_lt_bottom_bar=0x7f0a001f;
         public static final int ln_lt_search_bar=0x7f0a002c;
@@ -163,21 +165,21 @@ public final class R {
         public static final int lt_lt_top_bar=0x7f0a001d;
         public static final int lv_categories=0x7f0a0018;
         public static final int lv_keys=0x7f0a0034;
-        public static final int menu_settings=0x7f0a0058;
+        public static final int menu_settings=0x7f0a0059;
         public static final int rl_lt_footer_view=0x7f0a0005;
         public static final int rl_lt_key_list_top_bar=0x7f0a002a;
-        public static final int rl_lt_settings_top_bar=0x7f0a0048;
+        public static final int rl_lt_settings_top_bar=0x7f0a0049;
         public static final int rl_lt_tut_top_bar=0x7f0a0000;
         public static final int rl_top_view_register=0x7f0a0023;
         public static final int scrollView1=0x7f0a001e;
         public static final int spinner_key_category=0x7f0a000a;
         public static final int spinr_category=0x7f0a0032;
-        public static final int sv_web_lt=0x7f0a0055;
+        public static final int sv_web_lt=0x7f0a0056;
         public static final int sv_web_lt_=0x7f0a0001;
-        public static final int text=0x7f0a0053;
+        public static final int text=0x7f0a0054;
         public static final int textView1=0x7f0a0020;
-        public static final int textView_spinner=0x7f0a0052;
-        public static final int toggle_button_remember=0x7f0a004a;
+        public static final int textView_spinner=0x7f0a0053;
+        public static final int toggle_button_remember=0x7f0a004b;
         public static final int txt_cat_count=0x7f0a0013;
         public static final int txt_cat_name=0x7f0a0012;
         public static final int txt_hotel_name=0x7f0a0039;
@@ -188,9 +190,9 @@ public final class R {
         public static final int txt_key_list_title=0x7f0a002b;
         public static final int txt_key_no=0x7f0a0036;
         public static final int txt_key_title=0x7f0a0007;
-        public static final int txt_settings_email=0x7f0a0049;
+        public static final int txt_settings_email=0x7f0a004a;
         public static final int wv_about=0x7f0a0002;
-        public static final int wv_tutorial=0x7f0a0057;
+        public static final int wv_tutorial=0x7f0a0058;
     }
     public static final class layout {
         public static final int about_us=0x7f030000;
@@ -211,16 +213,17 @@ public final class R {
         public static final int log_in=0x7f03000f;
         public static final int main_screen=0x7f030010;
         public static final int main_screen1=0x7f030011;
-        public static final int my_account=0x7f030012;
-        public static final int overlay_view=0x7f030013;
-        public static final int settings=0x7f030014;
-        public static final int sign_up=0x7f030015;
-        public static final int spinner_view=0x7f030016;
-        public static final int splash_screen=0x7f030017;
-        public static final int toast_view=0x7f030018;
-        public static final int tut_footer=0x7f030019;
-        public static final int tutorial_footer=0x7f03001a;
-        public static final int tutorial_layout=0x7f03001b;
+        public static final int main_screen_1=0x7f030012;
+        public static final int my_account=0x7f030013;
+        public static final int overlay_view=0x7f030014;
+        public static final int settings=0x7f030015;
+        public static final int sign_up=0x7f030016;
+        public static final int spinner_view=0x7f030017;
+        public static final int splash_screen=0x7f030018;
+        public static final int toast_view=0x7f030019;
+        public static final int tut_footer=0x7f03001a;
+        public static final int tutorial_footer=0x7f03001b;
+        public static final int tutorial_layout=0x7f03001c;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;

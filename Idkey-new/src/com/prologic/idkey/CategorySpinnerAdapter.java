@@ -59,7 +59,7 @@ public  class CategorySpinnerAdapter extends ArrayAdapter<Category>
 		
 		if(textSize >-1)
 		{
-			tvTitle.setTextSize(context.getResources().getDimension(textSize));
+			//tvTitle.setTextSize(context.getResources().getDimension(textSize));
 			tvTitle.setTypeface(null, Typeface.BOLD);
 		}
 		return convertView;
