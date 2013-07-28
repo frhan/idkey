@@ -237,7 +237,10 @@ public class IQE extends Handler {
 
 		switch (message.what) {
 
-
+		case CMD_DECODE:
+			obtainMessage(CMD_COMPRESS_IMG,IQE.snap, 0,(File) message.obj).sendToTarget();
+			obtainMessage(CMD_DECODE_REMOTE).sendToTarget();
+			break;
 
 		case CMD_DECODE_REMOTE:
 
@@ -246,6 +249,9 @@ public class IQE extends Handler {
 				new SearchWithImageRemote().start();
 				if (DEBUG) Log.d(TAG,"Searching remotely");
 			}
+			break;
+		case CMD_COMPRESS_IMG:
+			imgFile = (File) message.obj;
 			break;
 
 			/**CMD_SUCCESS_BARCODE
@@ -343,7 +349,15 @@ public class IQE extends Handler {
 				onResultCallback.onQueryIdAssigned(qid, imgFile.getPath(),snap);
 				remoteQueryMap.put(qid, onResultCallback);
 				iqRemote.query(imgFile, deviceId,qid);
+				sleep(1000);
+				String result = iqRemote.update(deviceId, true);
+
+
 			} catch (IOException e) {
+				onResultCallback.onNoResult(snap,e,imgFile);
+				return;
+			}
+			catch (InterruptedException e) {
 				onResultCallback.onNoResult(snap,e,imgFile);
 				return;
 			}
@@ -388,7 +402,7 @@ public class IQE extends Handler {
 			remoteUpdateThread.stopThread();
 			remoteUpdateThread = null;
 		}
-		goSnap();
+
 		removeAllMessages();
 		synchronized (newIncomingRemoteMatchSemaphore) {
 			newIncomingRemoteMatchSemaphore.notifyAll();           
@@ -579,26 +593,5 @@ public class IQE extends Handler {
 		removeMessages(CMD_SERVER_RECEIVED,null);
 	}
 
-	/**
-	 * Stops the Scan Pipeline
-	 */
-
-	public void goSnap() {
-		stopScanSearch.set(true);
-		isLastEngineSnap=false;
-	}
-
-	/**
-	 * Enables the Scan pipeline
-	 */
-
-	public void goScan(){
-		stopScanSearch.set(false);
-		isLastEngineScan=false;
-	}
-
-	public boolean isSnaping(){
-		return stopScanSearch.get();
-	}
 
 }

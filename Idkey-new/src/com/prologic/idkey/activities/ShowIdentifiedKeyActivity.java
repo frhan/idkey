@@ -21,6 +21,8 @@ public class ShowIdentifiedKeyActivity extends MainActivity
 	private ImageView ivIdImage;
 	private TextView txtId;
 	private TextView txtCategoryName;
+	public static final String IQE_TOKEN = "iqe_token";
+	public static final String OBJ_NAME = "obj_name";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
