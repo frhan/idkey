@@ -233,12 +233,16 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	public void onClickClose(View v)
 	{
 		//finish();
+		goHome();
+
+	}
+	
+	protected void goHome() {
 		Intent intent = new Intent(context, com.prologic.idkey.activities.HomeScreenActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(intent);
-
+		startActivity(intent);	
 	}
 	protected void logInSuccessfully() 
 	{
@@ -280,14 +284,16 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		if(progressDailog != null)
 		{
 			progressDailog.setCancelable(isCancelable);
-			progressDailog.setTitle(title);
-			progressDailog.setMessage(message);
+			if(title != null)
+				progressDailog.setTitle(title);
+			if(message != null)
+				progressDailog.setMessage(message);
 
 			progressDailog.show();
 		}
 
 	}
-	protected void hideProgressDaoilog(String title,String message,boolean isCancelable)
+	protected void hideProgressDaoilog()
 	{
 		if(progressDailog != null && progressDailog.isShowing())
 			progressDailog.dismiss();

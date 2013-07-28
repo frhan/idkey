@@ -286,7 +286,7 @@ public class KeyShowActivity extends MainActivity
 		alertDialog.show();		
 	}
 
-	private String[] parseIqeRetrieveData(String data)
+	public static String[] parseIqeRetrieveData(String data)
 	{
 		String [] resultArray = new String[5];
 		try {

@@ -72,21 +72,12 @@ public class IdentifyKeyActivity extends CameraPictureSnapActivity{
 		pd = new QueryProgressDialog(this);
 	}
 
-	private void initIqSdk() {
-		/*iqe = new IQE(this, SEARCH_OBJECT_REMOTE,
-				onResultCallback, KEY, SECRET);*/
+	private void initIqSdk() 
+	{
 		iqRemote = new IQRemote(getResources().getString(R.string.iqe_app_key), getResources().getString(R.string.iqe_app_secret));
 
 	}
-	/*	//test
-	@Override
-	protected void onClickSnap() 
-	{
-		super.onClickSnap();
-		//currentFile = new File("/data/data/com.prologic.idkey/app_snapshots/snapshot.jpg");
-		//idKeyRemote();
-	}
-	 */
+
 	@Override
 	protected void onClickUse() 
 	{
@@ -99,7 +90,6 @@ public class IdentifyKeyActivity extends CameraPictureSnapActivity{
 			e.printStackTrace();
 		}	
 		idKeyRemote();
-
 	}
 
 	private void idKeyRemote()
@@ -260,7 +250,7 @@ public class IdentifyKeyActivity extends CameraPictureSnapActivity{
 				b.putString(ShowIdentifiedKeyActivity.IQE_TOKEN, objId);
 				b.putString(ShowIdentifiedKeyActivity.OBJ_NAME, label);
 
-				setCurrent(com.prologic.idkey.activities.ShowIdentifiedKeyActivity.class, null);				
+				setCurrent(com.prologic.idkey.activities.ShowIdentifiedKeyActivity.class, b);				
 			}
 
 
