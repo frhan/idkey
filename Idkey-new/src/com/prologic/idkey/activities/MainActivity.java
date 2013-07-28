@@ -267,7 +267,7 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	}
 	public void onClickMainIdAKey(View v)
 	{
-		//setCurrent(com.prologic.idkey.activities.IdentifyKeyActivity.class, null);
+		setCurrent(com.prologic.idkey.activities.IdentifyKeyActivity.class, null);
 	}
 	public void onClickMainAddNew(View v)
 	{

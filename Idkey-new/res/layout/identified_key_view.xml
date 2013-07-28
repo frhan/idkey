@@ -29,7 +29,7 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="2dp"
-            android:text="Add New Key"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="@dimen/text_size_big"
             android:textStyle="bold" />
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="7688686"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

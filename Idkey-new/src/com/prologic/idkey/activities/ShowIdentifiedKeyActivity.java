@@ -91,6 +91,13 @@ public class ShowIdentifiedKeyActivity extends MainActivity
 		}
 
 	}
+	@Override
+	public void onBackPressed() 
+	{
+		super.onBackPressed();
+		
+		finish();
+	}
 
 	private void updateKeyImage(String imageUrl)
 	{
@@ -140,6 +147,7 @@ public class ShowIdentifiedKeyActivity extends MainActivity
 			{
 				txtId.setText(key.getName());
 				txtCategoryName.setText(key.getCategoryName());
+				txtKeyName.setText(key.getName());
 				break;
 			}
 		}
