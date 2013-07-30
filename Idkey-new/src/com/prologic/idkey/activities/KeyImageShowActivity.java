@@ -326,7 +326,7 @@ public class KeyImageShowActivity extends KeyActivity{
 		private String sqeId;		
 		private String message;
 		private boolean status;
-		private CustomProgressDailog progressDialog;
+		
 
 		public DeleteKeyTask(Context context,String sqeId,int userKeyId) 
 		{
@@ -335,15 +335,13 @@ public class KeyImageShowActivity extends KeyActivity{
 			this.userKeyId = userKeyId;
 			message = "";
 			status = false;
-			progressDialog = new CustomProgressDailog(context);
-			progressDialog.setTitle("Loading");
-			progressDialog.setMessage("Please wait...");			
+					
 		}
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			progressDialog.show();
+			showProgressDaoilog(null, "Deleting...", true);
 		}
 
 		@Override
@@ -380,10 +378,9 @@ public class KeyImageShowActivity extends KeyActivity{
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 
-			if(progressDialog.isShowing())
-			{
-				progressDialog.dismiss();
-			}
+			if(!activityRunning.get())
+				return;
+			hideProgressDaoilog();
 
 			afterDeleteKey();
 		}
