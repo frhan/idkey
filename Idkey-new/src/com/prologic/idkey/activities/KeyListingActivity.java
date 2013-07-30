@@ -349,7 +349,8 @@ public class KeyListingActivity extends MainActivity implements OnClickListener,
 			Bundle b = new Bundle();
 			b.putStringArray(KeyShowActivity.CURRENT_KEY,keyArray);
 
-			setCurrent(com.prologic.idkey.activities.KeyShowActivity.class, b);
+			//setCurrent(com.prologic.idkey.activities.KeyShowActivity.class, b);
+			setCurrent(com.prologic.idkey.activities.KeyImageShowActivity.class, b);
 		}
 
 

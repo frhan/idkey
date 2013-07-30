@@ -16,9 +16,11 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 public abstract class MainActivity extends Activity implements OnClickListener {
 
@@ -27,7 +29,7 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 	protected static final String TAG = MainActivity.class.getName();
 	private CustomProgressDailog progressDailog;
 	protected AtomicBoolean activityRunning = new AtomicBoolean(false);
-	
+	protected LayoutInflater inflater;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		resources = this.getResources();
 		progressDailog = new CustomProgressDailog(context);
 		activityRunning.set(true);
+		inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	@Override
 	protected void onResume() 
@@ -299,5 +302,18 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 			progressDailog.dismiss();
 
 	}
+	
+	protected void showShortToast(String message)
+	{
+		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+		
+	}
+
+	protected void showLongToast(String message)
+	{
+		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+		
+	}
+	
 
 }

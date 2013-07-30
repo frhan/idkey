@@ -1,9 +1,7 @@
 package com.prologic.idkey.activities;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,15 +14,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.iqengines.sdk.IQRemote;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -32,89 +26,31 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.prologic.idkey.CategorySpinnerAdapter;
 import com.prologic.idkey.CustomProgressDailog;
 import com.prologic.idkey.R;
 import com.prologic.idkey.api.ApiConnection;
 import com.prologic.idkey.api.WebService;
-import com.prologic.idkey.api.command.GetAllCategoriesCommand;
-import com.prologic.idkey.api.command.MoveKeyCommand;
 import com.prologic.idkey.api.command.UpdateKeyCommand;
 import com.prologic.idkey.objects.Category;
 import com.prologic.idkey.objects.Key;
 
-public class KeyShowActivity extends MainActivity 
-{
+public class KeyImageShowActivity extends KeyActivity{
 
-	private Key currentKey = null;
-	public static final String CURRENT_KEY = "current_key";
-	private EditText etKeyName;
-	private CategoryListTask categoryTask = null;
-	private List<Category> listCategories;
-	private Spinner spinnerCategory;
-	private CategorySpinnerAdapter spinnerAdapter;
-	private TextView txtKeyTitle;
-	private IQRemote iqRemote;
-	private ImageView ivIqImage;
-	private String keyNo;
 	private DisplayImageOptions options;
 	private ImageLoader imageLoader;
-	protected Button btnSave;
-	protected Button btnDelete;
+	private Key currentKey = null;
+	public static final String CURRENT_KEY = "current_key";
+	private String keyNo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
-	{
+	{		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_key_layout);
-
-		btnSave = (Button) findViewById(R.id.btn_kay_use);
-		btnDelete = (Button) findViewById(R.id.btn_key_delete_cancel);
-		etKeyName = (EditText) findViewById(R.id.et_key_id);
-		spinnerCategory = (Spinner) findViewById(R.id.spinner_key_category);
-		txtKeyTitle = (TextView) findViewById(R.id.txt_key_title);
-		ivIqImage = (ImageView) findViewById(R.id.iv_add_key_image);
-
-		listCategories = new ArrayList<Category>();
-		spinnerAdapter = new CategorySpinnerAdapter(this,R.layout.spinner_view,listCategories);
-		spinnerCategory.setAdapter(spinnerAdapter);
 
 		btnSave.setText("Save");
 		btnSave.setTextColor(Color.WHITE);
-		//btnDelete.setBackgroundResource(R.drawable.round_rect_grey);
-		//btnSave.setBackgroundResource(R.drawable.round_rect_grey);
 		btnDelete.setText("Delete");
 		btnDelete.setTextColor(Color.WHITE);
-		keyNo = "";
-		iqRemote  = new IQRemote(getResources().getString(R.string.iqe_app_key),getResources().getString( R.string.iqe_app_secret));
-		
-		Bundle b = getIntent().getExtras();
-		if(b != null)
-		{
-			String [] keyArray = b.getStringArray(CURRENT_KEY);
-
-			if(keyArray != null && keyArray.length  > 0)
-			{
-				currentKey = new Key(Integer.valueOf(keyArray[0]));
-				currentKey.setName(keyArray[1]);
-				currentKey.setCategoryId(Integer.valueOf(keyArray[4]));
-				currentKey.setIqeToken(keyArray[2]);
-				currentKey.setScanUrl(keyArray[3]);
-				currentKey.setCategoryName(keyArray[5]);
-				currentKey.setCreateDate(keyArray[6]);		
-				keyNo = keyArray[7];		
-
-				Log.i(TAG, keyArray[2]);
-			}			
-		}
-
-		if(currentKey != null)
-		{
-			etKeyName.setText(currentKey.getName());
-			//etKeyName.setEnabled(false);
-			txtKeyTitle.setText("Key "+keyNo);
-			loadCategories();
-		}
 
 		options = new DisplayImageOptions.Builder()
 		.showImageForEmptyUri(R.drawable.img_avatar)
@@ -138,57 +74,66 @@ public class KeyShowActivity extends MainActivity
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(config); 
 		imageLoader.handleSlowNetwork(true);
-		
-		
-	}
-	@Override
-	protected void onDestroy() 
-	{
-		super.onDestroy();
-		
-		activityRunning.set(false);
-	}
 
-	@Override
-	protected void suspendRunningTask() 
-	{
-		super.suspendRunningTask();
-		if(categoryTask != null && categoryTask.getStatus() == AsyncTask.Status.RUNNING)
+		keyNo = "";
+
+		Bundle b = getIntent().getExtras();
+		if(b != null)
 		{
-			categoryTask.cancel(true);
-			categoryTask = null;
-		}
-	}
+			String [] keyArray = b.getStringArray(CURRENT_KEY);
 
-	private void loadCategories()
-	{
-		categoryTask = new CategoryListTask(this);
-		categoryTask.execute();
-	}
-
-
-	private void updateCategoryList(List<Category> listCategories)
-	{
-		this.listCategories.clear();
-		if(listCategories != null && listCategories.size() >0)
-		{
-			this.listCategories.addAll(listCategories);
-			spinnerAdapter.notifyDataSetChanged();
-			for(int i = 0; i<this.listCategories.size(); i++)
+			if(keyArray != null && keyArray.length  > 0)
 			{
-				if(this.listCategories.get(i).getId() == currentKey.getCategoryId())
-				{
-					spinnerCategory.setSelection(i);
-					break;					
-				}
+				currentKey = new Key(Integer.valueOf(keyArray[0]));
+				currentKey.setName(keyArray[1]);
+				currentKey.setCategoryId(Integer.valueOf(keyArray[4]));
+				currentKey.setIqeToken(keyArray[2]);
+				currentKey.setScanUrl(keyArray[3]);
+				currentKey.setCategoryName(keyArray[5]);
+				currentKey.setCreateDate(keyArray[6]);		
+				keyNo = keyArray[7];		
+
+				Log.i(TAG, keyArray[2]);
+			}			
+		}
+
+		if(currentKey != null)
+		{
+			etKeyName.setText(currentKey.getName());
+			setKeyTitle("Key "+keyNo);
+		}
+		loadImageFromIqEngine();
+
+	}
+	@Override
+	protected void updateListCategory(List<Category> categories) {
+		super.updateListCategory(categories);
+		
+		
+		for(int i = 0; i<this.listCategories.size(); i++)
+		{
+			if(this.listCategories.get(i).getId() == currentKey.getCategoryId())
+			{
+				setCategoryButtonName(this.listCategories.get(i));
+				break;					
 			}
 		}
 	}
+	
+	private void loadImageFromIqEngine()
+	{
+		if(currentKey != null && isOnline())
+		{
+			ShowImageFromIqEngineThread showImageThread = new ShowImageFromIqEngineThread();
+			showImageThread.start();
+		}else {
+			showShortToast("No internet connection");
+		}
+	}
+
 	private void updateKeyImage(String imageUrl)
 	{
-
-
-		imageLoader.displayImage(imageUrl, ivIqImage, options, new SimpleImageLoadingListener() {
+		imageLoader.displayImage(imageUrl, ivAddImage, options, new SimpleImageLoadingListener() {
 			@Override
 			public void onLoadingStarted(String imageUri, View view) {
 				//progressBarView.setVisibility(View.VISIBLE);
@@ -225,22 +170,27 @@ public class KeyShowActivity extends MainActivity
 		});
 	}
 
+	@Override
 	public void onClickUse(View v)
 	{
 
-		int spinnerPosition = spinnerCategory.getSelectedItemPosition();
+
 		int changedCategoryId = -1;
-		String currentText = etKeyName.getText().toString();	
-		
-		if(spinnerPosition > -1 )
+		int currentSelectedKeyId = -1;
+		String currentText = etKeyName.getText().toString();
+
+		Category category = (Category) btnKeyCategory.getTag();
+		if(category != null)
 		{
-			int currentSelectedKeyId = listCategories.get(spinnerPosition).getId();
-			if(currentKey.getCategoryId() != currentSelectedKeyId)
-			{
-				changedCategoryId = currentSelectedKeyId;
-			}
+			currentSelectedKeyId = category.getId();
 		}
-		
+
+		if(currentSelectedKeyId != -1 && currentKey.getCategoryId() != currentSelectedKeyId)
+		{
+			changedCategoryId = currentSelectedKeyId;
+		}
+
+
 		if((currentText.equalsIgnoreCase("") || currentText.equals(currentKey.getName())) && changedCategoryId == -1 )
 		{
 			showOkAlertDailog("Please Change Id or Category", "Save Key", false);
@@ -250,7 +200,7 @@ public class KeyShowActivity extends MainActivity
 			new UpdateKeyTask(context,currentKey.getId(),currentText,changedCategoryId).execute();
 		}
 	}
-
+	
 	private void deleteKey()
 	{
 		new DeleteKeyTask(context, currentKey.getIqeToken(), currentKey.getId()).execute();
@@ -286,118 +236,6 @@ public class KeyShowActivity extends MainActivity
 		alertDialog.show();		
 	}
 
-	public static String[] parseIqeRetrieveData(String data)
-	{
-		String [] resultArray = new String[5];
-		try {
-			JSONObject jsonObject = new JSONObject(data);
-			if(jsonObject.has("comment"))
-			{
-				resultArray[1] = jsonObject.getString("comment");
-			}
-			if(jsonObject.has("object"))
-			{
-				resultArray[0] = "Success";
-
-				JSONObject imageObject = jsonObject.getJSONObject("object");
-
-				if(imageObject.has("related_images"))
-				{
-					JSONObject relatedImageObject = imageObject.getJSONObject("related_images");
-					if(relatedImageObject.has("images") && relatedImageObject.get("images") instanceof JSONArray)
-					{
-						JSONArray imageArray = relatedImageObject.getJSONArray("images");
-						if(imageArray.length() >0 && imageArray.getJSONObject(0) instanceof JSONObject)
-						{
-							JSONObject mainImageObject = imageArray.getJSONObject(0);
-							if(mainImageObject.has("data_url"))
-							{
-								resultArray[2] = mainImageObject.getString("data_url");
-							}
-							if(mainImageObject.has("img_id"))
-							{
-								resultArray[3] = mainImageObject.getString("img_id");
-							}
-							if(mainImageObject.has("resource_url"))
-							{
-								resultArray[4] = mainImageObject.getString("resource_url");
-							}
-						}
-					}
-
-				}
-			}else {
-				resultArray[0] = "fail";
-			}
-
-
-		} catch (JSONException e) {
-			Log.e(TAG, e.getMessage());
-		}
-		return resultArray;
-	}
-
-	private class CategoryListTask extends AsyncTask<Void, Void, Void>
-	{
-		private Context context;
-		private GetAllCategoriesCommand allCategoriesCommand;
-		private CustomProgressDailog progressDialog;
-		private String [] retrieveData;
-		public CategoryListTask(Context context) 
-		{
-			this.context = context;
-			progressDialog = new CustomProgressDailog(context);
-			progressDialog.setTitle("Loading");
-			progressDialog.setMessage("Please wait...");
-			retrieveData = null;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			progressDialog.show();
-
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) 
-		{
-			allCategoriesCommand = new GetAllCategoriesCommand();
-			allCategoriesCommand.execute(ApiConnection.getInstance(context));
-			try {
-				String data = iqRemote.retrieveObject(currentKey.getIqeToken(), null, true);
-				retrieveData = parseIqeRetrieveData(data);
-				//Log.i(TAG, data);
-			} catch (IOException e) {
-				Log.e(TAG, e.getMessage());
-				e.printStackTrace();
-			}
-
-			return null;
-		}
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-
-			if(progressDialog != null && progressDialog.isShowing())
-			{
-				progressDialog.dismiss();
-			}
-
-			if(allCategoriesCommand != null)
-			{
-				List<Category> categories = allCategoriesCommand.getCategories();
-				updateCategoryList(categories);
-			}
-			if(retrieveData != null && retrieveData[0].equalsIgnoreCase("fail") && retrieveData[1] != null)
-			{
-				showOkAlertDailog(retrieveData[1], "IQEngine",false);				
-			}else if(retrieveData != null && retrieveData[2] != null){
-				//showOkAlertDailog(retrieveData[2], "IQEngine",true);	
-				updateKeyImage(retrieveData[2]);
-			}
-		}
-	}
 
 	private class UpdateKeyTask extends AsyncTask<Void, Void, Void>
 	{
@@ -407,7 +245,6 @@ public class KeyShowActivity extends MainActivity
 		//private MoveKeyCommand moveKeyCommand;
 		private int keyId;
 		private UpdateKeyCommand updateKeyCommand;		
-		private CustomProgressDailog progressDialog;
 
 		public UpdateKeyTask(Context context,int keyId,String name,int newCategoryId) 
 		{
@@ -416,9 +253,6 @@ public class KeyShowActivity extends MainActivity
 			this.keyId = keyId;
 			this.newCategoryId = newCategoryId;
 
-			progressDialog = new CustomProgressDailog(context);
-			progressDialog.setTitle("Loading");
-			progressDialog.setMessage("Please wait...");
 		}
 
 		@Override
@@ -434,21 +268,21 @@ public class KeyShowActivity extends MainActivity
 		protected void onPreExecute() 
 		{
 			super.onPreExecute();
-			progressDialog.show();
+			showProgressDaoilog(null, "Updating...", true);
 
 		}
-		
-		
+
+
 		@Override
 		protected void onPostExecute(Void result) {			
 			super.onPostExecute(result);
-			if(progressDialog != null && progressDialog.isShowing())
-			{
-				progressDialog.dismiss();
-			}
 			
+			if(!activityRunning.get())
+				return;
+			hideProgressDaoilog();		
+
 			showOkAlertDailog(updateKeyCommand.getMessage(), "Update Key", updateKeyCommand.isUpdatedSuccessfully(), new IDailogOKClickListener() {
-				
+
 				@Override
 				public void onOkClick() {
 					if(updateKeyCommand.isUpdatedSuccessfully())
@@ -456,11 +290,11 @@ public class KeyShowActivity extends MainActivity
 						finish();
 					}
 				}
-				
+
 				@Override
 				public void onCancelClick() {
-					
-					
+
+
 				}
 			});
 		}
@@ -545,12 +379,12 @@ public class KeyShowActivity extends MainActivity
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			
+
 			if(progressDialog.isShowing())
 			{
 				progressDialog.dismiss();
 			}
-			
+
 			afterDeleteKey();
 		}
 
@@ -572,5 +406,107 @@ public class KeyShowActivity extends MainActivity
 		}
 
 	}
+
+	private class ShowImageFromIqEngineThread extends Thread
+	{
+		private String [] retrieveData = null;
+
+
+		@Override
+		public void run() 
+		{
+			String data;
+			try {
+				data = iqRemote.retrieveObject(currentKey.getIqeToken(), null, true);
+				retrieveData = parseIqeRetrieveData(data);
+				if(retrieveData != null && retrieveData[0].equalsIgnoreCase("fail") && retrieveData[1] != null)
+				{
+					handler.sendEmptyMessage(FAILED);				
+				}else if(retrieveData != null && retrieveData[2] != null){
+					handler.sendMessage(Message.obtain(handler, SUCCESS, retrieveData[2]));
+
+				}
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+	}
+	private final Handler handler = new Handler()
+	{
+		public void handleMessage(android.os.Message msg) 
+		{
+			if(!activityRunning.get())
+				return;
+
+			switch (msg.what) 
+			{
+			case SUCCESS:
+				String url = (String) msg.obj;
+				updateKeyImage(url);
+				break;
+			case FAILED:
+				showShortToast("Getting image From Server Failed");
+				break;
+
+			default:
+				break;
+			}
+		};
+
+	};
+
+	public static String[] parseIqeRetrieveData(String data)
+	{
+		String [] resultArray = new String[5];
+		try {
+			JSONObject jsonObject = new JSONObject(data);
+			if(jsonObject.has("comment"))
+			{
+				resultArray[1] = jsonObject.getString("comment");
+			}
+			if(jsonObject.has("object"))
+			{
+				resultArray[0] = "Success";
+
+				JSONObject imageObject = jsonObject.getJSONObject("object");
+
+				if(imageObject.has("related_images"))
+				{
+					JSONObject relatedImageObject = imageObject.getJSONObject("related_images");
+					if(relatedImageObject.has("images") && relatedImageObject.get("images") instanceof JSONArray)
+					{
+						JSONArray imageArray = relatedImageObject.getJSONArray("images");
+						if(imageArray.length() >0 && imageArray.getJSONObject(0) instanceof JSONObject)
+						{
+							JSONObject mainImageObject = imageArray.getJSONObject(0);
+							if(mainImageObject.has("data_url"))
+							{
+								resultArray[2] = mainImageObject.getString("data_url");
+							}
+							if(mainImageObject.has("img_id"))
+							{
+								resultArray[3] = mainImageObject.getString("img_id");
+							}
+							if(mainImageObject.has("resource_url"))
+							{
+								resultArray[4] = mainImageObject.getString("resource_url");
+							}
+						}
+					}
+
+				}
+			}else {
+				resultArray[0] = "fail";
+			}
+
+
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return resultArray;
+	}
+
 
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#5b6574"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_key_dlg_add"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_button"
+            android:padding="2dp"
+            android:text="Add"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium" />
+
+        <Button
+            android:id="@+id/btn_key_dlg_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_button"
+            android:padding="2dp"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_dlg_keys"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

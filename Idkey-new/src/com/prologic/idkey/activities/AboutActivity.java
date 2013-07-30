@@ -20,7 +20,7 @@ public class AboutActivity extends MainActivity {
 		final String encoding = "UTF-8";
 		
 		String html = "<p>Five Tykes Technologies, LLC is a company dedicated to solving everyday problems"+
-				"through smartphone applications. It is based in Dallas, Texas.</p>"+
+				" through smartphone applications. It is based in Dallas, Texas.</p>"+
 				"<p>Five Tykes Technologies developed ID-a-key to help people label and"+
 				" categorize their keys within memory that can be accessed by their smartphone."+
 				"Thus, users will never have to ask “what is this key for?” again."+

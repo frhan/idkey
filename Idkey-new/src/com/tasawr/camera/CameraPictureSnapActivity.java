@@ -32,6 +32,7 @@ import com.ff.camera.BaseAlbumDirFactory;
 import com.ff.camera.FroyoAlbumDirFactory;
 import com.iqengines.sdk.Utils;
 import com.prologic.idkey.R;
+import com.prologic.idkey.activities.AddImageKeyActivity;
 import com.prologic.idkey.activities.AddKeyActivity;
 import com.prologic.idkey.activities.AddKeyCameraActivity;
 import com.prologic.idkey.activities.MainActivity;
@@ -206,7 +207,7 @@ public class CameraPictureSnapActivity extends MainActivity implements IPictureC
 
 		if(currentPhotoPath != null && currentFile != null)
 		{	
-			Intent intent = new Intent(CameraPictureSnapActivity.this,AddKeyActivity.class); 
+			Intent intent = new Intent(CameraPictureSnapActivity.this,AddImageKeyActivity.class); 
 			intent.putExtra(AddKeyCameraActivity.IMAGE_PATH, currentPhotoPath);
 			intent.putExtra(AddKeyActivity.IMAGE_FILE, currentFile);
 

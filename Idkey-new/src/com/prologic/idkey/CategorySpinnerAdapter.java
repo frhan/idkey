@@ -30,6 +30,10 @@ public  class CategorySpinnerAdapter extends ArrayAdapter<Category>
 	}
 
 	@Override
+	public Category getItem(int position) {
+		return listCategories.get(position);
+	}
+	@Override
 	public int getCount() {
 
 		return listCategories.size();
