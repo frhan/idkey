@@ -8,6 +8,7 @@ import com.prologic.idkey.api.command.Session;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class IdKeyApplication extends Application
 {
@@ -23,6 +24,9 @@ public class IdKeyApplication extends Application
 		session.setAuthToken(authToken);
 		session.setEmail(IdKeyPreferences.getEmail());
 		session.setPassword(IdKeyPreferences.getPassword());
+		
+		Log.v("IDkey", IdKeyPreferences.getEmail()+" pass: "+IdKeyPreferences.getPassword()+" isProtect:"+IdKeyPreferences.isProtect());
+		
 
 	}
 	@Override

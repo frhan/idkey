@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -40,8 +41,13 @@ public class SignInActivity extends MainActivity implements OnClickListener
 
 	private void setPrefData()
 	{
+		String pass = "";
 		String email = IdKeyPreferences.getEmail();
-		String pass = IdKeyPreferences.getPassword();
+		
+		if(!IdKeyPreferences.isProtect())
+		{
+			pass = IdKeyPreferences.getPassword();
+		}
 
 		etEmail.setText(email);
 		etPassword.setText(pass);
@@ -140,15 +146,19 @@ public class SignInActivity extends MainActivity implements OnClickListener
 					showOkAlertDailog(signInCommand.getMessage(), "Log In", signInCommand.isSignInSuccessfull());
 				}else 
 				{
+
+
 					Session.getInstance().setPassword(pass);
 					Toast.makeText(context, "Log in successfully", Toast.LENGTH_SHORT).show();
 
+					
+					IdKeyPreferences.setPassword(IdKeyPreferences.isProtect() ? "" : pass);				
 					IdKeyPreferences.setSignedUp(true);
 					IdKeyPreferences.setEmail(email);
 					IdKeyPreferences.save(context);
-					
+
 					logInSuccessfully();
-					
+
 					setCurrent(com.prologic.idkey.activities.HomeScreenActivity.class, null);
 					finish();
 

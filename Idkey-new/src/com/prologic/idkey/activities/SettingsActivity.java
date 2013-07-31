@@ -26,7 +26,8 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 		setContentView(R.layout.settings);
 		tbRemember = (ToggleButton) findViewById(R.id.toggle_button_remember);
 		tbRemember.setOnCheckedChangeListener(this);
-		tbRemember.setChecked(IdKeyPreferences.isRemember());
+		boolean isProtect = IdKeyPreferences.isProtect();
+		tbRemember.setChecked(isProtect);
 		txtEmail  = (TextView) findViewById(R.id.txt_settings_email);
 		
 		if(Session.getInstance().getEmail() != null)
@@ -34,7 +35,7 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 			txtEmail.setText(Session.getInstance().getEmail());
 		}
 		
-		protectPassword(IdKeyPreferences.isRemember());
+		//protectPassword(IdKeyPreferences.isProtect());
 
 	}
 	public void onClickForgotPassword(View v) 
@@ -53,35 +54,21 @@ public class SettingsActivity extends MainActivity implements OnCheckedChangeLis
 		IdKeyPreferences.setLogin(false);
 		IdKeyPreferences.save(context);
 
-		Intent intent = new Intent(this, com.prologic.idkey.activities.SignInActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(intent);
+		logOut();
 	}
 	
 	private void protectPassword(boolean protect)
 	{
 		if(protect)
 		{
-
-			/*IdKeyPreferences.setEmail(Session.getInstance().getEmail());
-			IdKeyPreferences.setPassword(Session.getInstance().getPassword());
-			IdKeyPreferences.setLogin(true);
-			 */
-			IdKeyPreferences.setRemember(true);
-			IdKeyPreferences.setPassword(Session.getInstance().getPassword());
+			IdKeyPreferences.setProtect(true);
+			IdKeyPreferences.setPassword("");
 			IdKeyPreferences.save(context);
 		}
 		else
-		{
-			/*IdKeyPreferences.setEmail(Session.getInstance().getEmail());
-			IdKeyPreferences.setPassword("");
-			IdKeyPreferences.setLogin(false);
-
-			IdKeyPreferences.save(context);*/
-			IdKeyPreferences.setRemember(false);
-			IdKeyPreferences.setPassword("");
+		{				
+			IdKeyPreferences.setProtect(false);
+			IdKeyPreferences.setPassword(Session.getInstance().getPassword());
 			IdKeyPreferences.save(context);
 		}
 		

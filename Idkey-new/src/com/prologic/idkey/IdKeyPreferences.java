@@ -47,10 +47,10 @@ public class IdKeyPreferences {
 	public static void setLogin(boolean isLogin) {
 		IdKeyPreferences.isLogin = isLogin;
 	}
-	public static boolean isRemember() {
+	public static boolean isProtect() {
 		return isRememberPassword;
 	}
-	public static void setRemember(boolean isRemember) {
+	public static void setProtect(boolean isRemember) {
 		IdKeyPreferences.isRememberPassword = isRemember;
 	}
 	public static boolean isFirstTime() {

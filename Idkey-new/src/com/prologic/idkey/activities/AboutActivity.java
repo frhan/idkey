@@ -23,7 +23,7 @@ public class AboutActivity extends MainActivity {
 				" through smartphone applications. It is based in Dallas, Texas.</p>"+
 				"<p>Five Tykes Technologies developed ID-a-key to help people label and"+
 				" categorize their keys within memory that can be accessed by their smartphone."+
-				"Thus, users will never have to ask “what is this key for?” again."+
+				"Thus, users will never have to ask &#34;what is this key for?&#34; again."+
 				"By enabling someone to snap an image of a key, label and categorize it, and then later identify the key by photographing it again, customers will never lose track of what their keys go to."+
 				"In addition, keys can be identified anytime and from anywhere a Wi-Fi connection exists to the smartphone.</p>"+
 				"<p>Five Tykes Technologies welcomes customer feedback. We can be reached by mail at P.O. Box 25578, Dallas, TX 75225, or via the ID-a-Key website at ID-a-key.com.</p>";

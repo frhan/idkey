@@ -59,22 +59,17 @@ public class ChangePasswordActivity extends MainActivity
 		private String oldPassword;
 		private String newPassword;
 		private ChangePasswordCommand changePasswordCommand;
-		private CustomProgressDailog progressDialog;
+		
 		public ChangePasswordTask(Context context,String oldPassword,String newPassword) 
 		{
 			this.context = context;
 			this.oldPassword = oldPassword;
 			this.newPassword = newPassword;
-
-			progressDialog = new CustomProgressDailog(context);
-			progressDialog.setTitle("Change password");
-			progressDialog.setMessage("Please wait...");
-
 		}
 		@Override
 		protected void onPreExecute() {	
 			super.onPreExecute();
-			progressDialog.show();
+			showProgressDaoilog(null, "Loading...", true);
 		}
 
 		@Override
@@ -89,17 +84,31 @@ public class ChangePasswordActivity extends MainActivity
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);			
 
-			if(progressDialog != null && progressDialog.isShowing())
-			{
-				progressDialog.dismiss();
-			}
-			if(changePasswordCommand.isChangeSuccessfully())
-			{
-				IdKeyPreferences.setPassword(newPassword);
-				IdKeyPreferences.save(context);
-			}
+			if(!activityRunning.get())
+				return;
+			hideProgressDaoilog();
+			
+//			if(changePasswordCommand.isChangeSuccessfully())
+//			{
+//				IdKeyPreferences.setPassword(newPassword);
+//				IdKeyPreferences.save(context);
+//			}
 
-			showOkAlertDailog(changePasswordCommand.getMessage(), "Change Password", changePasswordCommand.isChangeSuccessfully());
+			showOkAlertDailog(changePasswordCommand.getMessage(), "Change Password", changePasswordCommand.isChangeSuccessfully(),new IDailogOKClickListener() {
+				
+				@Override
+				public void onOkClick() {
+					logOut();
+					
+				}
+				
+				@Override
+				public void onCancelClick()
+				{
+					logOut();
+					
+				}
+			});
 
 		}
 

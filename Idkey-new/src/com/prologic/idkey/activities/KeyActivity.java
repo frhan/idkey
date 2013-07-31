@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.iqengines.sdk.IQRemote;
+import com.prologic.idkey.CategoryListAdapter;
 import com.prologic.idkey.CategorySpinnerAdapter;
 import com.prologic.idkey.CustomProgressDailog;
 import com.prologic.idkey.R;
@@ -51,7 +52,7 @@ public class KeyActivity extends MainActivity implements OnItemClickListener
 
 	protected IQRemote iqRemote;
 	protected ImageView ivAddImage;
-	protected CategorySpinnerAdapter categorySpinnerAdapter;
+	protected CategoryListAdapter categoryAdapter;
 
 	public static final String IMAGE_FILE = "image_file";	
 	protected Button btnKeyCategory;
@@ -111,8 +112,9 @@ public class KeyActivity extends MainActivity implements OnItemClickListener
 		lvCategories = (ListView) keyView.findViewById(R.id.lv_dlg_keys);
 		lvCategories.setOnItemClickListener(this);
 		listCategories = new ArrayList<Category>();
-		categorySpinnerAdapter = new CategorySpinnerAdapter(context, R.layout.spinner_view, listCategories);
-		lvCategories.setAdapter(categorySpinnerAdapter);		
+		categoryAdapter = new CategoryListAdapter(context, R.layout.spinner_view, listCategories);
+	
+		lvCategories.setAdapter(categoryAdapter);		
 	}
 
 	@Override
@@ -178,7 +180,7 @@ public class KeyActivity extends MainActivity implements OnItemClickListener
 		{
 			this.listCategories.addAll(categories);
 			setCategoryButtonName(listCategories.get(0));
-			categorySpinnerAdapter.notifyDataSetChanged();
+			categoryAdapter.notifyDataSetChanged();
 		}
 	
 	}
@@ -404,7 +406,7 @@ public class KeyActivity extends MainActivity implements OnItemClickListener
 				Toast.makeText(context, "Add Category Failed", Toast.LENGTH_SHORT).show();
 				break;
 			case SUCCESS:
-				categorySpinnerAdapter.notifyDataSetChanged();
+				categoryAdapter.notifyDataSetChanged();
 				break;
 
 			default:
@@ -419,7 +421,7 @@ public class KeyActivity extends MainActivity implements OnItemClickListener
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int pos, long id)
 	{
-		Category category = categorySpinnerAdapter.getItem(pos);
+		Category category = categoryAdapter.getItem(pos);
 		if(dlgKey != null && dlgKey.isShowing())
 			dlgKey.dismiss();
 		setCategoryButtonName(category);

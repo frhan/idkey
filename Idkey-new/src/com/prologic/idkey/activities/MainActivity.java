@@ -315,5 +315,14 @@ public abstract class MainActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	public void logOut()
+	{
+		Intent intent = new Intent(this, com.prologic.idkey.activities.SignInActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+	}
+	
 
 }
