@@ -96,11 +96,12 @@ public final class R {
         public static final int round_rect_white=0x7f020042;
         public static final int round_rect_white_edittext=0x7f020043;
         public static final int rount_rect_category_count=0x7f020044;
-        public static final int search=0x7f020045;
-        public static final int search_1=0x7f020046;
-        public static final int serach_2=0x7f020047;
-        public static final int success=0x7f020048;
-        public static final int switch_track_green=0x7f020049;
+        public static final int savebutton=0x7f020045;
+        public static final int search=0x7f020046;
+        public static final int search_1=0x7f020047;
+        public static final int serach_2=0x7f020048;
+        public static final int success=0x7f020049;
+        public static final int switch_track_green=0x7f02004a;
     }
     public static final class id {
         public static final int add_camera_view=0x7f0a0004;

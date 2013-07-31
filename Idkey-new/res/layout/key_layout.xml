@@ -129,7 +129,7 @@
                         android:layout_height="@dimen/button_size"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        android:background="@drawable/round_rect_blue"
+                        android:background="@drawable/savebutton"
                         android:onClick="onClickUse"
                         android:text="Use"
                         android:textColor="#FFFFFF"

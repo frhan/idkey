@@ -79,11 +79,12 @@ int drawable round_rect_red 0x7f020041
 int drawable round_rect_white 0x7f020042
 int drawable round_rect_white_edittext 0x7f020043
 int drawable rount_rect_category_count 0x7f020044
-int drawable search 0x7f020045
-int drawable search_1 0x7f020046
-int drawable serach_2 0x7f020047
-int drawable success 0x7f020048
-int drawable switch_track_green 0x7f020049
+int drawable savebutton 0x7f020045
+int drawable search 0x7f020046
+int drawable search_1 0x7f020047
+int drawable serach_2 0x7f020048
+int drawable success 0x7f020049
+int drawable switch_track_green 0x7f02004a
 int id add_camera_view 0x7f0a0004
 int id btn_camera_snap 0x7f0a000d
 int id btn_cat_close 0x7f0a0016
